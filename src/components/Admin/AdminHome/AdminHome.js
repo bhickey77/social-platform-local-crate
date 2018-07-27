@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearError } from '../../redux/actions/loginActions';
+import { clearError } from '../../../redux/actions/loginActions';
 
 // Components
-import Nav from '../Nav/Nav';
+import AdminNav from '../AdminNav/AdminNav';
 // Material UI
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-class PublicHome extends Component {
+class AdminHome extends Component {
 
   componentDidMount() {
       this.props.dispatch(clearError());
   }
 
   componentWillReceiveProps(nextProps) {
-      if (nextProps.user.userName) {
+      if (nextProps.user.userName!=='admin') {
           this.props.history.push('/user');
       }
   }
@@ -28,15 +28,15 @@ class PublicHome extends Component {
 
     content = (
     <div>
-        <p>PublicHome Component</p>
-        <p>This will be the public landing with all of the cards</p>
+        <p>Admin Component</p>
+        <p>This will be where the admin can view a list of profiles and posts</p>
     </div>
     );
     
 
     return (
       <div>
-          <Nav/>
+          <AdminNav/>
         { content }
       </div>
     );
@@ -44,4 +44,4 @@ class PublicHome extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(PublicHome);
+export default connect(mapStateToProps)(AdminHome);
