@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { clearError } from '../../redux/actions/loginActions';
+import NewCard from './NewCard/NewCard';
 
 // Components
 import Nav from '../Nav/Nav';
@@ -31,13 +32,14 @@ class PublicHome extends Component {
     <div>
         <p>PublicHome Component</p>
         <p>This will be the public landing with all of the cards</p>
+        <NewCard />
     </div>
     );
     
 
     return (
       <div>
-          <Nav/>
+          <Nav />
         { content }
       </div>
     );
