@@ -37,7 +37,6 @@ class UploadFile extends Component {
       <div>
         <img className="profilePicture" src={this.state.profilePictureUrl} alt="profilePictureUrl" />
         <input type="file" name="image" onChange={this.handleUploadFile} />
-        {JSON.stringify(this.state.profilePictureUrl)}
       </div>
     )
   }
