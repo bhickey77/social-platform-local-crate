@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-
-import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { Redirect } from "react-router-dom";
+// Components
+import Nav from '../../components/Nav/Nav';
+// Material UI
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
 class AdminMailer extends Component {
+  
+  constructor(){
+      super();
+
+      this.state = {
+            
+            name: '',
+            email: '',
+            message: ''
+            
+      }
+  }
+  
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
   }
@@ -20,56 +36,60 @@ class AdminMailer extends Component {
     }
   }
 
-  handleSubmit(e){
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    axios({
-        method: "POST", 
-        url:"http://localhost:3002/send", 
-        data: {
-            name: name,   
-            email: email,  
-            messsage: message
-        }
-    }).then((response)=>{
-        if (response.data.msg === 'success'){
-            alert("Message Sent."); 
-            this.resetForm()
-        }else if(response.data.msg === 'fail'){
-            alert("Message failed to send.")
-        }
-    })
+  sendWelcomeEmail = () => {
+    //   this.props.dispatch({type:'ADD_DEVICE', payload:this.state});
+    //   alert('Your new device has been submitted!');
+    //   this.setState({
+    //       deviceComplete: true
+    //   })
+    console.log(this.state);
   }
 
-  resetForm(){
-    document.getElementById('contact-form').reset();
+  handleInputChange = (event) => {
+    switch(event.target.id){
+      case 'name':
+        this.setState({name: event.target.value});
+        break;
+      case 'email':
+        this.setState({email: event.target.value});
+        break; 
+      case 'message':
+        this.setState({message: event.target.value});
+        break;
+      default:
+        console.log('Invalid field');
+        break;      
+    }
   }
 
   render() {
     let content = null;
-
+    
     if (this.props.user.userName) {
       content = (
-        <div>
-            <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
-            {/* <form id="contact-form" method="POST"> */}
-            <div className="form-group">
-            <label for="name">Name</label>
-            <input type="text" className="form-control" id="name" />
-        </div>
-        <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" />
-        </div>
-        <div className="form-group">
-            <label for="message">Message</label>
-            <textarea className="form-control" rows="5" id="message"></textarea>
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-         
+        <div className="NewDevice">
+            <p>
+              Send a welcome email to a partner
+            </p>
+            <Input 
+                placeholder="Name" 
+                id="name"
+                value={this.state.name}
+                onChange={this.handleInputChange}
+            />
+            <Input 
+                placeholder="Email Address" 
+                id="email"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+            />
+            <Input 
+                placeholder="Message" 
+                id="message"
+                value={this.state.message}
+                onChange={this.handleInputChange}
+            />
+            <Button vairant="raised" color="primary" onClick={this.sendWelcomeEmail} >Send Welcome Email</Button>
         </div>
       );
     }
