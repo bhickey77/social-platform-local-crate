@@ -31,7 +31,6 @@ class PublicHome extends Component {
     content = (
     <div>
         <p>PublicHome Component</p>
-        <p>This will be the public landing with all of the cards</p>
         <CardsGrid />
     </div>
     );
