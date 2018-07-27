@@ -33,6 +33,11 @@ class Nav extends Component {
                 Info Page
               </Link>
             </li>
+            <li>
+              <Link to="/admin">
+                Admin
+              </Link>
+            </li>
             {(this.props.user.userName) ?
             <li>
               <LogoutPage/>

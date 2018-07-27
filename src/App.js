@@ -12,6 +12,8 @@ import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadFile from './components/UploadFile/UploadFile';
 import PublicHome from './components/PublicHome/PublicHome';
+import AdminMailer from './components/AdminMailer/AdminMailer';
+import PartnerMailUrl from './components/PartnerMailUrl/PartnerMailUlr';
 
 import './styles/main.css';
 
@@ -40,6 +42,14 @@ const App = () => (
         <Route
           path="/upload"
           component={UploadFile}
+        />
+        <Route
+          path="/admin"
+          component={AdminMailer}
+        />
+        <Route
+          path="/partnerMailUrl"
+          component={PartnerMailUrl}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
