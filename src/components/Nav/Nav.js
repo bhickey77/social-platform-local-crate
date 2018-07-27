@@ -5,7 +5,6 @@ import LogoutPage from '../LogoutPage/LogoutPage';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -31,6 +30,11 @@ class Nav extends Component {
             <li>
               <Link to="/info">
                 Info Page
+              </Link>
+            </li>
+            <li>
+              <Link to="/upload">
+                Upload
               </Link>
             </li>
             {(this.props.user.userName) ?
