@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { clearError } from '../../../redux/actions/loginActions';
 
 // Components
@@ -18,7 +17,7 @@ class AdminHome extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      if (nextProps.user.userName) {
+      if (nextProps.user.userName!=='admin') {
           this.props.history.push('/user');
       }
   }

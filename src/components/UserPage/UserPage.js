@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
+import Nav from '../Nav/Nav';
+import AdminNav from '../Admin/AdminNav/AdminNav';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
@@ -23,6 +24,7 @@ class UserPage extends Component {
 
   render() {
     let content = null;
+    let nav = null;
 
     if (this.props.user.userName) {
       content = (
@@ -36,9 +38,15 @@ class UserPage extends Component {
       );
     }
 
+    if (this.props.user.userName === 'admin' ) {
+      nav = <AdminNav />
+    } else {
+      nav = <Nav />
+    }
+
     return (
       <div>
-        <Nav />
+        { nav }
         { content }
       </div>
     );
