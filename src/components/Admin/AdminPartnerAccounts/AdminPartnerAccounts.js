@@ -8,7 +8,7 @@ import AdminNav from '../AdminNav/AdminNav';
 
 const mapStateToProps = state => ({
   user: state.user,
-  partner: state.partner
+  partners: state.partner.partners
 });
 
 class AdminPartnerAccounts extends Component {
@@ -34,7 +34,8 @@ class AdminPartnerAccounts extends Component {
       <div>
           <AdminNav/>
         { content }
-        <pre>{JSON.stringify(this.props.partner.partners)}</pre>
+        {this.props.partners.map( partner =>
+          {return JSON.stringify(partner) })}
       </div>
     );
   }

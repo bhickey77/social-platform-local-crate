@@ -5,6 +5,7 @@ const partners = ( state = [], action ) => {
     switch ( action.type ) {
         case PARTNER_ACTIONS.SET_PARTNERS :
         console.log( 'partners', action.payload)
+        state = [];
             return [
                 ...state,
                 action.payload,
