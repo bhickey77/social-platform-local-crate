@@ -22,6 +22,23 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/:id/posts', (req, res) => {
+    // GET for all posts from specific partner
+    if (req.isAuthenticated()){
+        console.log('in GET route to get all posts from a partner');
+        console.log('user', req.user);
+        let queryText = `SELECT * FROM post WHERE supplier_id =$1`;
+        pool.query(queryText, [req.body.supplier_id]).then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.put('/:id', (req, res) => {
     // PUT for admin flagging a post
     if(req.isAuthenticated()){

@@ -5,7 +5,7 @@ import axios from 'axios';
 function* getPosts( action ) {
     try {
         const postResponse = yield call( axios.get, `/api/admin/post/` );
-        yield put({ type: 'GET_POSTS', payload: postResponse.data });
+        yield put({ type: 'SET_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
         console.log( 'Error in postList', error );
@@ -14,7 +14,7 @@ function* getPosts( action ) {
 
 function* getPartnerPosts( action ) {
     try {
-        const postResponse = yield call( axios.get, `/api/admin/post/` );
+        const postResponse = yield call( axios.get, `/api/admin/partner/${action.payload}/posts` );
         yield put({ type: 'GET_PARTNER_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
