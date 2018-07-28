@@ -34,6 +34,7 @@ class AdminPartnerAccounts extends Component {
       <div>
           <AdminNav/>
         { content }
+        <pre>{JSON.stringify(this.props.partner.partners)}</pre>
       </div>
     );
   }
