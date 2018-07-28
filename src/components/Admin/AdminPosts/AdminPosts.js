@@ -34,7 +34,8 @@ class AdminPosts extends Component {
       <div>
           <AdminNav/>
         { content }
-        <pre>{JSON.stringify(this.props.posts)}</pre>
+        {this.props.posts.map( post =>
+          {return JSON.stringify(post) })}
       </div>
     );
   }
