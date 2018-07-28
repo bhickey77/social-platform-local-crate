@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/getPartnerPosts', (req, res) => {
+router.get('/', (req, res) => {
     // GET for all posts from specific partner
     if (req.isAuthenticated()){
         console.log('in GET route to get all posts from a partner');
@@ -19,7 +19,7 @@ router.get('/getPartnerPosts', (req, res) => {
     }
 });
 
-router.put('/editPartnerPost/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
         queryText = `UPDATE post SET text = $2 where id = $1;`;
@@ -32,7 +32,7 @@ router.put('/editPartnerPost/:id', (req, res) => {
     }
 });
 
-router.delete('/deletePost/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     //DELETE for admin or partner to delete a post
     if(req.isAuthenticated()){
         queryText = `DELETE FROM post where id = $1;`;
@@ -45,7 +45,7 @@ router.delete('/deletePost/:id', (req, res) => {
     }
 });
 
-router.post('/newPost', (req, res) => {
+router.post('/', (req, res) => {
     //POST for supplier creating a new post
     if (req.isAuthenticated()){
         console.log('this is req.body for new posting', req.body);
@@ -74,7 +74,7 @@ router.post('/newPost', (req, res) => {
     } 
 });
 
-router.get('/getPosts', (req, res) => {
+router.get('/', (req, res) => {
     // GET for ALL posts - public view (can limit volume in query)
     if (req.isAuthenticated()){
         console.log('in GET route to get all posts');

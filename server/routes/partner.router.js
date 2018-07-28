@@ -3,10 +3,10 @@ const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/getPartners', (req, res) => {
+router.get('/', (req, res) => {
     // GET for ALL partners - admin view (can limit volume in query)
     if (req.isAuthenticated()){
-        console.log('in GET route to get all posts');
+        console.log('in GET route to get all partners');
         console.log('user', req.user);
         let queryText = `SELECT * FROM person`;
         pool.query(queryText).then((result) => {
@@ -20,7 +20,7 @@ router.get('/getPartners', (req, res) => {
     }
 });
 
-router.put('/hidePartner/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     // PUT for admin flagging a post
     if(req.isAuthenticated()){
         if (req.body.isflagged == true){
@@ -37,7 +37,7 @@ router.put('/hidePartner/:id', (req, res) => {
     }
 });
 
-router.delete('/deletePartner/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     //DELETE for admin to delete partner entirely
     if(req.isAuthenticated()){
         queryText = `DELETE FROM person where id = $1;`;
@@ -50,7 +50,7 @@ router.delete('/deletePartner/:id', (req, res) => {
     }
 });
 
-router.put('/editPartner/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     // PUT for partner to edit their account
 
     const body = req.bodyl

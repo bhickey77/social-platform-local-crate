@@ -34,8 +34,8 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/image', imageRouter);
-app.use('/api/partner', partnerRouter);
-app.use('/api/post', postRouter);
+app.use('/api/admin/partner', partnerRouter);
+app.use('/api/admin/post', postRouter);
 
 // Serve static files
 app.use(express.static('build'));
