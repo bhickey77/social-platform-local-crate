@@ -1,5 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { POST_ACTIONS } from '../actions/postActions';
+import axios from 'axios';
 
 function* getPosts( action ) {
     try {
@@ -33,7 +34,7 @@ function* addPost( action ) {
 
 function* editPost( action ) {
     try {
-        const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
+        // const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -43,7 +44,7 @@ function* editPost( action ) {
 
 function* hidePost( action ) {
     try {
-        const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
+        // const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -54,7 +55,7 @@ function* hidePost( action ) {
 function* deletePost( action ) {
     let id = action.payload.id;
     try {
-        const postResponse = yield call( axios.delete, `/api/admin/post/${ id }` );
+        // const postResponse = yield call( axios.delete, `/api/admin/post/${ id }` );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -66,9 +67,9 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
-    yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
-    yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
-    yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
+    // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
+    // yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
+    // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
   }
   
   export default postSaga;

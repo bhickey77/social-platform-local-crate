@@ -8,12 +8,14 @@ import AdminNav from '../AdminNav/AdminNav';
 
 const mapStateToProps = state => ({
   user: state.user,
+  partner: state.partner
 });
 
 class AdminPartnerAccounts extends Component {
 
   componentDidMount() {
       this.props.dispatch(clearError());
+      this.props.dispatch({ type: 'FETCH_PARTNERS' })
   }
 
   render() {
