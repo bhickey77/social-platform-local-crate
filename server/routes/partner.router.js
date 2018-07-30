@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         console.log('user', req.user);
         let queryText = `SELECT username, organization_name,
         supplier_location, supplier_type, date_created, date_updated
-        FROM person WHERE user_type != 'admin'`;
+        FROM partner WHERE user_type != 'admin'`;
         pool.query(queryText).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
