@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => (
   <div className="header">
-    <div className="logoContainer">
+    <div>
       <img id="logo"
       src="/images/Secondary_Logo_HorizontalTilted.jpg"
       alt="Local-Crate-Logo" />
