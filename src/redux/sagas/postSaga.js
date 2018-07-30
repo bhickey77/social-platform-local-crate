@@ -1,10 +1,11 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { POST_ACTIONS } from '../actions/postActions';
+import axios from 'axios';
 
 function* getPosts( action ) {
     try {
-        const postResponse = yield call( axios.get, `/api/post/getPosts` );
-        yield put({ type: 'GET_POSTS', payload: postResponse.data });
+        const postResponse = yield call( axios.get, `/api/admin/post/` );
+        yield put({ type: 'SET_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
         console.log( 'Error in postList', error );
@@ -13,7 +14,7 @@ function* getPosts( action ) {
 
 function* getPartnerPosts( action ) {
     try {
-        const postResponse = yield call( axios.get, `/api/post/getPosts` );
+        const postResponse = yield call( axios.get, `/api/admin/partner/${action.payload}/posts` );
         yield put({ type: 'GET_PARTNER_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
@@ -23,7 +24,7 @@ function* getPartnerPosts( action ) {
 
 function* addPost( action ) {
     try {
-        const postResponse = yield call( axios.post, '/api/post', action.payload );
+        const postResponse = yield call( axios.post, '/api/admin/post', action.payload );
         yield put({ type: 'SET_POST' })
     }
     catch ( error ) {
@@ -33,7 +34,7 @@ function* addPost( action ) {
 
 function* editPost( action ) {
     try {
-        const postResponse = yield call( axios.post, '/api/post', action.payload );
+        // const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -41,9 +42,9 @@ function* editPost( action ) {
     }
 }
 
-function* hidePartnerPost( action ) {
+function* hidePost( action ) {
     try {
-        const postResponse = yield call( axios.post, '/api/post/', action.payload );
+        // const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -51,14 +52,14 @@ function* hidePartnerPost( action ) {
     }
 }
 
-function* deletePartnerPost( action ) {
+function* deletePost( action ) {
     let id = action.payload.id;
     try {
-        const postResponse = yield call( axios.delete, `/api/post/${ id }` );
+        // const postResponse = yield call( axios.delete, `/api/admin/post/${ id }` );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
-        console.log( 'Error in deleteChar', error );
+        console.log( 'Error in deletePost', error );
     }
 }
 
@@ -66,9 +67,9 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
-    yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
-    yield takeLatest(POST_ACTIONS.HIDE_POST, hidePartnerPost);
-    yield takeLatest(POST_ACTIONS.DELETE_POST, deletePartnerPost);
+    // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
+    // yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
+    // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
   }
   
   export default postSaga;
