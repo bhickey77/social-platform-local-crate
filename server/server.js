@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const imageRouter = require('./routes/image.router');
+const personRouter = require('./routes/person.router');
 const partnerRouter = require('./routes/partner.router');
 const postRouter = require('./routes/post.router');
 const mailRouter = require('./routes/mail.router');
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/person', personRouter);
 app.use('/api/partner', partnerRouter);
 app.use('/api/post', postRouter);
 app.use('/api/mail', mailRouter);
