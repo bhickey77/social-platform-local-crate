@@ -28,12 +28,13 @@ var transporter = nodemailer.createTransport(transport)
     var name = req.body.name
     var email = req.body.email
     var message = req.body.message
-    var content = `name: ${name} \n email: ${email} \n message: ${message} `
+    // var content = `name: ${name} \n email: ${email} \n message: ${message} `
+    var content = `Sign up for Social Crate here: http://localhost:3000/?#/PartnerMailUrl`
   
     var mail = {
       from: name,
-      to: 'jacobtovsen@gmail.com',  //Change to email address that you want to receive messages on
-      subject: 'New Message from Contact Form',
+      to: email,  //Change to email address that you want to receive messages on
+      subject: 'Thank you for being a Local Crate Partner - Sign up at Social Crate!',
       text: content
     }
   
