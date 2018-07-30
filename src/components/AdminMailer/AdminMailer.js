@@ -6,10 +6,16 @@ import Nav from '../../components/Nav/Nav';
 // Material UI
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 
 const mapStateToProps = state => ({
   user: state.user,
 });
+
+function TransitionUp(props) {
+  return <Slide {...props} direction="up" />;
+}
 
 class AdminMailer extends Component {
   
@@ -20,10 +26,20 @@ class AdminMailer extends Component {
             
             name: '',
             email: '',
+            open: false,
+            Transition: null,
             
       }
   }
   
+  handleClick = Transition => () => {
+    this.setState({ open: true, Transition });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
   }
@@ -38,13 +54,13 @@ class AdminMailer extends Component {
     this.setState({
       name: '',
       email: '',
-      // message:''
     })
   }
   sendWelcomeEmail = () => {
     this.props.dispatch({type:'SEND_NEW_PARTNER_EMAIL', payload:this.state});
     console.log(this.state);
     this.resetForm();
+    this.handleClick(TransitionUp)();
   }
 
   handleInputChange = (event) => {
@@ -85,6 +101,15 @@ class AdminMailer extends Component {
             />
             <br/>
             <Button vairant="raised" color="primary" onClick={this.sendWelcomeEmail} >Send Welcome Email</Button>
+            <Snackbar
+              open={this.state.open}
+              onClose={this.handleClose}
+              TransitionComponent={this.state.Transition}
+              ContentProps={{
+                'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Welcome Email Sent!</span>}
+            />
         </div>
       );
     }
