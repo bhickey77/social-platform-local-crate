@@ -12,6 +12,9 @@ import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadFile from './components/UploadFile/UploadFile';
 import PublicHome from './components/PublicHome/PublicHome';
+import AdminHome from './components/Admin/AdminHome/AdminHome';
+import AdminPartnerAccounts from './components/Admin/AdminPartnerAccounts/AdminPartnerAccounts';
+import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
 
 import './styles/main.css';
 
@@ -41,6 +44,18 @@ const App = () => (
           path="/upload"
           component={UploadFile}
         />
+        <Route
+          exact path="/admin/home"
+          component={AdminHome}
+        />
+        <Route
+          exact path="/admin/accounts"
+          component={AdminPartnerAccounts}
+        />
+        <Route
+          exact path="/admin/posts"
+          component={AdminPosts}
+        />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
 
@@ -50,3 +65,4 @@ const App = () => (
 );
 
 export default App;
+

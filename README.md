@@ -1,6 +1,10 @@
 # Express/Passport with React
 This version uses React to control the login requests and redirection in coordination with client-side routing.
 
+## Team notes
+Add a .env file with your own secret key
+Bill has the AWS secrets when you need to add these to your file. 
+
 We **STONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
 ## Prerequisites
