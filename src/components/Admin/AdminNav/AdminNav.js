@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AddPartnerDialog from '../AddPartnerDialog/AddPartnerDialog';
 import LoginPage from '../../LoginPage/LoginPage';
 import LogoutPage from '../../LogoutPage/LogoutPage';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
-
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -37,6 +37,9 @@ class AdminNav extends Component {
               <Link to="/admin/posts">
                 Posts
               </Link>
+            </li>
+            <li>
+              <AddPartnerDialog/>
             </li>
             {(this.props.user.userName) ?
             <li>
