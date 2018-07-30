@@ -4,6 +4,7 @@ import axios from 'axios';
 function* sendEmail(action){
     try{
         console.log('action.payload in sendEmail saga', action.payload);
+        yield post(axios.post, `/api/mail/${action.payload}`)
     } catch (error) {
         console.log('Error in saga sendMail', error);
     }
