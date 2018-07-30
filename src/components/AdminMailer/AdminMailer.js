@@ -109,6 +109,7 @@ class AdminMailer extends Component {
                 'aria-describedby': 'message-id',
               }}
               message={<span id="message-id">Welcome Email Sent!</span>}
+              autoHideDuration={3000}
             />
         </div>
       );
