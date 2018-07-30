@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
@@ -60,9 +61,9 @@ const App = () => (
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
-
       </Switch>
     </Router>
+    <Footer />
   </div>
 );
 
