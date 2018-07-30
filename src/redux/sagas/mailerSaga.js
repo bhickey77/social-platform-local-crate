@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery, actionChannel } from 'redux-saga/effects';
+import { call, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* sendEmail(action){
