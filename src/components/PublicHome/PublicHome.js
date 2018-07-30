@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { clearError } from '../../redux/actions/loginActions';
+import CardsGrid from './CardsGrid/CardsGrid';
 
 // Components
 import Nav from '../Nav/Nav';
@@ -30,14 +30,14 @@ class PublicHome extends Component {
     content = (
     <div>
         <p>PublicHome Component</p>
-        <p>This will be the public landing with all of the cards</p>
+        <CardsGrid />
     </div>
     );
     
 
     return (
       <div>
-          <Nav/>
+          <Nav />
         { content }
       </div>
     );
