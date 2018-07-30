@@ -5,7 +5,7 @@ const router = express.Router();
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
-        queryText = `UPDATE post SET text = $2 where id = $1;`;
+        queryText = `UPDATE post SET content = $2 where id = $1;`;
         pool.query(queryText, [req.body.id, req.body.edit_value]).then(result => {
             res.sendStatus(200);
         }).catch(error => {
@@ -32,10 +32,11 @@ router.post('/', (req, res) => {
     //POST for supplier creating a new post
     if (req.isAuthenticated()){
         console.log('this is req.body for new posting', req.body);
-        const isflagged = true;
+        const is_marked_as_hidden = true;
         const date_created = new Date().toJSON().toString();
         const date_updated = "n/a";
-        const queryText = `INSERT INTO post (supplier_id, "title", "text", "media_url", "date_created", "date_updated", isflagged)
+        const queryText = `INSERT INTO post ("partner_id", "title", "content", "media_key",
+        "date_created", "date_updated", is_marked_as_hidden)
         VALUES($1, $2, $3, $4, $5, $6, $7)`;
         pool.query(queryText, [
             req.user.id,
@@ -44,7 +45,7 @@ router.post('/', (req, res) => {
             req.body.media_url,
             date_created,
             date_updated,
-            isflagged
+            is_marked_as_hidden
         ]).then((result) => {
             console.log('back from db with:', result);
             res.sendStatus(200);

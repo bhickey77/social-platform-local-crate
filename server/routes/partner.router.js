@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         console.log('user', req.user);
         let queryText = `SELECT username, organization_name,
         supplier_location, supplier_type, date_created, date_updated
-        FROM person WHERE username != 'admin'`;
+        FROM person WHERE user_type != 'admin'`;
         pool.query(queryText).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
@@ -27,7 +27,7 @@ router.get('/:id/posts', (req, res) => {
     if (req.isAuthenticated()){
         console.log('in GET route to get all posts from a partner');
         console.log('user', req.user);
-        let queryText = `SELECT * FROM post WHERE supplier_id =$1`;
+        let queryText = `SELECT * FROM post WHERE partner_id =$1`;
         pool.query(queryText, [req.body.supplier_id]).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
@@ -42,10 +42,10 @@ router.get('/:id/posts', (req, res) => {
 router.put('/:id', (req, res) => {
     // PUT for admin flagging a post
     if(req.isAuthenticated()){
-        if (req.body.isflagged == true){
-            queryText = `UPDATE person SET isflagged = false where id = $1;`;
+        if (req.body.is_marked_as_hidden == true){
+            queryText = `UPDATE person SET is_marked_as_hidden = false where id = $1;`;
         } else {
-            queryText = `UPDATE person SET isflagged = true where id = $1;`;
+            queryText = `UPDATE person SET is_marked_as_hidden = true where id = $1;`;
         }
         pool.query(queryText, [req.body.id]).then(result => {
             res.sendStatus(200);
