@@ -14,6 +14,7 @@ const imageRouter = require('./routes/image.router');
 const personRouter = require('./routes/person.router');
 const partnerRouter = require('./routes/partner.router');
 const postRouter = require('./routes/post.router');
+const mailRouter = require('./routes/mail.router');
 
 // Body parser middleware
 
@@ -34,10 +35,10 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/image', imageRouter);
 app.use('/api/person', personRouter);
 app.use('/api/partner', partnerRouter);
 app.use('/api/post', postRouter);
+app.use('/api/mail', mailRouter);
 
 // Serve static files
 app.use(express.static('build'));
