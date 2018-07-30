@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const USER = process.env.EMAIL_USERNAME;
 const PASS = process.env.EMAIL_PASSWORD;
 
-var transport = {
+let transport = {
     host: 'smtp.gmail.com',
     auth: {
       user: USER,
@@ -13,7 +13,7 @@ var transport = {
     }
   }
   
-var transporter = nodemailer.createTransport(transport)
+let transporter = nodemailer.createTransport(transport)
   
   transporter.verify((error, success) => {
     if (error) {
@@ -24,31 +24,28 @@ var transporter = nodemailer.createTransport(transport)
   });
 
 
-  router.post('/send', (req, res, next) => {
-    var name = req.body.name
-    var email = req.body.email
-    var message = req.body.message
-    // var content = `name: ${name} \n email: ${email} \n message: ${message} `
-    var content = `Sign up for Social Crate here: http://localhost:3000/?#/PartnerMailUrl`
-  
-    var mail = {
-      from: name,
-      to: email,  //Change to email address that you want to receive messages on
-      subject: 'Thank you for being a Local Crate Partner - Sign up at Social Crate!',
-      text: content
+router.post('/send', (req, res, next) => {
+  var name = req.body.name
+  var email = req.body.email
+  // var message = req.body.message
+  // var content = `name: ${name} \n email: ${email} \n message: ${message} `
+  var content = `${name}, we're so excited to have you as a partner of Local Crate. \n \n Please join us to help share your story by using Social Crate. \n \n Sign up for Social Crate here: http://localhost:3000/?#/PartnerMailUrl`
+
+  var mail = {
+    from: name,
+    to: email,
+    subject: 'Join us at Social Crate!',
+    text: content,
+    // html: '<p>This is html!</p>'
+  }
+
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      console.log('error sending mail');
+    } else {
+      console.log('successfully sent mail');
     }
-  
-    transporter.sendMail(mail, (err, data) => {
-      if (err) {
-        console.log('error sending mail');
-      } else {
-        console.log('successfully sent mail');
-      }
-    })
   })
-
-
-
-
+})
 
 module.exports = router;
