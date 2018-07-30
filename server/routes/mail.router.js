@@ -40,13 +40,9 @@ var transporter = nodemailer.createTransport(transport)
   
     transporter.sendMail(mail, (err, data) => {
       if (err) {
-        res.json({
-          msg: 'fail'
-        })
+        console.log('error sending mail');
       } else {
-        res.json({
-          msg: 'success'
-        })
+        console.log('successfully sent mail');
       }
     })
   })
