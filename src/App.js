@@ -43,14 +43,6 @@ const App = () => (
           path="/upload"
           component={UploadFile}
         />
-        <Route
-          path="/admin"
-          component={AdminMailer}
-        />
-        <Route
-          path="/partnerMailUrl"
-          component={PartnerMailUrl}
-        />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
 

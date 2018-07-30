@@ -94,7 +94,7 @@ class AdminMailer extends Component {
 
     return (
       <div>
-        <Nav />
+       
         { content }
       </div>
     );
