@@ -42,6 +42,16 @@ class Nav extends Component {
                 Upload
               </Link>
             </li>
+            <li>
+              <Link to="/adminMailer">
+                AdminMailer
+              </Link>
+            </li>
+            <li>
+              <Link to="/PartnerMailUrl">
+                PartnerMailUrl
+              </Link>
+            </li>
             {(this.props.user.userName) ?
             <li>
               <LogoutPage/>

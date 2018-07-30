@@ -58,6 +58,18 @@ const App = () => (
           exact path="/admin/posts"
           component={AdminPosts}
         />
+         <Route
+          exact path="/adminMailer"
+          component={AdminMailer}
+        />
+          <Route
+          exact path="/adminMailer"
+          component={AdminMailer}
+        />
+          <Route
+          exact path="/PartnerMailUrl"
+          component={PartnerMailUrl}
+        />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
 
