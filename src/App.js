@@ -22,8 +22,8 @@ import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
 import './styles/main.css';
 
 const App = () => (
-  <div>
-    <Header />
+  <div className="container">
+    <Header className="item-a"/>
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -75,7 +75,7 @@ const App = () => (
         <Route render={() => <h1>404</h1>} />
       </Switch>
     </Router>
-    <Footer />
+    <Footer className="item-c"/>
   </div>
 );
 

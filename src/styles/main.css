@@ -8,6 +8,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100%;
+    background-color: #FAFAFA;
 }
 
 html {
@@ -17,18 +18,26 @@ html {
 .item-a {
     grid-area: header;
     min-height: 100%;
-   }
-  .item-b {
+}
+
+.item-b {
     grid-area: main;
     min-height: 100%;
-   }
-   .item-c {
+    margin: 5px;
+}
+
+.item-c {
     grid-area: footer;
-    min-height: 100%;
-    background-color: white;
-   }
+    height: 150px;
+    background-color: black;
+    color: white;
+    background-image: url("/images/graywood.jpg");
+    width: 100%;
+}
 
    .container {
+    display: grid;
+    height: 100%;
     grid-template-rows: auto;
     grid-template-areas: 
     "header"
@@ -38,6 +47,7 @@ html {
 
 html, body {
     margin: 0;
+    height: 100%;
 }
 
 .instructions h1 {
