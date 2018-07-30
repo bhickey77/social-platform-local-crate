@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Header = ({ title }) => (
-  <div className="instructions">
+const Header = () => (
+  <div className="header">
     <div>
-      <h1 className="lead">{ title }</h1>
+      <img id="logo"
+      src="/images/Secondary_Logo_HorizontalTilted.jpg"
+      alt="Local-Crate-Logo" />
+      <h2 id="social-crate-header" font-family="Clarendon-Text-Pro">Social Crate</h2>
     </div>
   </div>
 );
