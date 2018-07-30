@@ -2,12 +2,8 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-// const USER = process.env.EMAIL_USERNAME;
-// const PASS = process.env.EMAIL_PASSWORD;
-
-const USER = 'localcratesocialplatform@gmail.com';
-const PASS = 'ShrimpPaellaMeals!!!';
-
+const USER = process.env.EMAIL_USERNAME;
+const PASS = process.env.EMAIL_PASSWORD;
 
 var transport = {
     host: 'smtp.gmail.com',
@@ -17,7 +13,7 @@ var transport = {
     }
   }
   
-  var transporter = nodemailer.createTransport(transport)
+var transporter = nodemailer.createTransport(transport)
   
   transporter.verify((error, success) => {
     if (error) {
@@ -32,11 +28,11 @@ var transport = {
     var name = req.body.name
     var email = req.body.email
     var message = req.body.message
-    var content = `name: ${name} \n email: ${email} \n message: ${content} `
+    var content = `name: ${name} \n email: ${email} \n message: ${message} `
   
     var mail = {
       from: name,
-      to: 'RECEIVING_EMAIL_ADDRESS_GOES_HERE',  //Change to email address that you want to receive messages on
+      to: 'jacobtovsen@gmail.com',  //Change to email address that you want to receive messages on
       subject: 'New Message from Contact Form',
       text: content
     }
