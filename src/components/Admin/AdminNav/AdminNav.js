@@ -38,9 +38,6 @@ class AdminNav extends Component {
                 Posts
               </Link>
             </li>
-            <li>
-              <AddPartnerDialog/>
-            </li>
             {(this.props.user.userName) ?
             <li>
               <LogoutPage/>

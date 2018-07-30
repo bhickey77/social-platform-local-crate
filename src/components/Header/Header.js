@@ -2,11 +2,11 @@ import React from 'react';
 
 const Header = () => (
   <div className="header">
-    <div>
+    <div className="logoContainer">
       <img id="logo"
       src="/images/Secondary_Logo_HorizontalTilted.jpg"
       alt="Local-Crate-Logo" />
-      <h2 id="social-crate-header" font-family="Clarendon-Text-Pro">Social Crate</h2>
+      <h2 id="social-crate-header">Social Crate</h2>
     </div>
   </div>
 );
