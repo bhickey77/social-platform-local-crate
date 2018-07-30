@@ -10,19 +10,19 @@ CREATE TABLE person (
     date_updated VARCHAR (100) NOT NULL,
     supplier_type VARCHAR (100),
     isVerified BOOLEAN,
-    isAdmin BOOLEAN,
+    user_type VARCHAR (100),
     password VARCHAR (1000) NOT NULL
 );
 
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
-    supplier_id INT REFERENCES person,
+    partner_id INT REFERENCES person,
     title VARCHAR (100) NOT NULL,
-    text VARCHAR (100) NOT NULL,
-    media_url VARCHAR (200) NOT NULL,
+    content VARCHAR (100) NOT NULL,
+    media_key VARCHAR (200) NOT NULL,
     date_created VARCHAR (100) NOT NULL,
     date_updated VARCHAR (100) NOT NULL,
-    isFlagged BOOLEAN NOT NULL
+    is_marked_as_hidden BOOLEAN NOT NULL
 );
 
 CREATE TABLE tag (

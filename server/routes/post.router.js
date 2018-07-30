@@ -2,6 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+const multer  = require('multer');
+const upload = multer({ dest: '../uploads/' });
+
+const uploadPost = require('../modules/uploadPost');
+
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
@@ -28,32 +33,11 @@ router.delete('/:id', (req, res) => {
     }
 });
 
-router.post('/', (req, res) => {
-    //POST for supplier creating a new post
+router.post('/', upload.single('file'), (req, res) => {
     if (req.isAuthenticated()){
-        console.log('this is req.body for new posting', req.body);
-        const isflagged = true;
-        const date_created = new Date().toJSON().toString();
-        const date_updated = "n/a";
-        const queryText = `INSERT INTO post (supplier_id, "title", "text", "media_url", "date_created", "date_updated", isflagged)
-        VALUES($1, $2, $3, $4, $5, $6, $7)`;
-        pool.query(queryText, [
-            req.user.id,
-            req.body.title,
-            req.body.text,
-            req.body.media_url,
-            date_created,
-            date_updated,
-            isflagged
-        ]).then((result) => {
-            console.log('back from db with:', result);
-            res.sendStatus(200);
-        }).catch((error) => {
-            console.log('error in POST', error);
-            res.sendStatus(500);
-        })
+        uploadPost(req, res);
     } else {
-        res.sendStatus(403);
+        res.sendStatus(200);
     } 
 });
 

@@ -1,31 +1,18 @@
 const express = require('express');
 const pool = require('../modules/pool');
 
-const multer  = require('multer');
-const upload = multer({ dest: '../uploads/' });
-const path = require('path');
-const fs = require('fs-extra');
-const tempfile = require('tempfile');
-
-const router = express.Router();
-
-const AWS = require('aws-sdk');
-
-const BUCKET_NAME = 'local-crate-social-platform';
-const IAM_USER_KEY = process.env.aws_access_key_id;
-const IAM_USER_SECRET = process.env.aws_secret_access_key;
-
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/profilepicture/', upload.single('file'), (req, res, next) => {
-  console.log(`IN THE IMAGE ROUTER PROFILE PICTURE ROUTE`);
-  console.log('file path: ', req.file.path);
+// router.post('/profilepicture/', upload.single('file'), (req, res, next) => {
+//   console.log(`IN THE IMAGE ROUTER PROFILE PICTURE ROUTE`);
+//   console.log(req.file);
+//   console.log('file path: ', req.file.path);
   
-  uploadToS3(req.file, res);
-});
+//   uploadToS3(req.file, res);
+// });
 
-
+ 
 function uploadToS3(file, res) {
  fs.readFile(file.path)
   .then(data => {
@@ -44,20 +31,21 @@ function uploadToS3(file, res) {
       };
       s3bucket.upload(params, function (err, data) {
         if (err) {
-        console.log('error in callback');
-        console.log(err);
+          console.log('error in callback');
+          console.log(err);
+        } else {
+          console.log('success');
+          console.log(data);
+          let urlParams = {Bucket: 'local-crate-social-platform', Key: data.Key};
+          s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
+            if(err){
+              console.log(`error with getsignedurl: `, err);
+            } else {
+              console.log(`url from getsignedurl: `, url);
+              res.send(url)
+            }       
+          })
         }
-        console.log('success');
-        console.log(data);
-        let urlParams = {Bucket: 'local-crate-social-platform', Key: data.Key};
-        s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
-          if(err){
-            console.log(`error with getsignedurl: `, err);
-          } else {
-            console.log(`url from getsignedurl: `, url);
-            res.send(url)
-          }       
-        })
       })
     })
   })
@@ -72,4 +60,4 @@ function uploadToS3(file, res) {
 
 // })
 
-module.exports = router;
+// module.exports = router;
