@@ -12,6 +12,8 @@ import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadFile from './components/UploadFile/UploadFile';
 import PublicHome from './components/PublicHome/PublicHome';
+import AdminMailer from './components/AdminMailer/AdminMailer';
+import PartnerMailUrl from './components/PartnerMailUrl/PartnerMailUlr';
 import AdminHome from './components/Admin/AdminHome/AdminHome';
 import AdminPartnerAccounts from './components/Admin/AdminPartnerAccounts/AdminPartnerAccounts';
 import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
