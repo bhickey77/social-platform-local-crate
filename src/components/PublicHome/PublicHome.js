@@ -28,7 +28,7 @@ class PublicHome extends Component {
     
 
     content = (
-    <div>
+    <div className="item-b">
         <p>PublicHome Component</p>
         <CardsGrid />
     </div>

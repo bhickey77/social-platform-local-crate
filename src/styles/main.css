@@ -1,5 +1,60 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FAFAFA;
+    min-height: 100%;
+    margin: 0;
+    padding: 0; 
+    background-color: red; 
+}
+
+
+/* layout  */
+
+.item-a {
+    grid-area: header;
+    min-height: 100%;
+
+  }
+  .item-b {
+    grid-area: main;
+    min-height: 100%;
+
+  }
+
+  .item-c {
+    grid-area: footer;
+    min-height: 100%;
+
+  }
+
+.container {
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+}
+
+html {
+    height: 100%;
+}
+
+#app {
+    height: 100%;
+    min-height: 100vh;
+}
+
+#react-root {
+    height: 100%;
+}
+
+.footer {
+    background-color: orange;
+    padding-top: 10px; 
+    padding-bottom: 50px;
+    width: 100%;
+    display: flex; 
+    bottom: 0;
 }
 
 .instructions h1 {
