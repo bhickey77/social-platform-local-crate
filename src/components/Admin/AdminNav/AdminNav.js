@@ -5,7 +5,6 @@ import LogoutPage from '../../LogoutPage/LogoutPage';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 
-
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,

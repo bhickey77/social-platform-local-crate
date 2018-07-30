@@ -5,7 +5,7 @@ import { PARTNER_ACTIONS } from '../actions/partnerActions';
 
 function* getPartners( action ) {
     try {
-        const partnerResponse = yield call( axios.get, `/api/admin/partner` );
+        const partnerResponse = yield call( axios.get, `/api/partner` );
         console.log( 'partnerResponse', partnerResponse.data )
         yield put({ type: 'SET_PARTNERS', payload: partnerResponse.data });
     }
@@ -17,7 +17,7 @@ function* getPartners( action ) {
 // Not sure if we want this?
 function* addPartner( action ) {
     try {
-        const partnerResponse = yield call( axios.post, `/api/admin/partner`, action.payload );
+        const partnerResponse = yield call( axios.post, `/api/partner`, action.payload );
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {
@@ -27,7 +27,7 @@ function* addPartner( action ) {
 
 function* hidePartner( action ) {
     try {
-        // const partnerResponse = yield call( axios.put, `/api/admin/partner/${id}`, action.payload );
+        // const partnerResponse = yield call( axios.put, `/api/partner/${id}`, action.payload );
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {
@@ -38,7 +38,7 @@ function* hidePartner( action ) {
 function* deletePartner( action ) {
     let id = action.payload.id;
     try {
-        const partnerResponse = yield call( axios.delete, `/api/admin/partner/${ id }` );
+        const partnerResponse = yield call( axios.delete, `/api/partner/${ id }` );
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {

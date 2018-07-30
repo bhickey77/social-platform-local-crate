@@ -5,6 +5,7 @@ import CardsGrid from './CardsGrid/CardsGrid';
 
 // Components
 import Nav from '../Nav/Nav';
+import AdminNav from '../Admin/AdminNav/AdminNav';
 // Material UI
 
 const mapStateToProps = state => ({
@@ -17,15 +18,21 @@ class PublicHome extends Component {
       this.props.dispatch(clearError());
   }
 
-  componentWillReceiveProps(nextProps) {
-      if (nextProps.user.userName) {
-          this.props.history.push('/user');
-      }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //     if (nextProps.user.userName) {
+  //         this.props.history.push('/user');
+  //     }
+  // }
 
   render() {
     let content = null;
+    let nav = null;
     
+    if (this.props.user.user_type === 'admin' ) {
+      nav = <AdminNav />
+    } else {
+      nav = <Nav />
+    }
 
     content = (
     <div className="item-b">
@@ -37,7 +44,7 @@ class PublicHome extends Component {
 
     return (
       <div>
-          <Nav />
+        { nav }
         { content }
       </div>
     );

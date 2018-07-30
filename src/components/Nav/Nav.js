@@ -33,13 +33,18 @@ class Nav extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/admin">
-                Admin
+              <Link to="/upload">
+                Upload
               </Link>
             </li>
             <li>
-              <Link to="/upload">
-                Upload
+              <Link to="/adminMailer">
+                AdminMailer
+              </Link>
+            </li>
+            <li>
+              <Link to="/PartnerMailUrl">
+                PartnerMailUrl
               </Link>
             </li>
             {(this.props.user.userName) ?
