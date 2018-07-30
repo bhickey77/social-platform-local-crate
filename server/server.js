@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const imageRouter = require('./routes/image.router');
 const partnerRouter = require('./routes/partner.router');
 const postRouter = require('./routes/post.router');
+const mailRouter = require('./routes/mail.router');
 
 // Body parser middleware
 
@@ -36,7 +37,7 @@ app.use('/api/user', userRouter);
 app.use('/api/image', imageRouter);
 app.use('/api/partner', partnerRouter);
 app.use('/api/post', postRouter);
-
+app.use('/api/mail', mailRouter);
 // Serve static files
 app.use(express.static('build'));
 

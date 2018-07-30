@@ -12,7 +12,7 @@ const styles = theme => ({
       flexGrow: 1,
     },
     paper: {
-      height: 300,
+      height: 365,
       width: 300,
     },
     control: {
