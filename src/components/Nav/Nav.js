@@ -33,11 +33,6 @@ class Nav extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/admin">
-                Admin
-              </Link>
-            </li>
-            <li>
               <Link to="/upload">
                 Upload
               </Link>
