@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function* getPosts( action ) {
     try {
-        const postResponse = yield call( axios.get, `/api/admin/post/` );
+        const postResponse = yield call( axios.get, `/api/post/` );
         yield put({ type: 'SET_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
@@ -14,7 +14,7 @@ function* getPosts( action ) {
 
 function* getPartnerPosts( action ) {
     try {
-        const postResponse = yield call( axios.get, `/api/admin/partner/${action.payload}/posts` );
+        const postResponse = yield call( axios.get, `/api/partner/${action.payload}/posts` );
         yield put({ type: 'GET_PARTNER_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
@@ -24,7 +24,7 @@ function* getPartnerPosts( action ) {
 
 function* addPost( action ) {
     try {
-        const postResponse = yield call( axios.post, '/api/admin/post', action.payload );
+        const postResponse = yield call( axios.post, '/api/post', action.payload );
         yield put({ type: 'SET_POST' })
     }
     catch ( error ) {
@@ -34,7 +34,7 @@ function* addPost( action ) {
 
 function* editPost( action ) {
     try {
-        // const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
+        // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -44,7 +44,7 @@ function* editPost( action ) {
 
 function* hidePost( action ) {
     try {
-        // const postResponse = yield call( axios.post, `/api/admin/post/${id}`, action.payload );
+        // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -55,7 +55,7 @@ function* hidePost( action ) {
 function* deletePost( action ) {
     let id = action.payload.id;
     try {
-        // const postResponse = yield call( axios.delete, `/api/admin/post/${ id }` );
+        // const postResponse = yield call( axios.delete, `/api/post/${ id }` );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
