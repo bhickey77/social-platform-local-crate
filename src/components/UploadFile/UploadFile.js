@@ -20,6 +20,12 @@ import UploadBox from '../UploadBox/UploadBox';
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
 
+//AWS
+const AWS = require('aws-sdk');
+const BUCKET_NAME = 'local-crate-social-platform';
+const IAM_USER_KEY = process.env.aws_access_key_id;
+const IAM_USER_SECRET = process.env.aws_secret_access_key;
+
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -102,6 +108,8 @@ class UploadFile extends Component {
     })
   }
 
+ 
+
   sendPost = () => {
     const data = new FormData();
     data.append('title', this.state.postTitle);
@@ -150,6 +158,7 @@ class UploadFile extends Component {
             />
         }
         </Dialog>
+      
       </div>
     );
   }

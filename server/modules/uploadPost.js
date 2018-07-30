@@ -15,22 +15,45 @@ const IAM_USER_SECRET = process.env.aws_secret_access_key;
 const uploadPost = async(req, res) => {
   console.log('UPLOADING POST: ', req.body);
   let media_key = await uploadToS3(req.file);
-  let status = await uploadToSQL(req, media_key);
-  res.sendStatus(status);
+  let media_url = await generateSignedUrl(media_key);
+  console.log(`MEDIA URLLLL: `, media_url);
+  let status = await uploadToSQL(req, media_url);
+  res.sendStatus(200);
 }
 
-function uploadToSQL(req, media_key) {
+generateSignedUrl = (media_key) => {
+  return new Promise(resolve => {
+    let s3bucket = new AWS.S3({
+      accessKeyId: IAM_USER_KEY,
+      secretAccessKey: IAM_USER_SECRET,
+      Bucket: BUCKET_NAME,
+      signatureVersion: 'v4',
+    });
+    let urlParams = {Bucket: 'local-crate-social-platform', Key: media_key};
+    s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
+      if(err){
+        console.log(`error with getsignedurl: `, err);
+      } else {
+        console.log(`url from getsignedurl: `, url);
+        resolve(url);
+      }       
+    })
+  })
+    
+}
+
+function uploadToSQL(req, media_url) {
   return new Promise(resolve => {
     const is_marked_as_hidden = false;
     const date_created = new Date().toJSON().toString();
     const date_updated = new Date().toJSON().toString();
-    const queryText = `INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
+    const queryText = `INSERT INTO post ("partner_id", "title", "content", "media_url", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES($1, $2, $3, $4, $5, $6, $7)`;
     pool.query(queryText, [
         1,
         req.body.title,
         req.body.content,
-        media_key,
+        media_url,
         date_created,
         date_updated,
         is_marked_as_hidden,
@@ -69,15 +92,6 @@ function uploadToS3(file) {
             console.log('success');
             console.log(data.Key);
             resolve(data.Key);
-          // let urlParams = {Bucket: 'local-crate-social-platform', Key: data.Key};
-          // s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
-          //   if(err){
-          //     console.log(`error with getsignedurl: `, err);
-          //   } else {
-          //     console.log(`url from getsignedurl: `, url);
-          //     res.send(url)
-          //   }       
-          // })
         })
       })
     })

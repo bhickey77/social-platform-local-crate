@@ -37,7 +37,7 @@ router.post('/', upload.single('file'), (req, res) => {
     if (req.isAuthenticated()){
         uploadPost(req, res);
     } else {
-        res.sendStatus(200);
+        res.sendStatus(500);
     } 
 });
 
