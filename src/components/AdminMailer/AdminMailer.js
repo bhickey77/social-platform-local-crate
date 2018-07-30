@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Redirect } from "react-router-dom";
 // Components
 import Nav from '../../components/Nav/Nav';
 // Material UI
@@ -37,11 +36,7 @@ class AdminMailer extends Component {
   }
 
   sendWelcomeEmail = () => {
-    //   this.props.dispatch({type:'ADD_DEVICE', payload:this.state});
-    //   alert('Your new device has been submitted!');
-    //   this.setState({
-    //       deviceComplete: true
-    //   })
+    this.props.dispatch({type:'SEND_NEW_PARTNER_EMAIL', payload:this.state});
     console.log(this.state);
   }
 
@@ -67,7 +62,7 @@ class AdminMailer extends Component {
     
     if (this.props.user.userName) {
       content = (
-        <div className="NewDevice">
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <p>
               Send a welcome email to a partner
             </p>
@@ -77,18 +72,21 @@ class AdminMailer extends Component {
                 value={this.state.name}
                 onChange={this.handleInputChange}
             />
+            <br/>
             <Input 
                 placeholder="Email Address" 
                 id="email"
                 value={this.state.email}
                 onChange={this.handleInputChange}
             />
+            <br/>
             <Input 
                 placeholder="Message" 
                 id="message"
                 value={this.state.message}
                 onChange={this.handleInputChange}
             />
+            <br/>
             <Button vairant="raised" color="primary" onClick={this.sendWelcomeEmail} >Send Welcome Email</Button>
         </div>
       );
