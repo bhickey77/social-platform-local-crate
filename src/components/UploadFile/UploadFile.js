@@ -14,6 +14,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import UploadBox from '../UploadBox/UploadBox';
+
+//UPLOAD STAGES
+import UploadStage1 from '../UploadStage1/UploadStage1';
+import UploadStage2 from '../UploadStage2/UploadStage2';
+
+//AWS
+const AWS = require('aws-sdk');
+const BUCKET_NAME = 'local-crate-social-platform';
+const IAM_USER_KEY = process.env.aws_access_key_id;
+const IAM_USER_SECRET = process.env.aws_secret_access_key;
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -24,8 +35,12 @@ class UploadFile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      open: true,
-      profilePictureUrl: '', 
+      open: false,
+      profilePictureUrl: '',
+      imageData: '', 
+      currentUploadStage: 1,
+      postTitle: '',
+      postContent: '',
     };
   }
 
@@ -39,28 +54,75 @@ class UploadFile extends Component {
   handleConfirmImage = () => {
     this.setState({ 
       ...this.state,
-      open: false,
+      currentUploadStage: 2,
      });
   };
 
-  handleUploadFile = (event) => {
+  handleChangeFor = property => event => {
+    this.setState({
+      ...this.state,
+      [property]: event.target.value,
+    })
+    console.log(this.state);
+  }
+
+  handleSubmitPost = () => {
+    this.sendPost();
+    this.setState({
+      open: false,
+      profilePictureUrl: '',
+      imageData: '',
+      currentUploadStage: 1,
+    })
+  }
+
+  backToImageUpload = () => {
+    this.setState({
+      ...this.state,
+      currentUploadStage: 1,
+    })
+  }
+
+  handleClickOpen = () => {
+    this.setState({
+      ...this.state,
+      open: true,
+    })
+  }
+
+  setImage = (imageData) => {
+    console.log(`SETTING IMAGE: `, imageData);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      console.log(reader.result);
+      this.setState({
+        ...this.state,
+        profilePictureUrl: reader.result,
+      })
+    }
+    reader.readAsDataURL(imageData);
+    this.setState({
+      ...this.state,
+      open: true,
+      imageData: imageData,
+    })
+  }
+
+ 
+
+  sendPost = () => {
     const data = new FormData();
-    data.append('file', event.target.files[0]);
-    data.append('name', 'some value user types');
-    data.append('description', 'some value user types');
-    // '/files' is your node.js route that triggers our middleware
-    axios.post('/api/image/profilepicture', data, { headers: {
+    data.append('title', this.state.postTitle);
+    data.append('content', this.state.postContent);
+    data.append('userName', this.props.user.userName);
+    data.append('file', this.state.imageData);
+    axios.post('api/post', data, { headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': event.target.files[0].type,
+        'Content-Type': this.state.imageData.type,
       }})
       .then(response => {
         console.log('successfully uploaded to the S3: ', response); // do something with the response
-        this.setState({
-          ...this.state,
-          profilePictureUrl: response.data,
-        })
-        this.handleClickOpen();
       })
       .catch(error => {
         console.log('error uploading file: ', error);
@@ -70,38 +132,33 @@ class UploadFile extends Component {
   render() {
     return (
       <div>
-        <input type="file" name="image" onChange={this.handleUploadFile} />
+        <UploadBox setImage={this.setImage} />
+
+        {/* <input type="file" name="image" onChange={this.handleUploadFile} /> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <img className="profilePicture" src={this.state.profilePictureUrl} alt="profilePictureUrl" />          
-          <input type="file" name="image" onChange={this.handleUploadFile} />
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          {/* <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send
-              updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
+        {
+          this.state.currentUploadStage === 1 &&
+            <UploadStage1 
+              profilePictureUrl={this.state.profilePictureUrl} 
+              handlePostCancel = {this.handlePostCancel}
+              handleConfirmImage = {this.handleConfirmImage}
             />
-          </DialogContent> */}
-          <DialogActions>
-            <Button onClick={this.handlePostCancel} color="primary">
-              Cancel Post Creation
-            </Button>
-            <Button onClick={this.handleConfirmImage} color="primary">
-              Confirm Image
-            </Button>
-          </DialogActions>
+        }
+        {
+          this.state.currentUploadStage === 2 &&
+            <UploadStage2 
+              profilePictureUrl={this.state.profilePictureUrl} 
+              backToImageUpload = {this.backToImageUpload}
+              handleSubmitPost = {this.handleSubmitPost}
+              handleChangeFor = {this.handleChangeFor}
+            />
+        }
         </Dialog>
+      
       </div>
     );
   }
