@@ -1,0 +1,16 @@
+import { call, put, takeLatest, takeEvery, actionChannel } from 'redux-saga/effects';
+import axios from 'axios';
+
+function* sendEmail(action){
+    try{
+        console.log('action.payload in sendEmail saga', action.payload);
+    } catch (error) {
+        console.log('Error in saga sendMail', error);
+    }
+}
+
+function* mailerSaga() {
+    yield takeEvery('SEND_NEW_PARTNER_EMAIL', sendEmail);
+  }
+  
+  export default mailerSaga;
