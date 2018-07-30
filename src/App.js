@@ -22,12 +22,12 @@ import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
 import './styles/main.css';
 
 const App = () => (
-  <div>
-    <Header />
+  <div className="container">
+    <Header title="Project Base"/>
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
-        <Route
+        <Route className="item-b"
           path="/home"
           component={PublicHome}
         />
@@ -74,7 +74,6 @@ const App = () => (
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
       </Switch>
-    </Router>
     <Footer />
   </div>
 );
