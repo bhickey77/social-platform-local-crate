@@ -20,7 +20,6 @@ class AdminMailer extends Component {
             
             name: '',
             email: '',
-            // message: ''
             
       }
   }
@@ -46,7 +45,6 @@ class AdminMailer extends Component {
     this.props.dispatch({type:'SEND_NEW_PARTNER_EMAIL', payload:this.state});
     console.log(this.state);
     this.resetForm();
-    //ADD SNACKBAR FOR 'EMAIL SENT!'
   }
 
   handleInputChange = (event) => {
@@ -57,9 +55,6 @@ class AdminMailer extends Component {
       case 'email':
         this.setState({email: event.target.value});
         break; 
-      // case 'message':
-      //   this.setState({message: event.target.value});
-      //   break;
       default:
         console.log('Invalid field');
         break;      
@@ -88,13 +83,6 @@ class AdminMailer extends Component {
                 value={this.state.email}
                 onChange={this.handleInputChange}
             />
-            <br/>
-            {/* <Input 
-                placeholder="Message" 
-                id="message"
-                value={this.state.message}
-                onChange={this.handleInputChange}
-            /> */}
             <br/>
             <Button vairant="raised" color="primary" onClick={this.sendWelcomeEmail} >Send Welcome Email</Button>
         </div>

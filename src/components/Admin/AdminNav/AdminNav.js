@@ -38,6 +38,11 @@ class AdminNav extends Component {
                 Posts
               </Link>
             </li>
+            <li>
+              <Link to="/adminMailer">
+                AdminMailer
+              </Link>
+            </li>
             {(this.props.user.userName) ?
             <li>
               <LogoutPage/>
