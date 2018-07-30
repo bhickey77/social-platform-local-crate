@@ -10,7 +10,7 @@ const uploadPost = require('../modules/uploadPost');
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
-        queryText = `UPDATE post SET text = $2 where id = $1;`;
+        queryText = `UPDATE post SET content = $2 where id = $1;`;
         pool.query(queryText, [req.body.id, req.body.edit_value]).then(result => {
             res.sendStatus(200);
         }).catch(error => {

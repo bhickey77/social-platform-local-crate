@@ -5,7 +5,6 @@ import LogoutPage from '../../LogoutPage/LogoutPage';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 
-
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -36,6 +35,11 @@ class AdminNav extends Component {
             <li>
               <Link to="/admin/posts">
                 Posts
+              </Link>
+            </li>
+            <li>
+              <Link to="/adminMailer">
+                AdminMailer
               </Link>
             </li>
             {(this.props.user.userName) ?

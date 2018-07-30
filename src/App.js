@@ -7,11 +7,14 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadFile from './components/UploadFile/UploadFile';
 import PublicHome from './components/PublicHome/PublicHome';
+import AdminMailer from './components/AdminMailer/AdminMailer';
+import PartnerMailUrl from './components/PartnerMailUrl/PartnerMailUlr';
 import AdminHome from './components/Admin/AdminHome/AdminHome';
 import AdminPartnerAccounts from './components/Admin/AdminPartnerAccounts/AdminPartnerAccounts';
 import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
@@ -19,8 +22,8 @@ import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
 import './styles/main.css';
 
 const App = () => (
-  <div>
-    <Header title="Project Base" />
+  <div className="container">
+    <Header className="item-a"/>
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -56,11 +59,23 @@ const App = () => (
           exact path="/admin/posts"
           component={AdminPosts}
         />
+         <Route
+          exact path="/adminMailer"
+          component={AdminMailer}
+        />
+          <Route
+          exact path="/adminMailer"
+          component={AdminMailer}
+        />
+          <Route
+          exact path="/PartnerMailUrl"
+          component={PartnerMailUrl}
+        />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
-
       </Switch>
     </Router>
+    <Footer className="item-c"/>
   </div>
 );
 
