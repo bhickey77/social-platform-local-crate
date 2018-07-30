@@ -29,7 +29,7 @@ router.post('/send', (req, res, next) => {
   var email = req.body.email
   // var message = req.body.message
   // var content = `name: ${name} \n email: ${email} \n message: ${message} `
-  var content = `${name}, we're so excited to have you as a partner of Local Crate. \n \n Please join us to help share your story by using Social Crate. \n \n Sign up for Social Crate here: http://localhost:3000/?#/PartnerMailUrl`
+  var content = `${name}, we're so excited to have you as a partner of Local Crate. \n \n Please join us to help share your story by using Social Crate. \n \n Sign up for Social Crate here: http://localhost:3000/?#/register`
 
   var mail = {
     from: name,
