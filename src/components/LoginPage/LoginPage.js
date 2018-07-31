@@ -36,12 +36,14 @@ class LoginPage extends Component {
 
   login = (event) => {
     event.preventDefault();
+    console.log('login');
 
     if (this.state.username === '' || this.state.password === '') {
       this.props.dispatch(formError());
     } else {
       this.props.dispatch(triggerLogin(this.state.username, this.state.password));
     }
+    this.handleClose();
   }
 
   handleOpen = () => {

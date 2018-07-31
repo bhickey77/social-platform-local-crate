@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearError } from '../../../redux/actions/loginActions';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 // Components
 import AdminNav from '../AdminNav/AdminNav';
@@ -34,8 +40,32 @@ class AdminPosts extends Component {
       <div>
           <AdminNav/>
         { content }
-        {this.props.posts.map( post =>
-          {return JSON.stringify(post) })}
+        <Table>
+          <TableHead>
+          <TableRow>
+            <TableCell>Partner ID</TableCell>
+            <TableCell>Title</TableCell>
+            <TableCell>Content</TableCell>
+            <TableCell>Date Created</TableCell>
+            <TableCell>Date Updated</TableCell>
+            <TableCell>Is Hidden?</TableCell>
+          </TableRow>
+          </TableHead>
+          <TableBody>
+        {this.props.posts.map( post => {
+          return (
+            <TableRow key={post.id}>
+                <TableCell>{post.partner_id}</TableCell>
+                <TableCell>{post.title}</TableCell>
+                <TableCell>{post.content}</TableCell>
+                <TableCell>{post.date_created}</TableCell>
+                <TableCell>{post.date_updated}</TableCell>
+                <TableCell>{String(post.is_marked_as_hidden)}</TableCell>
+              </TableRow> 
+            );
+            })}
+            </TableBody>
+        </Table>
       </div>
     );
   }
