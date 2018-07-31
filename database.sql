@@ -1,10 +1,20 @@
 database name:
 local_crate
 
+DROP TABLE post_tags;
+DROP TABLE tag;
+DROP TABLE post;
+DROP TABLE person;
+DROP TABLE partner;
+
+database name:
+local_crate
+
 CREATE TABLE partner (
     id SERIAL PRIMARY KEY,
     name VARCHAR (100),
     location VARCHAR (120),
+    date_created VARCHAR (100) NOT NULL,
     type VARCHAR (100)
 );
 
@@ -16,7 +26,7 @@ CREATE TABLE person (
     date_created VARCHAR (100) NOT NULL,
     date_updated VARCHAR (100) NOT NULL,
     partner_id INTEGER REFERENCES partner,
-    isVerified BOOLEAN,
+    is_verified BOOLEAN,
     user_type VARCHAR (100),
     password VARCHAR (1000) NOT NULL
 );
@@ -42,3 +52,4 @@ CREATE TABLE post_tags (
     post_id INT REFERENCES post,
     tag_id INT REFERENCES tag
 );
+
