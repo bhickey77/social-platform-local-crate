@@ -16,11 +16,11 @@ class AdminHome extends Component {
       this.props.dispatch(clearError());
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //     if (nextProps.user.userName!=='admin') {
-  //         this.props.history.push('/user');
-  //     }
-  // }
+  componentWillReceiveProps(nextProps) {
+      if (nextProps.user.userName!=='admin') {
+          this.props.history.push('/user');
+      }
+  }
 
   render() {
     let content = null;
