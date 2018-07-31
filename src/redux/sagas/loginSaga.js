@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { LOGIN_ACTIONS } from '../actions/loginActions';
 import { USER_ACTIONS } from '../actions/userActions';
-import { callLogin, callLogout } from '../requests/loginRequests';
+import { callLogin, callLogout, callRegistration } from '../requests/loginRequests';
 
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
@@ -33,10 +33,22 @@ function* loginUser(action) {
   }
 }
 
+function* registerUser(action) {
+  try {
+    yield put({ type: LOGIN_ACTIONS.REQUEST_START });
+    yield callRegistration(action.payload);
+    yield put({
+      type: LOGIN_ACTIONS.LOGIN_REQUEST_DONE,
+    });
+  } catch (error) {
+    console.log(`error with the register user saga: `, error);
+  }
+}
+
 // worker Saga: will be fired on "LOGOUT" actions
 function* logoutUser(action) {
   try {
-    yield callLogout(action);
+    yield callLogout(action.payload);
     yield put({
       type: USER_ACTIONS.UNSET_USER,
     });
@@ -48,6 +60,7 @@ function* logoutUser(action) {
 function* loginSaga() {
   yield takeLatest(LOGIN_ACTIONS.LOGIN, loginUser);
   yield takeLatest(LOGIN_ACTIONS.LOGOUT, logoutUser);
+  yield takeLatest(LOGIN_ACTIONS.REGISTER, registerUser);
 }
 
 export default loginSaga;

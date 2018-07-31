@@ -174,3 +174,14 @@ li a:hover {
     width: 25%;
     /* height: 250px; */
 }
+
+.registration-container {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.registration-inputs-container {
+    width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+}
