@@ -10,12 +10,13 @@ import AdminNav from '../Admin/AdminNav/AdminNav';
 
 const mapStateToProps = state => ({
   user: state.user,
+  post: state.post
 });
 
 class PublicHome extends Component {
 
   componentDidMount() {
-      this.props.dispatch(clearError());
+    this.props.dispatch(clearError());
   }
 
   // componentWillReceiveProps(nextProps) {
