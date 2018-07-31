@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import NewCard from '../NewCard/NewCard';
 
+const mapStateToProps = state => ({
+  user: state.user,
+  post: state.post
+});
 
 const styles = theme => ({
     root: {
@@ -22,7 +27,14 @@ const styles = theme => ({
   
 
 class CardsGrid extends Component {
-    state = {
+  
+  async componentDidMount() {
+    this.props.dispatch({type: "FETCH_POSTS"});
+    await new Promise(resolve => {setTimeout(resolve, 150)})
+    console.log('reducer', this.props.post.posts)
+  }
+
+  state = {
         spacing: '16',
       };
     
@@ -37,20 +49,42 @@ class CardsGrid extends Component {
         const { spacing } = this.state;
 
         return (
-            <Grid container className={classes.root} spacing={32}>
-            <Grid item xs={12}>
-              <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-                {[0, 1, 2].map(value => (
-                  <Grid key={value} item>
-                    <Paper className={classes.paper} >
-                        <NewCard />
-                    </Paper>
-                  </Grid>
-                ))}
-              </Grid>
+          <Grid container className={classes.root} spacing={32}>
+          <Grid item xs={12}>
+            <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
+              {[0, 1, 2].map(value => (
+                <Grid key={value} item>
+                  <Paper className={classes.paper} >
+                    <div>
+                      {this.props.post.posts.map( post => {
+                        return <NewCard
+                        
+                        />
+                        })
+                      }
+                    </div>
+                  </Paper>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
+        </Grid>
         );
+        // return (
+        //     <Grid container className={classes.root} spacing={32}>
+        //     <Grid item xs={12}>
+        //       <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
+        //         {[0, 1, 2].map(value => (
+        //           <Grid key={value} item>
+        //             <Paper className={classes.paper} >
+        //                 <NewCard />
+        //             </Paper>
+        //           </Grid>
+        //         ))}
+        //       </Grid>
+        //     </Grid>
+        //   </Grid>
+        // );
     }
 }
 
@@ -58,4 +92,4 @@ CardsGrid.propTypes = {
     classes: PropTypes.object.isRequired,
   };
 
-export default withStyles(styles)(CardsGrid);
+export default compose(withStyles(styles),connect(mapStateToProps))(CardsGrid);
