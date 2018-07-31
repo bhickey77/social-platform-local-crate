@@ -22,6 +22,15 @@ function* getPartnerPosts( action ) {
     }
 }
 
+function* fetchUserPosts( ) {
+    try {
+        const postResponse = yield call( axios.get, `/api/post/userposts` );
+        yield put({ type: 'SET_PARTNER_POSTS', payload: postResponse.data });   
+    } catch (error) {
+        console.log('Error in postSaga fetchUserPosts', error);
+    }
+}
+
 function* addPost( action ) {
     try {
         const postResponse = yield call( axios.post, '/api/post', action.payload );
@@ -70,6 +79,7 @@ function* postSaga() {
     // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
     // yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
     // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
+    yield takeLatest('FETCH_USER_POSTS', fetchUserPosts)
   }
   
   export default postSaga;
