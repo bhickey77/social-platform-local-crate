@@ -90,8 +90,10 @@ class LoginPage extends Component {
             <TextField
               autoFocus
               margin="dense"
-              id="name"
+              id="username"
+              value={this.state.username}
               label="Username"
+              onChange={this.handleInputChangeFor('username')}
               type="text"
               fullWidth
             />
@@ -99,7 +101,9 @@ class LoginPage extends Component {
               autoFocus
               margin="dense"
               id="password"
+              value={this.state.password}
               label="Password"
+              onChange={this.handleInputChangeFor('password')}
               type="password"
               fullWidth
             />
@@ -108,10 +112,9 @@ class LoginPage extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.login} color="primary">
               Login
             </Button>
-            <Button><Link to="/register">Register</Link></Button>
           </DialogActions>
         </Dialog>
       </div>
