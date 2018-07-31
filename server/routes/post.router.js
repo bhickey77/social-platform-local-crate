@@ -54,18 +54,4 @@ router.get('/', (req, res) => {
         })
 });
 
-router.get('/userposts', (req, res) => {
-    if (req.isAuthenticated()){
-        let queryText = `SELECT * FROM post WHERE partner_id=$1`;
-        pool.query(queryText, [req.user.id]).then((result) => {
-            res.send(result.rows);
-        }).catch((error) => {
-            console.log(error);
-            res.sendStatus(500);
-        })
-    } else {
-        res.sendStatus(403);
-    }
-});
-
 module.exports = router;
