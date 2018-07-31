@@ -43,19 +43,15 @@ router.post('/', upload.single('file'), (req, res) => {
 
 router.get('/', (req, res) => {
     // GET for ALL posts - public view (can limit volume in query)
-    if (req.isAuthenticated()){
         console.log('in GET route to get all posts');
         console.log('user', req.user);
-        let queryText = `SELECT * FROM post`;
+        let queryText = `SELECT * FROM post ORDER BY id DESC`;
         pool.query(queryText).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
             console.log(error);
             res.sendStatus(500);
         })
-    } else {
-        res.sendStatus(403);
-    }
 });
 
 module.exports = router;

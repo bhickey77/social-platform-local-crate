@@ -28,13 +28,11 @@ const styles = theme => ({
 
 class CardsGrid extends Component {
   
-  async componentDidMount() {
+  componentDidMount() {
     this.props.dispatch({type: "FETCH_POSTS"});
-    await new Promise(resolve => {setTimeout(resolve, 150)})
-    console.log('reducer', this.props.post.posts)
   }
 
-  state = {
+    state = {
         spacing: '16',
       };
     
@@ -49,26 +47,17 @@ class CardsGrid extends Component {
         const { spacing } = this.state;
 
         return (
-          <Grid container className={classes.root} spacing={32}>
-          <Grid item xs={12}>
-            <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-              {[0, 1, 2].map(value => (
-                <Grid key={value} item>
-                  <Paper className={classes.paper} >
-                    <div>
-                      {this.props.post.posts.map( post => {
-                        return <NewCard
-                        
-                        />
-                        })
-                      }
-                    </div>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Grid>
+          <div>
+            <div>
+              {this.props.post.posts.map( post => {
+                return <NewCard
+                key = {post.id}
+                post= {post}
+                />
+                })
+              }
+            </div>
+          </div>
         );
         // return (
         //     <Grid container className={classes.root} spacing={32}>
@@ -90,6 +79,6 @@ class CardsGrid extends Component {
 
 CardsGrid.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
 
 export default compose(withStyles(styles),connect(mapStateToProps))(CardsGrid);
