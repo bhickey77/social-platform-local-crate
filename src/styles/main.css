@@ -86,6 +86,13 @@ input[type="submit"] {
     margin: 10px;
 }
 
+#login {
+    width: 75vw;
+    margin: 0 auto;
+    padding-top: 10%;
+    
+}
+
 #logo {
     width: 10vw;
     height: inherit;

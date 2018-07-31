@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
-import { compose } from 'redux';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Slide from '@material-ui/core/Slide';
 
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
 });
 
-const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-  },
-});
+const Transition = (props) => {
+  return <Slide direction="up" {...props} />;
+}
 
 class LoginPage extends Component {
   constructor(props) {
@@ -75,54 +72,51 @@ class LoginPage extends Component {
     return (<span />);
   }
   
+  
   render() {
     return (
       <div>
         <Button onClick={this.handleOpen}>Login</Button>
-        { this.renderAlert() }
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+        <Dialog
           open={this.state.open}
           onClose={this.handleClose}
+          TransitionComponent={Transition}
+          keepMounted
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
         >
-        <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Log In"
+          <DialogTitle id="alert-dialog-slide-title">Login</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Username"
+              type="text"
+              fullWidth
             />
-            <Link to="/register">Register</Link>
-          </div>
-        </form>
-        </Modal>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="password"
+              label="Password"
+              type="password"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Login
+            </Button>
+            <Button><Link to="/register">Register</Link></Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
 }
 
-export default compose(withStyles(styles),connect(mapStateToProps))(LoginPage);
+export default connect(mapStateToProps)(LoginPage);
