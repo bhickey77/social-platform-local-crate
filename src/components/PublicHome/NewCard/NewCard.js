@@ -55,6 +55,7 @@ class NewCard extends Component {
 
     render() {
         const { classes } = this.props;
+
         return (
             <div>
                 <Card className={classes.card}>
@@ -69,17 +70,17 @@ class NewCard extends Component {
                         <EditIcon />
                     </IconButton>
                     }
-                    title="This is the post title"
-                    subheader="This is the date"
+                    title={this.props.post.title}
+                    subheader={this.props.post.date_created}
                 />
                 <CardMedia
                     className={classes.media}
-                    image="/images/ChickenFajitaBowl_Main1.jpg"
+                    image={this.props.post.media_url}
                     title="Contemplative Reptile"
                 />
                 <CardContent>
                     <Typography component="p">
-                    This is the copy for the post. 
+                    {this.props.post.content}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
