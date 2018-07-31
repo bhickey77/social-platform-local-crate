@@ -39,7 +39,6 @@ generateSignedUrl = (media_key) => {
       }       
     })
   })
-    
 }
 
 function uploadToSQL(req, media_url) {

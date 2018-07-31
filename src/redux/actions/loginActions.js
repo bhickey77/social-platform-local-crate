@@ -7,6 +7,7 @@ export const LOGIN_ACTIONS = {
   LOGIN_FAILED_NO_CODE: 'LOGIN_FAILED_NO_CODE',
   INPUT_ERROR: 'INPUT_ERROR',
   LOGOUT: 'LOGOUT',
+  REGISTER: 'REGISTER',
 };
 
 export const clearError = () => ({
@@ -24,6 +25,14 @@ export const triggerLogin = (username, password) => ({
 export const triggerLogout = () => ({
   type: LOGIN_ACTIONS.LOGOUT,
 });
+
+export const triggerRegistration = (partnerData, personData)  => ({
+  type: LOGIN_ACTIONS.REGISTER,
+  payload: {
+    partnerData,
+    personData,
+  }
+})
 
 export function formError() {
   return {

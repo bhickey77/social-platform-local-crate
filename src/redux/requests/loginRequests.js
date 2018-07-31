@@ -31,3 +31,11 @@ export function callLogout() {
       throw error.response || error;
     });
 }
+
+export function callRegistration(payload) {
+  return axios.post('api/user/register', payload)
+    .then(response => response.data)
+    .catch((error) => {
+      throw error.response || error;
+    });
+}

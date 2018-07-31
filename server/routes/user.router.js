@@ -16,19 +16,40 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
-  body = req.body;
-  console.log('req: ', body);
-  
-  // const username = req.body.username;
-  const password = encryptLib.encryptPassword(req.body.password);
+  const password = encryptLib.encryptPassword(req.body.personData.password);
+  const partner = req.body.partnerData;
+  const person = req.body.personData;
 
-  const queryText = `INSERT INTO person
-  (username, password, date_created, date_updated, supplier_type )
-  VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
-  pool.query(queryText, [body.username, password, body.organization_name,
-    body.supplier_location, body.date_created, body.date_updated, body.supplier_type])
-    .then(() => { res.sendStatus(201); })
-    .catch((err) => { next(err); });
+  const currentDateTime = new Date().toJSON().toString();
+
+  const partnerQuery = `INSERT INTO partner
+                        (name, location, date_created, type)
+                        VALUES
+                        ($1, $2, $3, $4)
+                        RETURNING id;`
+  const partnerValues = [partner.name, partner.location, currentDateTime, partner.type];
+  pool.query(partnerQuery, partnerValues)
+    .then(response => {
+      console.log(response.rows[0]);
+      const personQuery = `INSERT INTO person
+                           (username, first_name, last_name, date_created, date_updated, partner_id, is_verified, user_type, password)
+                           VALUES
+                           ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
+      const personValues = [person.username, person.first_name, person.last_name, currentDateTime, currentDateTime, response.rows[0].id, true, 'user', password];
+      pool.query(personQuery, personValues)
+        .then(response => {
+          console.log(`successfully inserted into person: `, response);
+          res.sendStatus(200);
+        })
+        .catch(error => {
+          console.log(`error inserting into person: `, error);
+          res.sendStatus(500);
+        })
+    })
+    .catch(error => {
+      console.log(`error with insert into partner: `, error);
+      res.sendStatus(500);
+    })
 });
 
 // Handles login form authenticate/login POST
