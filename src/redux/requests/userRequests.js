@@ -6,7 +6,7 @@ export function callUser() {
     withCredentials: true,
   };
 
-  return axios.get('api/user', config)
+  return axios.get('/api/user', config)
     .then(response => response.data)
     .catch((error) => { throw error.response || error; });
 }

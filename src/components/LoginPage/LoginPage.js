@@ -36,12 +36,14 @@ class LoginPage extends Component {
 
   login = (event) => {
     event.preventDefault();
+    console.log('login');
 
     if (this.state.username === '' || this.state.password === '') {
       this.props.dispatch(formError());
     } else {
       this.props.dispatch(triggerLogin(this.state.username, this.state.password));
     }
+    this.handleClose();
   }
 
   handleOpen = () => {
@@ -92,6 +94,8 @@ class LoginPage extends Component {
               margin="dense"
               id="name"
               label="Username"
+              // value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
               type="text"
               fullWidth
             />
@@ -100,6 +104,8 @@ class LoginPage extends Component {
               margin="dense"
               id="password"
               label="Password"
+              // value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
               type="password"
               fullWidth
             />
@@ -108,7 +114,7 @@ class LoginPage extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.login} color="primary">
               Login
             </Button>
             <Button><Link to="/register">Register</Link></Button>

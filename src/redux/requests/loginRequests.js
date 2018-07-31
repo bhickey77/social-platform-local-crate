@@ -11,8 +11,9 @@ export function callLogin(payload) {
     withCredentials: true,
   };
 
-  return axios.post('api/user/login', body, config)
+  return axios.post('/api/user/login', body, config)
     .then(response => response.data)
+    console.log( 'axios' )
     .catch((error) => {
       throw error.response || error;
     });
@@ -24,7 +25,7 @@ export function callLogout() {
     withCredentials: true,
   };
 
-  return axios.get('api/user/logout', config)
+  return axios.get('/api/user/logout', config)
     .then(response => response.data)
     .catch((error) => {
       throw error.response || error;
