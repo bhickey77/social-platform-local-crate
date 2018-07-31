@@ -43,7 +43,7 @@ router.post('/', upload.single('file'), (req, res) => {
 
 router.get('/', (req, res) => {
     // GET for ALL posts - public view (can limit volume in query)
-    if (req.isAuthenticated()){
+    // if (req.isAuthenticated()){
         console.log('in GET route to get all posts');
         console.log('user', req.user);
         let queryText = `SELECT * FROM post`;
@@ -53,9 +53,9 @@ router.get('/', (req, res) => {
             console.log(error);
             res.sendStatus(500);
         })
-    } else {
-        res.sendStatus(403);
-    }
+    // } else {
+    //     res.sendStatus(403);
+    // }
 });
 
 module.exports = router;
