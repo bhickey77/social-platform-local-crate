@@ -76,7 +76,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleOpen}>Login</Button>
+        <Button className="whiteButton" onClick={this.handleOpen}>Login</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -111,7 +111,6 @@ class LoginPage extends Component {
             <Button onClick={this.handleClose} color="primary">
               Login
             </Button>
-            <Button><Link to="/register">Register</Link></Button>
           </DialogActions>
         </Dialog>
       </div>
