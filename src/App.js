@@ -75,7 +75,7 @@ const App = () => (
         <Route render={() => <h1>404</h1>} />
       </Switch>
     </Router>
-    <Footer className="item-c"/>
+    <Footer/>
   </div>
 );
 

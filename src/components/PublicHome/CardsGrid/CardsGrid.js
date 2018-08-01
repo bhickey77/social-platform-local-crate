@@ -49,13 +49,13 @@ class CardsGrid extends Component {
         return (
           <div>
             <div>
-              {this.props.post.posts.map( post => {
+              {/* {this.props.post.posts.map( post => {
                 return <NewCard
                 key = {post.id}
                 post= {post}
                 />
                 })
-              }
+              } */}
             </div>
           </div>
         );
