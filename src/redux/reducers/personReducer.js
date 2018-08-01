@@ -1,15 +1,11 @@
 import { combineReducers } from 'redux';
-import { PERSON_ACTIONS } from '../actions/partnerActions';
+import { PERSON_ACTIONS } from '../actions/personActions';
 
 const persons = ( state = [], action ) => {
     switch ( action.type ) {
         case PERSON_ACTIONS.SET_PERSONS :
         console.log( 'persons', action.payload)
-        state = [];
-            return [
-                ...state,
-                action.payload,
-            ];
+            return action.payload;
         default:
             return state;
     }
