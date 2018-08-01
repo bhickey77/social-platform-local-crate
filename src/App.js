@@ -18,12 +18,13 @@ import PartnerMailUrl from './components/PartnerMailUrl/PartnerMailUlr';
 import AdminHome from './components/Admin/AdminHome/AdminHome';
 import AdminPartnerAccounts from './components/Admin/AdminPartnerAccounts/AdminPartnerAccounts';
 import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
-
+import ButtonAppBar from './components/ButtonAppBar/ButtonAppBar';
 import './styles/main.css';
 
 const App = () => (
   <div className="container-parent">
-    <Header />
+    {/* <Header /> */}
+    <ButtonAppBar />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />

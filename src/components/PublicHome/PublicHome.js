@@ -29,11 +29,11 @@ class PublicHome extends Component {
     let content = null;
     let nav = null;
     
-    if (this.props.user.user_type === 'admin' ) {
-      nav = <AdminNav />
-    } else {
-      nav = <Nav />
-    }
+    // if (this.props.user.user_type === 'admin' ) {
+    //   nav = <AdminNav />
+    // } else {
+    //   nav = <Nav />
+    // }
 
     content = (
     <div>
