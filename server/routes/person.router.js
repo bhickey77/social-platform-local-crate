@@ -8,8 +8,7 @@ router.get('/', (req, res) => {
     // if (req.isAuthenticated()){
         console.log('in GET route to get all partners');
         console.log('user', req.user);
-        let queryText = `SELECT username, partner_id, date_created,
-        date_updated FROM person WHERE user_type != 'admin'`;
+        let queryText = `SELECT * FROM person WHERE user_type != 'admin'`;
         pool.query(queryText).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
