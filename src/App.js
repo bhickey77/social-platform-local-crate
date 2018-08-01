@@ -22,8 +22,8 @@ import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
 import './styles/main.css';
 
 const App = () => (
-  <div className="container">
-    <Header className="item-a"/>
+  <div className="container-parent">
+    <Header />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />

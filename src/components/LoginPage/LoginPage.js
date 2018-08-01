@@ -78,7 +78,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleOpen}>Login</Button>
+        <Button className="whiteButton" onClick={this.handleOpen}>Login</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
