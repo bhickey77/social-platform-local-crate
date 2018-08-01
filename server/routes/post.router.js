@@ -20,6 +20,20 @@ router.put('/:id', (req, res) => {
     }
 });
 
+router.put('/hide/:id', (req, res) => {
+    // PUT for editing whether a post is hidden
+    if(req.isAuthenticated()){
+        console.log( req.body )
+        queryText = `UPDATE post SET is_marked_as_hidden = $1 where id = $2;`;
+        pool.query(queryText, [!req.body.post_is_hidden, req.params.id]).then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('Error handling PUT for hide post:', error);});
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.delete('/:id', (req, res) => {
     //DELETE for admin or partner to delete a post
     if(req.isAuthenticated()){

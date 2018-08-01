@@ -7,6 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 
 // Components
 import AdminNav from '../AdminNav/AdminNav';
@@ -18,10 +19,32 @@ const mapStateToProps = state => ({
 });
 
 class AdminPosts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isHidden: null,
+      id: 0
+    };
+  }
+
 
   componentDidMount() {
       this.props.dispatch(clearError());
       this.props.dispatch({ type: 'FETCH_POSTS' });
+  }
+
+  hidePost = (post_is_hidden, post_id) => () => {
+    // if(post_is_hidden === false) {
+    //   this.state.isHidden = true;
+    // } else {
+    //   this.state.isHidden = false;
+    // }
+    // this.state.id = post_id;
+    console.log( 'hidden state', this.state )
+    this.props.dispatch({ type: 'HIDE_POST', payload: {
+        post_is_hidden,
+        post_id,
+    } })
   }
 
   render() {
@@ -60,7 +83,10 @@ class AdminPosts extends Component {
                 <TableCell>{post.content}</TableCell>
                 <TableCell>{post.date_created}</TableCell>
                 <TableCell>{post.date_updated}</TableCell>
-                <TableCell>{String(post.is_marked_as_hidden)}</TableCell>
+                <TableCell>
+                  <Button onClick={this.hidePost(post.is_marked_as_hidden, post.id)}>
+                  {String(post.is_marked_as_hidden)}</Button>
+                </TableCell>
               </TableRow> 
             );
             })}
