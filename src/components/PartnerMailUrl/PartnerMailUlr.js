@@ -29,6 +29,7 @@ class PartnerMailUrl extends Component {
 
   handleSubmit = () => {
     this.props.dispatch(triggerRegistration(this.state.partner, this.state.person));
+    this.props.history.push('/');
   }
 
   handleChangeFor = property => event => {
@@ -110,6 +111,7 @@ class PartnerMailUrl extends Component {
               <TextField
                 id="password"
                 label="Password"
+                type="password"
                 value={this.state.person.password}
                 onChange={this.handleChangeFor('password')}
                 margin="normal"
