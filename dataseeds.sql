@@ -1,11 +1,11 @@
-INSERT INTO post ("partner_id", "title", "content", "media_url", "date_created", "date_updated", "is_marked_as_hidden")
+INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES(1, 'Party Time!', 'Bill has food in his mouth', 'https://local-crate-social-platform.s3.us-east-2.amazonaws.com/40dec9d2d588952a4b510717a93dca7f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMAWRS6NFP7JTO5A%2F20180730%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20180730T213752Z&X-Amz-Expires=900&X-Amz-Signature=8efddad05ad16cfe8fc3f6cb34967259869ca9d8c79d262450c2c81f50d11281&X-Amz-SignedHeaders=host', '2018-07-30T21:37:52.986Z', '2018-07-30T21:37:52.986Z', false);
 
-INSERT INTO post ("partner_id", "title", "content", "media_url", "date_created", "date_updated", "is_marked_as_hidden")
+INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES(1, 'Its fall!', 'Lots o pumpkins', 'https://local-crate-social-platform.s3.us-east-2.amazonaws.com/54c8df26aaba03cbb31ae08cebe7f682?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMAWRS6NFP7JTO5A%2F20180731%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20180731T143810Z&X-Amz-Expires=900&X-Amz-Signature=9c85415fd69295e3b60c5cca25c508b3038398f9a234a49db7b3b40997ec6576&X-Amz-SignedHeaders=host', '2018-07-31T14:38:10.787Z', '2018-07-31T14:38:10.787Z', false);
 
-INSERT INTO post ("partner_id", "title", "content", "media_url", "date_created", "date_updated", "is_marked_as_hidden")
+INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES(1, 'Dirt & plants.', 'Bill has food in his mouth', 'https://local-crate-social-platform.s3.us-east-2.amazonaws.com/c1fc32c5206cb97793b48e720b36d629?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMAWRS6NFP7JTO5A%2F20180731%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20180731T143854Z&X-Amz-Expires=900&X-Amz-Signature=f68b13cd57040c177b0899142b2f8dcff4b2c57c7d0de713e2233877e7b00cd5&X-Amz-SignedHeaders=host', '2018-07-31T14:38:54.286Z', '2018-07-31T14:38:54.286Z', false);
 
-INSERT INTO post ("partner_id", "title", "content", "media_url", "date_created", "date_updated", "is_marked_as_hidden")
+INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES(1, 'Moo', 'Cows...!', 'https://local-crate-social-platform.s3.us-east-2.amazonaws.com/a9f7688f72df9d2be4997fbf0c99121b?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMAWRS6NFP7JTO5A%2F20180731%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20180731T143912Z&X-Amz-Expires=900&X-Amz-Signature=67129e63de4307ec2b86b2dff4272719997a521c2e7ce8478cf60c43d930bd42&X-Amz-SignedHeaders=host', '2018-07-31T14:39:12.730Z', '2018-07-31T14:39:12.730Z', false);

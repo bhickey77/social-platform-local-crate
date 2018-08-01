@@ -13,12 +13,48 @@ const IAM_USER_KEY = process.env.aws_access_key_id;
 const IAM_USER_SECRET = process.env.aws_secret_access_key;
  
 const uploadPost = async(req, res) => {
-  console.log('UPLOADING POST: ', req.body);
   let media_key = await uploadToS3(req.file);
-  let media_url = await generateSignedUrl(media_key);
-  console.log(`MEDIA URLLLL: `, media_url);
-  let status = await uploadToSQL(req, media_url);
+  let status = await uploadToSQL(req, media_key);
   res.sendStatus(200);
+}
+
+const generateSignedUrls = async (res, rows) => {
+  const newRows = await addSignedUrls(rows);
+  res.send(newRows);
+}
+
+const addSignedUrls = async rows => {
+  const newRows = [];
+  for(const row of rows){
+    const media_url = await generateSignedUrl(row.media_key);
+    row.media_url = media_url;
+    newRows.push(row);
+  }  
+  return new Promise(resolve => {
+    resolve(newRows);
+  })
+}
+
+function generateSignedUrl(key) {
+return new Promise(revolve => {
+  let s3bucket = new AWS.S3({
+    accessKeyId: IAM_USER_KEY,
+    secretAccessKey: IAM_USER_SECRET,
+    Bucket: BUCKET_NAME,
+    signatureVersion: 'v4',
+  });
+  let urlParams = {Bucket: 'local-crate-social-platform', Key: key};
+  console.log({urlParams});
+  s3bucket.getSignedUrl('getObject', urlParams, function(error, url) {
+    if(error){
+      console.log(error);
+      resolve('');
+    } else {
+      console.log('url in getsigned response: ', url);
+      revolve(url);
+    }
+  })
+})
 }
 
 generateSignedUrl = (media_key) => {
@@ -41,18 +77,18 @@ generateSignedUrl = (media_key) => {
   })
 }
 
-function uploadToSQL(req, media_url) {
+function uploadToSQL(req, media_key) {
   return new Promise(resolve => {
     const is_marked_as_hidden = false;
     const date_created = new Date().toJSON().toString();
     const date_updated = new Date().toJSON().toString();
-    const queryText = `INSERT INTO post ("partner_id", "title", "content", "media_url", "date_created", "date_updated", "is_marked_as_hidden")
+    const queryText = `INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES($1, $2, $3, $4, $5, $6, $7)`;
     pool.query(queryText, [
         1,
         req.body.title,
         req.body.content,
-        media_url,
+        media_key,
         date_created,
         date_updated,
         is_marked_as_hidden,
@@ -100,4 +136,4 @@ function uploadToS3(file) {
   })
 }
 
-module.exports = uploadPost;
+module.exports = { uploadPost, generateSignedUrls };

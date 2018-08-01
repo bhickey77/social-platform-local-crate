@@ -5,7 +5,7 @@ const router = express.Router();
 const multer  = require('multer');
 const upload = multer({ dest: '../uploads/' });
 
-const uploadPost = require('../modules/uploadPost');
+const { uploadPost, generateSignedUrls } = require('../modules/uploadPost');
 
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
@@ -48,6 +48,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
+    console.log('hit the post post route: ', req.file);
     if (req.isAuthenticated()){
         uploadPost(req, res);
     } else {
@@ -61,7 +62,7 @@ router.get('/', (req, res) => {
         console.log('user', req.user);
         let queryText = `SELECT * FROM post ORDER BY id DESC`;
         pool.query(queryText).then((result) => {
-            res.send(result.rows);
+            generateSignedUrls(res, result.rows);
         }).catch((error) => {
             console.log(error);
             res.sendStatus(500);
