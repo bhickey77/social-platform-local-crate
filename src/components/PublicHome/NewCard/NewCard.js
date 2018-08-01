@@ -91,13 +91,13 @@ class NewCard extends Component {
                     {/* <ShareIcon /> */}
                     </IconButton>
                     <IconButton
-                    className={classnames(classes.expand, {
-                        [classes.expandOpen]: this.state.expanded,
-                    })}
-                    onClick={this.handleExpandClick}
-                    aria-expanded={this.state.expanded}
-                    aria-label="Show more"
-                    >
+                        className={classnames(classes.expand, {
+                            [classes.expandOpen]: this.state.expanded,
+                        })}
+                        onClick={this.handleExpandClick}
+                        aria-expanded={this.state.expanded}
+                        aria-label="Show more"
+                        >
                     <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>

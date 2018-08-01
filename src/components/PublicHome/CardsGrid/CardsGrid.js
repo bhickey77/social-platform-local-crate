@@ -45,11 +45,11 @@ class CardsGrid extends Component {
     render() {
         const { classes } = this.props;
         const { spacing } = this.state;
-
+        const posts = this.props && this.props.post && this.props.post.posts || [];
         return (
           <div>
             <div>
-              {this.props.post.posts.map( post => {
+              {posts.map( post => {
                 return <NewCard
                 key = {post.id}
                 post= {post}
