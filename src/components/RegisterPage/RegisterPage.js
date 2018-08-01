@@ -35,25 +35,10 @@ class RegisterPage extends Component {
         date_updated: this.state.date_updated,
         supplier_type: this.state.supplier_type
       };
-
-      // making the request to the server to post the new user's registration
-      axios.post('/api/user/register/', body)
-        .then((response) => {
-          if (response.status === 201) {
-            this.props.history.push('/home');
-          } else {
-            this.setState({
-              message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
-            });
-          }
-        })
-        .catch(() => {
-          this.setState({
-            message: 'Ooops! Something went wrong! Is the server running?',
-          });
-        });
+      this.props.dispatch({ type: 'REGISTER_USER', payload: body})
     }
-  } // end registerUser
+  }
+
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
