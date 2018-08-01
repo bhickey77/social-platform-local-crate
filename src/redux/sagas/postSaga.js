@@ -44,7 +44,7 @@ function* editPost( action ) {
 
 function* hidePost( action ) {
     try {
-        // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
+        const postResponse = yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -68,7 +68,7 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
     // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
-    // yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
+    yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
     // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
   }
   
