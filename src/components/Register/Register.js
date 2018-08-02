@@ -80,7 +80,6 @@ class Register extends Component {
     })
   }
   
-  // Same as nextStep, but decrementing
   previousStep = () => {
     this.setState({
       step : this.state.step - 1
