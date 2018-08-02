@@ -28,16 +28,11 @@ class PublicHome extends Component {
   render() {
     let content = null;
     let nav = null;
-    
-    if (this.props.user.user_type === 'admin' ) {
-      nav = <AdminNav />
-    } else {
-      nav = <Nav />
-    }
 
     content = (
     <div>
         <p>PublicHome Component</p>
+        <p>go to /partnerMailUrl to create a user profile</p>
         <CardsGrid />
     </div>
     );
@@ -45,7 +40,6 @@ class PublicHome extends Component {
 
     return (
       <div>
-        { nav }
         { content }
       </div>
     );

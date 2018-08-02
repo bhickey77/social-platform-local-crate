@@ -33,7 +33,7 @@ class RegisterStep3 extends Component {
                             <br/>
                             <TextField
                                 id="password"
-                                label="ConfirmPassword"
+                                label="Confirm Password"
                                 type="password"
                                 value={this.props.state.person.password2}
                                 onChange={this.props.handleChangeFor('password2')}
