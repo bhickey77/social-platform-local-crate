@@ -44,13 +44,13 @@ return new Promise(revolve => {
     signatureVersion: 'v4',
   });
   let urlParams = {Bucket: 'local-crate-social-platform', Key: key};
-  console.log({urlParams});
+  // console.log({urlParams});
   s3bucket.getSignedUrl('getObject', urlParams, function(error, url) {
     if(error){
       console.log(error);
       resolve('');
     } else {
-      console.log('url in getsigned response: ', url);
+      // console.log('url in getsigned response: ', url);
       revolve(url);
     }
   })
@@ -70,7 +70,7 @@ generateSignedUrl = (media_key) => {
       if(err){
         console.log(`error with getsignedurl: `, err);
       } else {
-        console.log(`url from getsignedurl: `, url);
+        // console.log(`url from getsignedurl: `, url);
         resolve(url);
       }       
     })

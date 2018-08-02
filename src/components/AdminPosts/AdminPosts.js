@@ -29,7 +29,7 @@ class AdminPosts extends Component {
 
   componentDidMount() {
       this.props.dispatch(clearError());
-      this.props.dispatch({ type: 'FETCH_POSTS' });
+      this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
   }
 
   hidePost = (post_is_hidden, post_id) => () => {

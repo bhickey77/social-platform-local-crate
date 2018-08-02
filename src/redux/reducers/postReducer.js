@@ -5,6 +5,9 @@ const posts = ( state = [], action ) => {
     switch ( action.type ) {
         case POST_ACTIONS.SET_POSTS :
             return action.payload;
+        case POST_ACTIONS.SET_ALL_POSTS :
+            return action.payload;
+            
         default:
             return state;
     }
