@@ -23,28 +23,10 @@ class Newsfeed extends Component {
   // }
 
   render() {
-    let content = null;
-<<<<<<< HEAD:src/components/PublicHome/PublicHome.js
-    let nav = null;
-=======
->>>>>>> baselayout:src/components/Newsfeed/Newsfeed.js
-
-    content = (
-    <div>
-        <p>PublicHome Component</p>
-        <p>go to /partnerMailUrl to create a user profile</p>
-        <CardsGrid />
-    </div>
-    );
-    
-
     return (
       <div>
-<<<<<<< HEAD:src/components/PublicHome/PublicHome.js
-=======
         <Nav />
->>>>>>> baselayout:src/components/Newsfeed/Newsfeed.js
-        { content }
+        <CardsGrid />
       </div>
     );
   }
