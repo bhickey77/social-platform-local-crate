@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import NewCard from '../NewCard/NewCard';
-
+import UploadCard from '../../UploadCard/UploadCard';
 const mapStateToProps = state => ({
   user: state.user,
   post: state.post
@@ -46,19 +46,37 @@ class CardsGrid extends Component {
         const { classes } = this.props;
         const { spacing } = this.state;
         const posts = this.props && this.props.post && this.props.post.posts || [];
-        return (
-          <div>
+
+        if (this.props.user.userName) {
+          return (
             <div>
-              {posts.map( post => {
-                return <NewCard
-                key = {post.id}
-                post= {post}
-                />
-                })
-              }
+              <div>
+                <UploadCard/>
+                {posts.map( post => {
+                  return <NewCard
+                  key = {post.id}
+                  post= {post}
+                  />
+                  })
+                }
+              </div>
             </div>
-          </div>
-        );
+          );
+        } else {
+          return (
+            <div>
+              <div>
+                {posts.map( post => {
+                  return <NewCard
+                  key = {post.id}
+                  post= {post}
+                  />
+                  })
+                }
+              </div>
+            </div>
+          );
+        }
         // return (
         //     <Grid container className={classes.root} spacing={32}>
         //     <Grid item xs={12}>
