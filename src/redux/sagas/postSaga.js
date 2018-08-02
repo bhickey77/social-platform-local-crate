@@ -56,7 +56,7 @@ function* editPost( action ) {
 function* hidePost( action ) {
     try {
         const postResponse = yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
-        yield put({ type: 'FETCH_POSTS' })
+        yield put({ type: 'FETCH_ALL_POSTS' })
     }
     catch ( error ) {
         console.log( 'Error in newChar', error );
