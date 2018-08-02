@@ -58,9 +58,7 @@ router.post('/', upload.single('file'), (req, res) => {
 
 router.get('/', (req, res) => {
     // GET for ALL posts - public view (can limit volume in query)
-        console.log('in GET route to get all posts');
-        console.log('user', req.user);
-        let queryText = `SELECT * FROM post ORDER BY id DESC`;
+        let queryText = `SELECT * FROM post where is_marked_as_hidden = false ORDER BY id DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {

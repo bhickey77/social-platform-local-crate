@@ -8,7 +8,6 @@ import {
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadFile from './components/UploadFile/UploadFile';
@@ -31,10 +30,6 @@ const App = () => (
         <Route
           path="/home"
           component={PublicHome}
-        />
-        <Route
-          path="/register"
-          component={RegisterPage}
         />
         <Route
           path="/user"
@@ -61,10 +56,6 @@ const App = () => (
           component={AdminPosts}
         />
          <Route
-          exact path="/adminMailer"
-          component={AdminMailer}
-        />
-          <Route
           exact path="/adminMailer"
           component={AdminMailer}
         />

@@ -58,7 +58,6 @@ class AdminMailer extends Component {
   }
   sendWelcomeEmail = () => {
     this.props.dispatch({type:'SEND_NEW_PARTNER_EMAIL', payload:this.state});
-    console.log(this.state);
     this.resetForm();
     this.handleClick(TransitionUp)();
   }
