@@ -16,10 +16,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
-  const password = encryptLib.encryptPassword(req.body.personData.password);
+  const password = encryptLib.encryptPassword(req.body.personData.password1);
   const partner = req.body.partnerData;
   const person = req.body.personData;
-
+  console.log(req.body);
   const currentDateTime = new Date().toJSON().toString();
 
   const partnerQuery = `INSERT INTO partner

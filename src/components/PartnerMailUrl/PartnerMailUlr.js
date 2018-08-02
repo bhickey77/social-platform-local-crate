@@ -35,11 +35,6 @@ class PartnerMailUrl extends Component {
 
   handleSubmit = () => {
     if ( this.state.person.password1 === this.state.person.password2 ) {
-      this.setState({
-        person: {
-          password: this.state.person.password1
-        }
-      })
       this.props.dispatch(triggerRegistration(this.state.partner, this.state.person));
       this.props.history.push('/');
     } else {
