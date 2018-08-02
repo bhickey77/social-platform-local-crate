@@ -9,7 +9,7 @@ import {
 import Footer from './components/Footer/Footer';
 import PartnerPage from './components/PartnerPage/PartnerPage';
 import InfoPage from './components/InfoPage/InfoPage';
-import UploadFile from './components/UploadFile/UploadFile';
+import UploadCard from './components/UploadCard/UploadCard';
 import Newsfeed from './components/Newsfeed/Newsfeed';
 import AddNewPartner from './components/AddNewPartner/AddNewPartner';
 import Register from './components/Register/Register';
@@ -37,7 +37,7 @@ const App = () => (
         />
         <Route
           path="/upload"
-          component={UploadFile}
+          component={UploadCard}
         />
         <Route
           exact path="/admin/accounts"
