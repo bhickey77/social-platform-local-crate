@@ -64,6 +64,7 @@ generateSignedUrl = (media_key) => {
       secretAccessKey: IAM_USER_SECRET,
       Bucket: BUCKET_NAME,
       signatureVersion: 'v4',
+      region: 'us-east-2',
     });
     let urlParams = {Bucket: 'local-crate-social-platform', Key: media_key};
     s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
