@@ -95,13 +95,6 @@ class Nav extends Component {
                 </Button>
               </Link>
             }
-            {(currentRoute !== 'partners') &&
-              <Link to="/partners">
-                <Button color="primary">
-                  Our Partners
-                </Button>
-              </Link>
-            }
             {(this.props.user.username) && 
               <Link to="/upload">
                 <Button color="primary">
