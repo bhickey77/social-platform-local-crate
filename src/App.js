@@ -59,10 +59,6 @@ const App = () => (
           component={AdminMailer}
         />
           <Route
-          exact path="/adminMailer"
-          component={AdminMailer}
-        />
-          <Route
           exact path="/PartnerMailUrl"
           component={PartnerMailUrl}
         />
