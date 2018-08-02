@@ -13,7 +13,8 @@ import AdminNav from '../AdminNav/AdminNav';
 
 const mapStateToProps = state => ({
   user: state.user,
-  persons: state.person.persons
+  persons: state.person.persons,
+  partners: state.partner.partners
 });
 
 class AdminPartnerAccounts extends Component {
@@ -50,19 +51,21 @@ class AdminPartnerAccounts extends Component {
             <TableCell>Partner ID</TableCell>
           </TableRow>
           </TableHead>
-          <TableBody>
-        {this.props.persons.map( person => {
-          return (
-            <TableRow key={person.id}>
-                <TableCell>{person.username}</TableCell>
-                <TableCell>{person.first_name}</TableCell>
-                <TableCell>{person.last_name}</TableCell>
-                <TableCell>{person.date_created}</TableCell>
-                <TableCell>{person.date_updated}</TableCell>
-                <TableCell>{String(person.partner_id)}</TableCell>
-              </TableRow> 
-            );
-            })}
+            <TableBody>
+              {this.props.persons.map( person => {
+                return this.props.partners.map( partner => {
+                  return (
+                    <TableRow key={person.id}>
+                        <TableCell>{person.username}</TableCell>
+                        <TableCell>{person.first_name}</TableCell>
+                        <TableCell>{person.last_name}</TableCell>
+                        <TableCell>{partner.name}</TableCell>
+                        <TableCell>{person.date_created}</TableCell>
+                        <TableCell>{person.date_updated}</TableCell>
+                    </TableRow> 
+                  );
+                })
+              })}
             </TableBody>
         </Table>
       </div>
