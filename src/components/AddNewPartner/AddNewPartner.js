@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -19,37 +20,44 @@ function TransitionUp(props) {
 }
 
 class AddNewPartner extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {   
       name: '',
       email: '',
       open: false,
       Transition: null,
+      snackOpen: false,
           
     }
   }
   
-  handleClick = Transition => () => {
-    this.setState({ open: true, Transition });
+  handleClick = () => {
+    this.setState({ 
+      ...this.state,
+      open: true,
+    });
   };
+
+  handleSubmit = Transition => () => {
+    this.setState({
+      ...this.state,
+      open: false,
+      snackOpen: true,
+      Transition,
+    })
+  }
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      ...this.state,
+      open: false,
+    });
   };
-
-  // componentDidMount() {
-    // this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
-  // }
-
-  // componentDidUpdate() {
-    // if (!this.props.user.isLoading && this.props.user.userName === null) {
-    //   this.props.history.push('home');
-    // }
-  // }
 
   resetForm() {
     this.setState({
+      ...this.state,
       name: '',
       email: '',
     })
@@ -57,16 +65,22 @@ class AddNewPartner extends Component {
   sendWelcomeEmail = () => {
     this.props.dispatch({type:'SEND_NEW_PARTNER_EMAIL', payload:this.state});
     this.resetForm();
-    this.handleClick(TransitionUp)();
+    this.handleSubmit(TransitionUp)();
   }
 
   handleInputChange = (event) => {
     switch(event.target.id){
       case 'name':
-        this.setState({name: event.target.value});
+        this.setState({
+          ...this.state,
+          name: event.target.value,
+        });
         break;
       case 'email':
-        this.setState({email: event.target.value});
+        this.setState({
+          ...this.state,
+          email: event.target.value,
+        });
         break; 
       default:
         console.log('Invalid field');
@@ -79,7 +93,7 @@ class AddNewPartner extends Component {
   render() {
     return (
       <div>
-        <Button color="primary" onClick={this.handleClick()}>
+        <Button color="primary" onClick={this.handleClick}>
           Add New Partner
         </Button>
 
@@ -87,7 +101,10 @@ class AddNewPartner extends Component {
           onClose={this.handleClose} 
           aria-labelledby="simple-dialog-title"
           open={this.state.open}
+          keepMounted
+
         >
+          <DialogContent>
           <div className="add-partner-dialog">
               <p>
                 Send a welcome email to a partner
@@ -97,18 +114,18 @@ class AddNewPartner extends Component {
                   id="name"
                   value={this.state.name}
                   onChange={this.handleInputChange}
-              />
+                  />
               <br/>
               <Input 
                   placeholder="Email Address" 
                   id="email"
                   value={this.state.email}
                   onChange={this.handleInputChange}
-              />
+                  />
               <br/>
               <Button vairant="raised" color="primary" onClick={this.sendWelcomeEmail} >Send Welcome Email</Button>
               <Snackbar
-                open={this.state.open}
+                open={this.state.snackOpen}
                 onClose={this.handleClose}
                 TransitionComponent={this.state.Transition}
                 ContentProps={{
@@ -116,8 +133,9 @@ class AddNewPartner extends Component {
                 }}
                 message={<span id="message-id">Welcome Email Sent!</span>}
                 autoHideDuration={3000}
-              />
+                />
             </div>
+          </DialogContent> 
         </Dialog>
       </div>
     );

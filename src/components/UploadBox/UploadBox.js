@@ -45,7 +45,6 @@ class UploadBox extends Component {
             }
           }}
           />
-          {JSON.stringify(this.uppy.state.files)}
       </div>
     )
   }

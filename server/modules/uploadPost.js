@@ -35,28 +35,6 @@ const addSignedUrls = async rows => {
   })
 }
 
-function generateSignedUrl(key) {
-return new Promise(revolve => {
-  let s3bucket = new AWS.S3({
-    accessKeyId: IAM_USER_KEY,
-    secretAccessKey: IAM_USER_SECRET,
-    Bucket: BUCKET_NAME,
-    signatureVersion: 'v4',
-  });
-  let urlParams = {Bucket: 'local-crate-social-platform', Key: key};
-  console.log({urlParams});
-  s3bucket.getSignedUrl('getObject', urlParams, function(error, url) {
-    if(error){
-      console.log(error);
-      resolve('');
-    } else {
-      console.log('url in getsigned response: ', url);
-      revolve(url);
-    }
-  })
-})
-}
-
 generateSignedUrl = (media_key) => {
   return new Promise(resolve => {
     let s3bucket = new AWS.S3({
@@ -64,6 +42,7 @@ generateSignedUrl = (media_key) => {
       secretAccessKey: IAM_USER_SECRET,
       Bucket: BUCKET_NAME,
       signatureVersion: 'v4',
+      region: 'us-east-2',
     });
     let urlParams = {Bucket: 'local-crate-social-platform', Key: media_key};
     s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
