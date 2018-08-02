@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import axios from 'axios';
 
-// MATERIAL UI
+// MATERIAL UI - Upload
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,10 +16,29 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import UploadBox from '../UploadBox/UploadBox';
 
+// MATERIAL UI - Card
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import classnames from 'classnames';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import red from '@material-ui/core/colors/red';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
+
 //UPLOAD STAGES
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
-import Nav from '../Nav/Nav';
 
 //AWS
 const AWS = require('aws-sdk');
@@ -30,7 +51,33 @@ const mapStateToProps = state => ({
   login: state.login,
 });
 
-class UploadFile extends Component {
+const styles = theme => ({
+  card: {
+    maxWidth: 400,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  actions: {
+    display: 'flex',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+    marginLeft: 'auto',
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+});
+
+class UploadCard extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -40,7 +87,8 @@ class UploadFile extends Component {
       currentUploadStage: 1,
       postTitle: '',
       postContent: '',
-    };
+    }, 
+    {expanded: false};
   }
 
   handlePostCancel = () => {
@@ -128,13 +176,24 @@ class UploadFile extends Component {
       })
   }
 
-  render() {
-    return (
-      <div>
-        <Nav />
-        <UploadBox setImage={this.setImage} />
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+};
 
-        {/* <input type="file" name="image" onChange={this.handleUploadFile} /> */}
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      
+      <div>
+        <Card className={classes.card}>
+          <UploadBox setImage={this.setImage} />
+        </Card>
+
+        {/* <UploadBox setImage={this.setImage} /> */}
+
+        {/* <input type="file" name="image" onChange={this.handleUploadCard} /> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -158,9 +217,13 @@ class UploadFile extends Component {
             />
         }
         </Dialog>
-      
       </div>
     );
   }
 }
-export default connect(mapStateToProps)(UploadFile);
+
+UploadCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default compose(withStyles(styles),connect(mapStateToProps))(UploadCard);
