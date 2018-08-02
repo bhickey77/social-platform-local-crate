@@ -12,6 +12,17 @@ function* getPosts( action ) {
     }
 }
 
+function* getAllPosts( action ) {
+    try {
+        console.log('in getAllPosts saga');
+        const postResponse = yield call( axios.get, `/api/post/all` );
+        yield put({ type: 'SET_ALL_POSTS', payload: postResponse.data });
+    }
+    catch ( error ) {
+        console.log( 'Error in postList', error );
+    }
+}
+
 function* getPartnerPosts( action ) {
     try {
         const postResponse = yield call( axios.get, `/api/partner/${action.payload}/posts` );
@@ -65,6 +76,7 @@ function* deletePost( action ) {
 
 function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
+    yield takeLatest(POST_ACTIONS.FETCH_ALL_POSTS, getAllPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
     // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
