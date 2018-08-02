@@ -37,7 +37,7 @@ const styles = {
   },
   appBar: {
     height: 100,
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   },
 };
 
@@ -50,6 +50,10 @@ class Nav extends Component {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
+  sendToNewsfeed = () => {
+    window.location.href = '#/newsfeed';
+  }
+
   render() {
     const { classes } = this.props;
     let isSignedIn = false;
@@ -59,7 +63,7 @@ class Nav extends Component {
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
+            <Typography onClick={this.sendToNewsfeed} variant="title" color="inherit" className={classes.flex}>
               <img id="logo"
                 src="/images/Secondary_Logo_HorizontalTilted.jpg"
                 alt="Local-Crate-Logo" />
