@@ -24,12 +24,13 @@ class UploadBox extends Component {
     
   }
   
+  uppy = Uppy({
+    meta: { type: 'profilePicture' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+  
   render() {
-    this.uppy = Uppy({
-      meta: { type: 'profilePicture' },
-      restrictions: { maxNumberOfFiles: 1 },
-      autoProceed: true
-    })
     
     // this.uppy.use(Tus, { endpoint: '/api/image/profilepicture' })
     this.uppy.on('upload', file => {
