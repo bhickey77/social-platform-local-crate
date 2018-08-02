@@ -49,7 +49,7 @@ generateSignedUrl = (media_key) => {
       if(err){
         console.log(`error with getsignedurl: `, err);
       } else {
-        console.log(`url from getsignedurl: `, url);
+        // console.log(`url from getsignedurl: `, url);
         resolve(url);
       }       
     })

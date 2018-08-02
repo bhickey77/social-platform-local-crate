@@ -84,12 +84,10 @@ class NewCard extends Component {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
-                    {/* <FavoriteIcon /> */}
+                    {/* <IconButton aria-label="Add to favorites">
                     </IconButton>
                     <IconButton aria-label="Share">
-                    {/* <ShareIcon /> */}
-                    </IconButton>
+                    </IconButton> */}
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,

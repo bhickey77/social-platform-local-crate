@@ -11,13 +11,12 @@
 }
 
 
-
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100%;
     background-color: #FAFAFA;
     margin: 0;
+    padding-top: 150px;
 }
 
 .container-parent {

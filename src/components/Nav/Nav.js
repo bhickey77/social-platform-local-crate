@@ -7,15 +7,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Login from '../Login/Login';
 import Logout from '../Logout/Logout';
-import AddNewPartner from '../AddNewPartner/AddNewPartner';
-import Register from '../Register/Register';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
