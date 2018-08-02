@@ -19,7 +19,7 @@ const Transition = (props) => {
   return <Slide direction="up" {...props} />;
 }
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -124,4 +124,4 @@ class LoginPage extends Component {
   }
 }
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(Login);

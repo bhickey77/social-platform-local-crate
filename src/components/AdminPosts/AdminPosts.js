@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearError } from '../../../redux/actions/loginActions';
+import { clearError } from '../../redux/actions/loginActions';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,8 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
 // Components
-import AdminNav from '../AdminNav/AdminNav';
-// Material UI
+import Nav from '../Nav/Nav';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -48,21 +47,9 @@ class AdminPosts extends Component {
   }
 
   render() {
-    let content = null;
-    
-
-    content = (
-    <div>
-        <p>Admin Partner Posts</p>
-        <p>This will be where the admin can view a list of partner posts</p>
-    </div>
-    );
-    
-
     return (
       <div>
-          <AdminNav/>
-        { content }
+        <Nav />
         <Table>
           <TableHead>
           <TableRow>

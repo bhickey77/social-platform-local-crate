@@ -6,34 +6,30 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import UserPage from './components/UserPage/UserPage';
+import PartnerPage from './components/PartnerPage/PartnerPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadFile from './components/UploadFile/UploadFile';
-import PublicHome from './components/PublicHome/PublicHome';
-import AdminMailer from './components/AdminMailer/AdminMailer';
-import PartnerMailUrl from './components/PartnerMailUrl/PartnerMailUlr';
-import AdminHome from './components/Admin/AdminHome/AdminHome';
-import AdminPartnerAccounts from './components/Admin/AdminPartnerAccounts/AdminPartnerAccounts';
-import AdminPosts from './components/Admin/AdminPosts/AdminPosts';
-import ButtonAppBar from './components/ButtonAppBar/ButtonAppBar';
+import Newsfeed from './components/Newsfeed/Newsfeed';
+import AddNewPartner from './components/AddNewPartner/AddNewPartner';
+import Register from './components/Register/Register';
+import AdminPartnerAccounts from './components/AdminPartnerAccounts/AdminPartnerAccounts';
+import AdminPosts from './components/AdminPosts/AdminPosts';
+import Nav from './components/Nav/Nav';
 import './styles/main.css';
 
 const App = () => (
   <div className="container-parent">
-    {/* <Header /> */}
-    <ButtonAppBar />
     <Router>
       <Switch>
-        <Redirect exact from="/" to="/home" />
+        <Redirect exact from="/" to="/newsfeed" />
         <Route
-          path="/home"
-          component={PublicHome}
+          path="/newsfeed"
+          component={Newsfeed}
         />
         <Route
-          path="/user"
-          component={UserPage}
+          path="/partner"
+          component={PartnerPage}
         />
         <Route
           path="/info"
@@ -44,10 +40,6 @@ const App = () => (
           component={UploadFile}
         />
         <Route
-          exact path="/admin/home"
-          component={AdminHome}
-        />
-        <Route
           exact path="/admin/accounts"
           component={AdminPartnerAccounts}
         />
@@ -56,12 +48,12 @@ const App = () => (
           component={AdminPosts}
         />
          <Route
-          exact path="/adminMailer"
-          component={AdminMailer}
+          exact path="/addNewPartner"
+          component={AddNewPartner}
         />
           <Route
-          exact path="/PartnerMailUrl"
-          component={PartnerMailUrl}
+          exact path="/Register"
+          component={Register}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
