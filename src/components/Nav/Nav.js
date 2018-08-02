@@ -78,7 +78,7 @@ class Nav extends Component {
                   Posts (admin)
                 </Button>
               </Link>
-              <Link to="/addNewPArtner">
+              <Link to="/addNewPartner">
                 <Button color="primary">
                   Add New Partner (admin)
                 </Button>
