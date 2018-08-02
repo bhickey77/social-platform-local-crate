@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 import { clearError } from '../../redux/actions/loginActions';
 import CardsGrid from './CardsGrid/CardsGrid';
 
-// Components
 import Nav from '../Nav/Nav';
-import AdminNav from '../Admin/AdminNav/AdminNav';
-// Material UI
 
 const mapStateToProps = state => ({
   user: state.user,
   post: state.post
 });
 
-class PublicHome extends Component {
+class Newsfeed extends Component {
 
   componentDidMount() {
     this.props.dispatch(clearError());
@@ -27,7 +24,10 @@ class PublicHome extends Component {
 
   render() {
     let content = null;
+<<<<<<< HEAD:src/components/PublicHome/PublicHome.js
     let nav = null;
+=======
+>>>>>>> baselayout:src/components/Newsfeed/Newsfeed.js
 
     content = (
     <div>
@@ -40,6 +40,10 @@ class PublicHome extends Component {
 
     return (
       <div>
+<<<<<<< HEAD:src/components/PublicHome/PublicHome.js
+=======
+        <Nav />
+>>>>>>> baselayout:src/components/Newsfeed/Newsfeed.js
         { content }
       </div>
     );
@@ -47,4 +51,4 @@ class PublicHome extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(PublicHome);
+export default connect(mapStateToProps)(Newsfeed);

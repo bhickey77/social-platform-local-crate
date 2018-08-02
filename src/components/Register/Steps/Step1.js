@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-class RegisterStep1 extends Component {
+class Step1 extends Component {
     render() {
         return (
             <div>
@@ -51,4 +51,4 @@ class RegisterStep1 extends Component {
     }
 }
 
-export default RegisterStep1;
+export default Step1;

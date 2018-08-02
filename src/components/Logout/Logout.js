@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   login: state.login,
 });
 
-class LogoutPage extends Component {
+class Logout extends Component {
 
   componentDidMount() {
     this.props.dispatch(clearError());
@@ -30,4 +30,4 @@ class LogoutPage extends Component {
   }
 }
 
-export default connect(mapStateToProps)(LogoutPage);
+export default connect(mapStateToProps)(Logout);

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import LoginPage from '../LoginPage/LoginPage';
-import LogoutPage from '../LogoutPage/LogoutPage';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import axios from 'axios';
@@ -19,6 +17,7 @@ import UploadBox from '../UploadBox/UploadBox';
 //UPLOAD STAGES
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
+import Nav from '../Nav/Nav';
 
 //AWS
 const AWS = require('aws-sdk');
@@ -132,6 +131,7 @@ class UploadFile extends Component {
   render() {
     return (
       <div>
+        <Nav />
         <UploadBox setImage={this.setImage} />
 
         {/* <input type="file" name="image" onChange={this.handleUploadFile} /> */}
