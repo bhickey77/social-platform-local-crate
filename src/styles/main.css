@@ -213,3 +213,7 @@ li a:hover {
     width: 80%;
     margin: 0 auto;
 }
+
+.upload-card {
+    display: inline-block;
+}

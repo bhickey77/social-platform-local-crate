@@ -54,6 +54,7 @@ const mapStateToProps = state => ({
 const styles = theme => ({
   card: {
     maxWidth: 400,
+    height: 365,
   },
   media: {
     height: 0,
@@ -155,8 +156,6 @@ class UploadCard extends Component {
     })
   }
 
- 
-
   sendPost = () => {
     const data = new FormData();
     data.append('title', this.state.postTitle);
@@ -186,7 +185,7 @@ class UploadCard extends Component {
 
     return (
       
-      <div>
+      <div className="upload-card">
         <Card className={classes.card}>
           <UploadBox setImage={this.setImage} />
         </Card>

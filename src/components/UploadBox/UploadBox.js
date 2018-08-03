@@ -35,16 +35,14 @@ class UploadBox extends Component {
     })
 
     return (
-      <div>
-        <DragDrop
-          uppy={this.uppy}
-          locale={{
-            strings: {
-              chooseFile: 'Pick a new avatar'
-            }
-          }}
-          />
-      </div>
+      <DragDrop
+        uppy={this.uppy}
+        locale={{
+          strings: {
+            chooseFile: 'Pick a new avatar'
+          }
+        }}
+        />
     )
   }
 }
