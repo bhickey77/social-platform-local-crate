@@ -6,25 +6,7 @@ const multer  = require('multer');
 const upload = multer({ dest: '../uploads/' });
 
 const { uploadPost, generateSignedUrls } = require('../modules/uploadPost');
-
-// Authorization
-const ConnectRoles = require('connect-roles');
-const user = new ConnectRoles({
-  failureHandler: function (req, res, action) {
-    // optional function to customise code that runs when
-    // user fails authorisation
-    var accept = req.headers.accept || '';
-    res.status(403);
-    if (~accept.indexOf('html')) {
-      res.render('access-denied', {action: action});
-    } else {
-      res.send('Access Denied - You don\'t have permission to: ' + action);
-    }
-  }
-});
-
-
-
+const { isAdmin } = require('../modules/authorization');
 
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
@@ -39,10 +21,11 @@ router.put('/:id', (req, res) => {
     }
 });
 
-
 router.put('/hide/:id', (req, res) => {
     // PUT for editing whether a post is hidden
-    if(req.isAuthenticated()){
+    console.log('HIDING ID: ', req.user);
+    
+    if(req.isAuthenticated() && isAdmin(req.user)){
         console.log( req.body )
         queryText = `UPDATE post SET is_marked_as_hidden = $1 where id = $2;`;
         pool.query(queryText, [!req.body.post_is_hidden, req.params.id]).then(result => {
@@ -89,6 +72,7 @@ router.get('/', (req, res) => {
 
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
+    if(req.isAuthenticated() && isAdmin(req.user)){
         console.log('in router admin post ALL');
         let queryText = `SELECT * FROM post ORDER BY id DESC`;
         pool.query(queryText).then((result) => {
@@ -97,6 +81,9 @@ router.get('/all', (req, res) => {
             console.log(error);
             res.sendStatus(500);
         })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 module.exports = router;
