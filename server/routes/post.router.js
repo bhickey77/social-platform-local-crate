@@ -70,7 +70,8 @@ router.get('/', (req, res) => {
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
         console.log('in router admin post ALL');
-        let queryText = `SELECT * FROM post ORDER BY id DESC`;
+        let queryText = `SELECT * FROM partner
+        JOIN post ON partner.id = post.partner_id`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
