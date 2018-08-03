@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearError } from '../../redux/actions/loginActions';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -32,6 +33,10 @@ class AdminPosts extends Component {
       this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
   }
 
+  dateConvert = ( date ) => {
+    return moment().utc( date ).format("MMM Do YYYY");
+  }
+
   hidePost = (post_is_hidden, post_id) => () => {
     // if(post_is_hidden === false) {
     //   this.state.isHidden = true;
@@ -50,6 +55,7 @@ class AdminPosts extends Component {
     return (
       <div>
         <Nav />
+        <div className='adminTable'>
         <Table>
           <TableHead>
           <TableRow>
@@ -68,8 +74,8 @@ class AdminPosts extends Component {
                 <TableCell>{post.partner_id}</TableCell>
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.content}</TableCell>
-                <TableCell>{post.date_created}</TableCell>
-                <TableCell>{post.date_updated}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>
                   <Button onClick={this.hidePost(post.is_marked_as_hidden, post.id)}>
                   {String(post.is_marked_as_hidden)}</Button>
@@ -79,6 +85,7 @@ class AdminPosts extends Component {
             })}
             </TableBody>
         </Table>
+        </div>
       </div>
     );
   }

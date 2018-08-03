@@ -22,8 +22,6 @@ class AdminPartnerAccounts extends Component {
   }
 
   dateConvert = ( date ) => {
-    const stringDate = String(date);
-    // moment().format(stringDate, ["ll", moment.ISO_8601]);
     return moment().utc( date ).format("MMM Do YYYY");
   }
 
@@ -31,6 +29,7 @@ class AdminPartnerAccounts extends Component {
     return (
       <div>
         <Nav />
+        <div className='adminTable'>
         <Table>
           <TableHead>
           <TableRow>
@@ -57,6 +56,7 @@ class AdminPartnerAccounts extends Component {
                 })}
             </TableBody>
         </Table>
+        </div>
       </div>
     );
   }
