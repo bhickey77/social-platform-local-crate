@@ -60,7 +60,7 @@ router.get('/', (req, res) => {
     // GET for ALL posts - public view (does not return flagged posts)
         let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
         FROM post
-        INNER JOIN partner ON post.partner_id=partner.id WHERE post.is_marked_as_hidden=false ORDER BY post.id DESC`;
+        INNER JOIN partner ON post.partner_id=partner.id WHERE post.is_marked_as_hidden=false ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
@@ -73,7 +73,7 @@ router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
         let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
         FROM post
-        INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.id DESC`;
+        INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
