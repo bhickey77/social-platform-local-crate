@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PostDialog from '../../PostDialog/PostDialog';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
@@ -58,6 +59,10 @@ class NewCard extends Component {
         return <PostDialog post={this.props.post}/>
     }
 
+    dateConvert = ( date ) => {
+        return moment().utc( date ).format("MMM Do YYYY");
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -76,7 +81,7 @@ class NewCard extends Component {
                     </IconButton>
                     }
                     title={this.props.post.title}
-                    subheader={this.props.post.date_created}
+                    subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 {/* <CardMedia
                     className={classes.media}
@@ -84,7 +89,7 @@ class NewCard extends Component {
                     title="Contemplative Reptile"
                     onClick={this.handleCardClick}
                 /> */}
-                <PostDialog post={this.props.post}/>
+                <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>
                 <CardContent>
                     <Typography component="p">
                     {this.props.post.content}

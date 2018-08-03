@@ -18,7 +18,13 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const styles = theme => ({
     card: {
-      maxWidth: 400,
+    //   maxWidth: 1000,
+    },
+    card1: {
+    //   maxwidth: 400,
+    },
+    dialog: {
+      width: 1000,
     },
     media: {
       height: 0,
@@ -60,19 +66,20 @@ class PostDialog extends Component {
 
     return (
       <div>
-        <Card onClick={this.handleClickOpen} className={classes.card}>
+        <Card onClick={this.handleClickOpen}>
             <CardMedia
                 className={classes.media}
                 image={this.props.post.media_url}
                 title="Contemplative Reptile"/>
         </Card>
+        {/* <div className='postDialog'> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-            <Card className={classes.card}>
+            <Card className='postDialog'>
                     <CardHeader
                         avatar={
                         <Avatar aria-label="Recipe" className={classes.avatar}>
@@ -85,7 +92,7 @@ class PostDialog extends Component {
                         </IconButton>
                         }
                         title={this.props.post.title}
-                        subheader={this.props.post.date_created}
+                        subheader={String(this.props.dateConvert(this.props.post.date_created))}
                     />
                     <CardMedia
                         className={classes.media}
@@ -99,6 +106,7 @@ class PostDialog extends Component {
                     </CardContent>
                 </Card>
         </Dialog>
+        {/* </div> */}
       </div>
     );
   }
