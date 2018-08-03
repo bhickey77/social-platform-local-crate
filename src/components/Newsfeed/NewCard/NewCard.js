@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PostDialog from '../../PostDialog/PostDialog';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
@@ -53,6 +54,10 @@ class NewCard extends Component {
         this.setState(state => ({ expanded: !state.expanded }));
     };
 
+    handleCardClick = () => {
+        return <PostDialog post={this.props.post}/>
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -73,11 +78,13 @@ class NewCard extends Component {
                     title={this.props.post.title}
                     subheader={this.props.post.date_created}
                 />
-                <CardMedia
+                {/* <CardMedia
                     className={classes.media}
                     image={this.props.post.media_url}
                     title="Contemplative Reptile"
-                />
+                    onClick={this.handleCardClick}
+                /> */}
+                <PostDialog post={this.props.post}/>
                 <CardContent>
                     <Typography component="p">
                     {this.props.post.content}
@@ -92,7 +99,7 @@ class NewCard extends Component {
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
                         })}
-                        onClick={this.handleExpandClick}
+                        // onClick={this.handleExpandClick}
                         aria-expanded={this.state.expanded}
                         aria-label="Show more"
                         >

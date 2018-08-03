@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
 import moment from 'moment';
+import PostDialog from '../PostDialog/PostDialog';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -75,7 +76,7 @@ class AdminPosts extends Component {
           <TableHead>
           <TableRow>
             <TableCell>Partner Name</TableCell>
-            <TableCell>Preview</TableCell>
+            <TableCell>Preview (Click)</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Content</TableCell>
             <TableCell>Date Created</TableCell>
@@ -89,13 +90,7 @@ class AdminPosts extends Component {
             <TableRow key={post.id}>
                 <TableCell>{post.name}</TableCell>
                 <TableCell>
-                  <Card>
-                    <CardMedia
-                      className={classes.media}
-                      image={post.media_url}
-                      title="Contemplative Reptile"
-                    />
-                  </Card>
+                  <PostDialog post={post} />
                 </TableCell>
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.content}</TableCell>
