@@ -58,7 +58,9 @@ router.post('/', upload.single('file'), (req, res) => {
 
 router.get('/', (req, res) => {
     // GET for ALL posts - public view (does not return flagged posts)
-        let queryText = `SELECT * FROM post where is_marked_as_hidden = false ORDER BY id DESC`;
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
+        FROM post
+        INNER JOIN partner ON post.partner_id=partner.id WHERE post.is_marked_as_hidden=false ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
@@ -69,9 +71,9 @@ router.get('/', (req, res) => {
 
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
-        console.log('in router admin post ALL');
-        let queryText = `SELECT * FROM partner
-        JOIN post ON partner.id = post.partner_id`;
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
+        FROM post
+        INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
