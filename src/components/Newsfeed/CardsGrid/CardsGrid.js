@@ -50,8 +50,8 @@ class CardsGrid extends Component {
         if (this.props.user.userName) {
           return (
             <div>
-              <div>
-                <UploadCard/>
+              <div style={{textAlign:'center'}}>
+                <UploadCard />
                 {posts.map( post => {
                   return <NewCard
                   key = {post.id}
@@ -64,8 +64,8 @@ class CardsGrid extends Component {
           );
         } else {
           return (
-            <div>
-              <div>
+            <div >
+              <div style={{textAlign:'center'}}>
                 {posts.map( post => {
                   return <NewCard
                   key = {post.id}
