@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PostDialog from '../../PostDialog/PostDialog';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
@@ -55,11 +57,13 @@ class NewCard extends Component {
         this.setState(state => ({ expanded: !state.expanded }));
     };
 
+    handleCardClick = () => {
+        return <PostDialog post={this.props.post}/>
+    }
+
     dateConvert = ( date ) => {
-        const stringDate = String(date);
-        // moment().format(stringDate, ["ll", moment.ISO_8601]);
         return moment().utc( date ).format("MMM Do YYYY");
-      }
+    }
 
     render() {
         const { classes } = this.props;
@@ -78,14 +82,17 @@ class NewCard extends Component {
                         <EditIcon />
                     </IconButton>
                     }
+   
                     title={this.props.post.name}
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
-                <CardMedia
+                {/* <CardMedia
                     className={classes.media}
                     image={this.props.post.media_url}
                     title="Contemplative Reptile"
-                />
+                    onClick={this.handleCardClick}
+                /> */}
+                <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>
                 <CardContent>
                 <Typography component="p">
                     {this.props.post.title}
@@ -100,7 +107,7 @@ class NewCard extends Component {
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
                         })}
-                        onClick={this.handleExpandClick}
+                        // onClick={this.handleExpandClick}
                         aria-expanded={this.state.expanded}
                         aria-label="Show more"
                         >
