@@ -17,6 +17,8 @@ import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
+import moment from 'moment';
+
 
 
 const styles = theme => ({
@@ -53,6 +55,12 @@ class NewCard extends Component {
         this.setState(state => ({ expanded: !state.expanded }));
     };
 
+    dateConvert = ( date ) => {
+        const stringDate = String(date);
+        // moment().format(stringDate, ["ll", moment.ISO_8601]);
+        return moment().utc( date ).format("MMM Do YYYY");
+      }
+
     render() {
         const { classes } = this.props;
 
@@ -71,7 +79,7 @@ class NewCard extends Component {
                     </IconButton>
                     }
                     title={this.props.post.title}
-                    subheader={this.props.post.date_created}
+                    subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 <CardMedia
                     className={classes.media}
