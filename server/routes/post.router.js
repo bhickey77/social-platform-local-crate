@@ -7,6 +7,25 @@ const upload = multer({ dest: '../uploads/' });
 
 const { uploadPost, generateSignedUrls } = require('../modules/uploadPost');
 
+// Authorization
+const ConnectRoles = require('connect-roles');
+const user = new ConnectRoles({
+  failureHandler: function (req, res, action) {
+    // optional function to customise code that runs when
+    // user fails authorisation
+    var accept = req.headers.accept || '';
+    res.status(403);
+    if (~accept.indexOf('html')) {
+      res.render('access-denied', {action: action});
+    } else {
+      res.send('Access Denied - You don\'t have permission to: ' + action);
+    }
+  }
+});
+
+
+
+
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
@@ -19,6 +38,7 @@ router.put('/:id', (req, res) => {
         res.sendStatus(403);
     }
 });
+
 
 router.put('/hide/:id', (req, res) => {
     // PUT for editing whether a post is hidden
