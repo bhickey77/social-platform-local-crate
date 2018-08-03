@@ -47,10 +47,10 @@ const App = () => (
           exact path="/admin/posts"
           component={AdminPosts}
         />
-         <Route
+         {/* <Route
           exact path="/addNewPartner"
           component={AddNewPartner}
-        />
+        /> */}
           <Route
           exact path="/Register"
           component={Register}

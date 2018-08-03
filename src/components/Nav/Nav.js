@@ -14,6 +14,7 @@ import Login from '../Login/Login';
 import Logout from '../Logout/Logout';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import AddNewPartner from '../AddNewPartner/AddNewPartner';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -74,11 +75,7 @@ class Nav extends Component {
                   Posts (admin)
                 </Button>
               </Link>
-              <Link to="/addNewPartner">
-                <Button color="primary">
-                  Add New Partner (admin)
-                </Button>
-              </Link>
+              <AddNewPartner />
               <Link to="/Register">
                 <Button color="primary">
                   Register (new user)

@@ -12,6 +12,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/info', rejectUnauthenticated, (req, res) => {
+  console.log('In the route api/user/info', req.user);
+  const queryText = `SELECT partner.name as "partner_name", username, first_name, partner_id, user_type, location FROM person
+                     JOIN partner ON partner.id = person.partner_id 
+                     WHERE person.id = $1;`
+  pool.query(queryText, [req.user.id])
+    .then(response => {
+      console.log('Back from the db in the get user info route: ', response.rows[0]);
+      res.send(response.rows);
+    })
+    .catch(error => {
+      // console.log('Error with the get user info route: ', error);
+      res.sendStatus(500)
+    })
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
