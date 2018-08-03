@@ -208,3 +208,8 @@ li a:hover {
     width: 300px;
     height: 200px;
 }
+
+.adminTable {
+    width: 80%;
+    margin: 0 auto;
+}
