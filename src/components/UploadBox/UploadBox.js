@@ -15,7 +15,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
 
-
 class UploadBox extends Component {
   constructor(props){
     super(props);
