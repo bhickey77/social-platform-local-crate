@@ -19,6 +19,8 @@ import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
+import moment from 'moment';
+
 
 
 const styles = theme => ({
@@ -67,7 +69,7 @@ class NewCard extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
+            <div style={{display:'inline-block', margin:'10px'}}>
                 <Card className={classes.card}>
                 <CardHeader
                     avatar={
@@ -80,7 +82,8 @@ class NewCard extends Component {
                         <EditIcon />
                     </IconButton>
                     }
-                    title={this.props.post.title}
+   
+                    title={this.props.post.name}
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 {/* <CardMedia
@@ -91,15 +94,15 @@ class NewCard extends Component {
                 /> */}
                 <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>
                 <CardContent>
+                <Typography component="p">
+                    {this.props.post.title}
+                    </Typography>
+                    <hr/>
                     <Typography component="p">
                     {this.props.post.content}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    {/* <IconButton aria-label="Add to favorites">
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                    </IconButton> */}
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,

@@ -15,7 +15,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
 
-
 class UploadBox extends Component {
   constructor(props){
     super(props);
@@ -36,16 +35,14 @@ class UploadBox extends Component {
     })
 
     return (
-      <div>
-        <DragDrop
-          uppy={this.uppy}
-          locale={{
-            strings: {
-              chooseFile: 'Pick a new avatar'
-            }
-          }}
-          />
-      </div>
+      <DragDrop
+        uppy={this.uppy}
+        locale={{
+          strings: {
+            chooseFile: 'Pick a new avatar'
+          }
+        }}
+        />
     )
   }
 }

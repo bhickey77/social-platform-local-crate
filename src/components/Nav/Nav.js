@@ -55,7 +55,7 @@ class Nav extends Component {
     const { classes } = this.props;
     let isSignedIn = false;
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
-    var currentRoute = window.location.hash.split('/')[1];
+    const currentRoute = window.location.hash.split('/')[1];
     return (
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
@@ -65,22 +65,25 @@ class Nav extends Component {
                 src="/images/Secondary_Logo_HorizontalTilted.jpg"
                 alt="Local-Crate-Logo" />
             </Typography>
-            <Link to="/admin/accounts">
-                <Button color="primary">
-                  Accounts (admin)
-                </Button>
-              </Link>
-              <Link to="/admin/posts">
-                <Button color="primary">
-                  Posts (admin)
-                </Button>
-              </Link>
-              <AddNewPartner />
-              <Link to="/Register">
+            {
+              (this.props.user.userInfo.user_type === 'admin') && 
+                [<Link to="/admin/accounts">
+                  <Button color="primary">
+                    Partner accounts
+                  </Button>
+                </Link>,
+                <Link to="/admin/posts">
+                  <Button color="primary">
+                    Posts
+                  </Button>
+                </Link>,
+                <AddNewPartner />]
+            }
+              {/* <Link to="/Register">
                 <Button color="primary">
                   Register (new user)
                 </Button>
-              </Link>
+              </Link> */}
             {(currentRoute !== 'newsfeed') &&
               <Link to="/newsfeed">
                 <Button color="primary">
