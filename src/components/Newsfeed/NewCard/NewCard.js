@@ -57,7 +57,7 @@ class NewCard extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
+            <div style={{display:'inline-block', margin:'10px'}}>
                 <Card className={classes.card}>
                 <CardHeader
                     avatar={
