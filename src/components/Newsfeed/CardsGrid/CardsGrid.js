@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import NewCard from '../NewCard/NewCard';
 import UploadCard from '../../UploadCard/UploadCard';
+
 const mapStateToProps = state => ({
   user: state.user,
   post: state.post
@@ -35,12 +36,6 @@ class CardsGrid extends Component {
     state = {
         spacing: '16',
       };
-    
-    handleChange = key => (event, value) => {
-        this.setState({
-            [key]: value,
-        });
-    };
 
     render() {
         const { classes } = this.props;
@@ -77,21 +72,6 @@ class CardsGrid extends Component {
             </div>
           );
         }
-        // return (
-        //     <Grid container className={classes.root} spacing={32}>
-        //     <Grid item xs={12}>
-        //       <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-        //         {[0, 1, 2].map(value => (
-        //           <Grid key={value} item>
-        //             <Paper className={classes.paper} >
-        //                 <NewCard />
-        //             </Paper>
-        //           </Grid>
-        //         ))}
-        //       </Grid>
-        //     </Grid>
-        //   </Grid>
-        // );
     }
 }
 
