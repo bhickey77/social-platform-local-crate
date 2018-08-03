@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 
 // Components
@@ -16,6 +20,16 @@ const mapStateToProps = state => ({
   user: state.user,
   posts: state.post.posts
 });
+
+const styles = theme => ({
+  card: {
+    maxWidth: 400,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+})
 
 class AdminPosts extends Component {
   constructor(props) {
@@ -30,6 +44,10 @@ class AdminPosts extends Component {
   componentDidMount() {
       this.props.dispatch(clearError());
       this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
+  }
+
+  dateConvert = ( date ) => {
+    return moment().utc( date ).format("MMM Do YYYY");
   }
 
   hidePost = (post_is_hidden, post_id) => () => {
@@ -47,13 +65,17 @@ class AdminPosts extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
         <Nav />
+        <div className='adminTable'>
         <Table>
           <TableHead>
           <TableRow>
-            <TableCell>Partner ID</TableCell>
+            <TableCell>Partner Name</TableCell>
+            <TableCell>Preview</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Content</TableCell>
             <TableCell>Date Created</TableCell>
@@ -65,11 +87,20 @@ class AdminPosts extends Component {
         {this.props.posts.map( post => {
           return (
             <TableRow key={post.id}>
-                <TableCell>{post.partner_id}</TableCell>
+                <TableCell>{post.name}</TableCell>
+                <TableCell>
+                  <Card>
+                    <CardMedia
+                      className={classes.media}
+                      image={post.media_url}
+                      title="Contemplative Reptile"
+                    />
+                  </Card>
+                </TableCell>
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.content}</TableCell>
-                <TableCell>{post.date_created}</TableCell>
-                <TableCell>{post.date_updated}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>
                   <Button onClick={this.hidePost(post.is_marked_as_hidden, post.id)}>
                   {String(post.is_marked_as_hidden)}</Button>
@@ -79,10 +110,11 @@ class AdminPosts extends Component {
             })}
             </TableBody>
         </Table>
+        </div>
       </div>
     );
   }
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(AdminPosts);
+export default compose(withStyles(styles),connect(mapStateToProps))(AdminPosts);
