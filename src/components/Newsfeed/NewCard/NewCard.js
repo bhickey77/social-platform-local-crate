@@ -78,7 +78,7 @@ class NewCard extends Component {
                         <EditIcon />
                     </IconButton>
                     }
-                    title={this.props.post.title}
+                    title={this.props.post.name}
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 <CardMedia
@@ -87,15 +87,15 @@ class NewCard extends Component {
                     title="Contemplative Reptile"
                 />
                 <CardContent>
+                <Typography component="p">
+                    {this.props.post.title}
+                    </Typography>
+                    <hr/>
                     <Typography component="p">
                     {this.props.post.content}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    {/* <IconButton aria-label="Add to favorites">
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                    </IconButton> */}
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,

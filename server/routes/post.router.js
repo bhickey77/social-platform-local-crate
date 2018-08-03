@@ -71,7 +71,6 @@ router.get('/', (req, res) => {
 
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
-        console.log('in router admin post ALL');
         let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
         FROM post
         INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.id DESC`;
