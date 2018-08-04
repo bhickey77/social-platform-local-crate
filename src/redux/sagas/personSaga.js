@@ -17,7 +17,7 @@ function* getPersons( action ) {
 // Not sure if we want this?
 function* addPerson( action ) {
     try {
-        const personResponse = yield call( axios.post, `/api/person`, action.payload );
+        yield call( axios.post, `/api/person`, action.payload );
         yield put({ type: 'FETCH_PERSONS' })
     }
     catch ( error ) {
@@ -38,7 +38,7 @@ function* hidePerson( action ) {
 function* deletePerson( action ) {
     let id = action.payload.id;
     try {
-        const personResponse = yield call( axios.delete, `/api/person/${ id }` );
+        yield call( axios.delete, `/api/person/${ id }` );
         yield put({ type: 'FETCH_PERSONS' })
     }
     catch ( error ) {

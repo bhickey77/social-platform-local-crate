@@ -10,8 +10,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 
 // Components
@@ -66,7 +64,7 @@ class AdminPosts extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
       <div>

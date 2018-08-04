@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
+// import { USER_ACTIONS } from '../../redux/actions/userActions';
 // Components
-import Nav from '../../components/Nav/Nav';
+// import Nav from '../../components/Nav/Nav';
 // Material UI
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
+// import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
-import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+// import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
 import NewCard from '../Newsfeed/NewCard/NewCard';
 import UploadCard from '../UploadCard/UploadCard';
 
@@ -54,7 +54,7 @@ class PartnerPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { spacing } = this.state;
+    // const { spacing } = this.state;
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     return (
       <div>
