@@ -56,6 +56,7 @@ class Nav extends Component {
     let isSignedIn = false;
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
     const currentRoute = window.location.hash.split('/')[1];
+    console.log('user', this.props.user)
     return (
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
@@ -67,17 +68,17 @@ class Nav extends Component {
             </Typography>
             {
               (this.props.user.userInfo.user_type === 'admin') && 
-                [<Link to="/admin/accounts">
+                [<Link to="/admin/accounts" key='accounts'>
                   <Button color="primary">
                     Partner accounts
                   </Button>
                 </Link>,
-                <Link to="/admin/posts">
+                <Link to="/admin/posts" key='posts'>
                   <Button color="primary">
                     Posts
                   </Button>
                 </Link>,
-                <AddNewPartner />]
+                <AddNewPartner key='new'/>]
             }
               {/* <Link to="/Register">
                 <Button color="primary">

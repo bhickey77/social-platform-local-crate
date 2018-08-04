@@ -90,7 +90,7 @@ class AdminPosts extends Component {
             <TableRow key={post.id}>
                 <TableCell>{post.name}</TableCell>
                 <TableCell>
-                  <PostDialog post={post} dateConvert={this.dateConvert()}/>
+                  <PostDialog post={post} dateConvert={this.dateConvert}/>
                 </TableCell>
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.content}</TableCell>
