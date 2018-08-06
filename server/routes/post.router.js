@@ -11,11 +11,11 @@ const { isAdmin } = require('../modules/authorization');
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
-        queryText = `UPDATE post SET content = $2 where id = $1;`;
-        pool.query(queryText, [req.body.id, req.body.edit_value]).then(result => {
+        queryText = `UPDATE post SET title = $1, content = $2 where id = $3;`;
+        pool.query(queryText, [req.body.title, req.body.content, req.params.id]).then(result => {
             res.sendStatus(200);
         }).catch(error => {
-            console.log('Error handling PUT for /editSupplierPost:', error);});
+            console.log('Error handling PUT for /editPost:', error);});
     } else {
         res.sendStatus(403);
     }
@@ -77,8 +77,9 @@ router.get('/all', (req, res) => {
     console.log('router test');
     if({isAdmin}){
         console.log('in router admin post ALL');
-        let queryText = `SELECT * FROM post
-                        JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id as post_id, partner.name as partner_name, post.partner_id as partner_id
+        FROM post
+        INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {

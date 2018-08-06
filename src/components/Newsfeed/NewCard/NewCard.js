@@ -76,7 +76,8 @@ class NewCard extends Component {
                     </Avatar>
                     }
                     action={
-                        <EditPost post={this.props.post} handleChange={this.handleChange}/>
+                        <EditPost post={this.props.post}
+                        handleChange={this.handleChange}/>
                     }
    
                     title={this.props.post.partner_name}
