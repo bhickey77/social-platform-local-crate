@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HideIcon from '../HideIcon/HideIcon';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
@@ -75,13 +76,13 @@ class AdminPosts extends Component {
             <TableCell>Content</TableCell>
             <TableCell>Date Created</TableCell>
             <TableCell>Date Updated</TableCell>
-            <TableCell>Is Hidden?</TableCell>
+            <TableCell>Hide/Unhide</TableCell>
           </TableRow>
           </TableHead>
           <TableBody>
         {posts.map( post => {
           return (
-            <TableRow key={post.id}>
+            <TableRow key={post.post_id}>
                 <TableCell>{post.name}</TableCell>
                 <TableCell>
                   <PostDialog post={post} dateConvert={this.dateConvert}/>
@@ -91,8 +92,7 @@ class AdminPosts extends Component {
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>
-                  <Button onClick={this.hidePost(post.is_marked_as_hidden, post.post_id)}>
-                  {String(post.is_marked_as_hidden)}</Button>
+                  <HideIcon hidePost={this.hidePost} post={post}/>
                 </TableCell>
               </TableRow> 
             );
