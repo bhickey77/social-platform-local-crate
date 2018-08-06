@@ -39,9 +39,9 @@ const styles = {
 };
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -57,6 +57,7 @@ class Nav extends Component {
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
     let user_type = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.user_type || false;
     const currentRoute = window.location.hash.split('/')[1];
+    console.log('user', this.props.user)
     return (
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
@@ -69,16 +70,18 @@ class Nav extends Component {
             {
               (user_type === 'admin') && 
                 [<Link to="/admin/accounts">
+              (this.props.user.userInfo.user_type === 'admin') && 
+                [<Link to="/admin/accounts" key='accounts'>
                   <Button color="primary">
                     Partner accounts
                   </Button>
                 </Link>,
-                <Link to="/admin/posts">
+                <Link to="/admin/posts" key='posts'>
                   <Button color="primary">
                     Posts
                   </Button>
                 </Link>,
-                <AddNewPartner />]
+                <AddNewPartner key='new'/>]
             }
               {/* <Link to="/Register">
                 <Button color="primary">

@@ -214,6 +214,10 @@ li a:hover {
     margin: 0 auto;
 }
 
-.upload-card {
+.postDialog {
+    width: 600px;
+    height: inherit;
+}
+  .upload-card {
     display: inline-block;
 }

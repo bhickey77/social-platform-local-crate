@@ -35,7 +35,7 @@ function* getPartnerPosts( action ) {
 
 function* addPost( action ) {
     try {
-        const postResponse = yield call( axios.post, '/api/post', action.payload );
+        yield call( axios.post, '/api/post', action.payload );
         yield put({ type: 'SET_POST' })
     }
     catch ( error ) {
@@ -43,19 +43,19 @@ function* addPost( action ) {
     }
 }
 
-function* editPost( action ) {
-    try {
-        // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
-        yield put({ type: 'FETCH_POSTS' })
-    }
-    catch ( error ) {
-        console.log( 'Error in newChar', error );
-    }
-}
+// function* editPost( action ) {
+//     try {
+//         // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
+//         yield put({ type: 'FETCH_POSTS' })
+//     }
+//     catch ( error ) {
+//         console.log( 'Error in newChar', error );
+//     }
+// }
 
 function* hidePost( action ) {
     try {
-        const postResponse = yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
+        yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
         yield put({ type: 'FETCH_ALL_POSTS' })
     }
     catch ( error ) {
@@ -63,16 +63,16 @@ function* hidePost( action ) {
     }
 }
 
-function* deletePost( action ) {
-    let id = action.payload.id;
-    try {
-        // const postResponse = yield call( axios.delete, `/api/post/${ id }` );
-        yield put({ type: 'FETCH_POSTS' })
-    }
-    catch ( error ) {
-        console.log( 'Error in deletePost', error );
-    }
-}
+// function* deletePost( action ) {
+//     let id = action.payload.id;
+//     try {
+//         // const postResponse = yield call( axios.delete, `/api/post/${ id }` );
+//         yield put({ type: 'FETCH_POSTS' })
+//     }
+//     catch ( error ) {
+//         console.log( 'Error in deletePost', error );
+//     }
+// }
 
 function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);

@@ -6,16 +6,16 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 import PartnerPage from './components/PartnerPage/PartnerPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadCard from './components/UploadCard/UploadCard';
 import Newsfeed from './components/Newsfeed/Newsfeed';
-import AddNewPartner from './components/AddNewPartner/AddNewPartner';
+// import AddNewPartner from './components/AddNewPartner/AddNewPartner';
 import Register from './components/Register/Register';
 import AdminPartnerAccounts from './components/AdminPartnerAccounts/AdminPartnerAccounts';
 import AdminPosts from './components/AdminPosts/AdminPosts';
-import Nav from './components/Nav/Nav';
+// import Nav from './components/Nav/Nav';
 import './styles/main.css';
 
 const App = () => (

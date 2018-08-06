@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
+// import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
+// import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+import NewCard from '../Newsfeed/NewCard/NewCard';
+import UploadCard from '../UploadCard/UploadCard';
+
 
 // Material UI
 import PropTypes from 'prop-types';
@@ -29,29 +33,33 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
   user: state.user,
+  post: state.post
 });
 
 class PartnerPage extends Component {
   
-  constructor(props){
-    super(props);
+  state = {
+    spacing: '16',
+  };
+
+  componentDidMount() {
+    this.props.dispatch({type: "FETCH_POSTS"});
   }
 
   componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
-    }
+    // if (!this.props.user.isLoading && this.props.user.userName === null) {
+    //   this.props.history.push('home');
+    // }
   }
 
   render() {
     const { classes } = this.props;
-
+    // const { spacing } = this.state;
+    const posts = this.props && this.props.post && this.props.post.posts || [];       
     return (
       <div>
         <Nav />
         Welcome, { this.props.user.userName }!
-        Partner page to go here
-
         <Grid container spacing={24}
           style={{ 
             marginLeft: 10,
@@ -91,14 +99,28 @@ class PartnerPage extends Component {
             </Paper>          
           </Grid>
         </Grid>
-
-        
-
-         
-      </div>
-    );
+        {(this.props.user.userName) &&
+          <div>
+            <div style={{textAlign:'center'}}>
+              <UploadCard />
+            </div>
+          </div>
+        }
+        <Grid >
+          <div style={{textAlign:'center'}}>
+                {posts.map( post => {
+                  return <NewCard
+                  key = {post.id}
+                  post= {post}
+                  />
+                  })
+                }
+              </div>
+            </Grid>
+          </div>
+      );
+    }
   }
-}
 
 PartnerPage.propTypes = {
   classes: PropTypes.object.isRequired,

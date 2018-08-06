@@ -74,11 +74,11 @@ router.get('/', (req, res) => {
 
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
-    if(req.isAuthenticated() && isAdmin(req.user)){
+    console.log('router test');
+    if({isAdmin}){
         console.log('in router admin post ALL');
-        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
-                         FROM post
-                         INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
+        let queryText = `SELECT * FROM post
+                        JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
@@ -88,6 +88,19 @@ router.get('/all', (req, res) => {
     } else {
         res.sendStatus(403);
     }
+});
+
+router.get('/:id', (req, res) => {
+    // GET for ALL posts - public view (does not return flagged posts)
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
+        FROM post
+        INNER JOIN partner ON post.partner_id=partner.id WHERE post.partner_id=$1 ORDER BY post.date_created DESC`;
+        pool.query(queryText, [req.params.id]).then((result) => {
+            generateSignedUrls(res, result.rows);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;

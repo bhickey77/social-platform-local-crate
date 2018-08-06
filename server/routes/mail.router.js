@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const { isAdmin } = require('../modules/authorization');
 
 const USER = process.env.EMAIL_USERNAME;
 const PASS = process.env.EMAIL_PASSWORD;
