@@ -17,6 +17,7 @@ import Avatar from '@material-ui/core/Avatar';
 import red from '@material-ui/core/colors/red';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { TextField } from '../../../node_modules/@material-ui/core';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
@@ -69,6 +70,9 @@ class EditPost extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    if( this.props.open ) {
+      this.props.handleClose();
+    };
   };
 
   handleChange = ( property ) => event => {
@@ -108,7 +112,10 @@ class EditPost extends Component {
 
     return (
       <div>
-        <EditIcon onClick={this.handleClickOpen}/>
+        {/* <EditIcon onClick={this.handleClickOpen} /> */}
+        <IconButton aria-label="Edit">
+          <EditIcon onClick={this.handleClickOpen}/>
+        </IconButton>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
