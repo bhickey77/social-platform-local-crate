@@ -29,7 +29,7 @@ class CardsGrid extends Component {
           }
           {posts.map( post => {
             return <NewCard
-                    key = {post.id}
+                    key = {post.post_id}
                     post= {post}
                     />
             })
