@@ -107,7 +107,7 @@ class PartnerPage extends Component {
         </Grid>
       </div>
     );
-
+    }
   }
 
 PartnerPage.propTypes = {
