@@ -91,7 +91,7 @@ class AdminPosts extends Component {
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>
-                  <Button onClick={this.hidePost(post.is_marked_as_hidden, post.id)}>
+                  <Button onClick={this.hidePost(post.is_marked_as_hidden, post.post_id)}>
                   {String(post.is_marked_as_hidden)}</Button>
                 </TableCell>
               </TableRow> 
