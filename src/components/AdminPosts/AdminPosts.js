@@ -50,14 +50,6 @@ class AdminPosts extends Component {
     return moment().utc( date ).format("MMM Do YYYY");
   }
 
-  hidePost = (post_is_hidden, post_id) => () => {
-    console.log( 'hidden state', this.state )
-    this.props.dispatch({ type: 'HIDE_POST', payload: {
-        post_is_hidden,
-        post_id,
-    } })
-  }
-
   render() {
     const posts = this.props && this.props.post && this.props.post.allPosts || [];
     // const { classes } = this.props;
@@ -92,7 +84,7 @@ class AdminPosts extends Component {
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>
-                  <HideIcon hidePost={this.hidePost} post={post}/>
+                  <HideIcon post={post}/>
                 </TableCell>
               </TableRow> 
             );

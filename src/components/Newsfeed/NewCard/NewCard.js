@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PostDialog from '../../PostDialog/PostDialog';
 import EditPost from '../../EditPost/EditPost';
+import HideIcon from '../../HideIcon/HideIcon';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
@@ -72,8 +73,11 @@ class NewCard extends Component {
                     </Avatar>
                     }
                     action={
+                        <div>
                         <EditPost post={this.props.post}
                         handleChange={this.handleChange}/>
+                        <HideIcon post={this.props.post}/>
+                        </div>
                     }
    
                     title={this.props.post.partner_name}

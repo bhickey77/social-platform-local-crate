@@ -58,7 +58,8 @@ function* editPost( action ) {
 function* hidePost( action ) {
     try {
         yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
-        yield put({ type: 'FETCH_ALL_POSTS' })
+        yield put({ type: 'FETCH_ALL_POSTS' });
+        yield put({ type: POST_ACTIONS.FETCH_POSTS });
     }
     catch ( error ) {
         console.log( 'Error in postList', error );
