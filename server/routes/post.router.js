@@ -11,11 +11,11 @@ const { isAdmin } = require('../modules/authorization');
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
     if(req.isAuthenticated()){
-        queryText = `UPDATE post SET content = $2 where id = $1;`;
-        pool.query(queryText, [req.body.id, req.body.edit_value]).then(result => {
+        queryText = `UPDATE post SET title = $1, content = $2 where id = $3;`;
+        pool.query(queryText, [req.body.title, req.body.content, req.params.id]).then(result => {
             res.sendStatus(200);
         }).catch(error => {
-            console.log('Error handling PUT for /editSupplierPost:', error);});
+            console.log('Error handling PUT for /editPost:', error);});
     } else {
         res.sendStatus(403);
     }

@@ -45,8 +45,9 @@ function* addPost( action ) {
 
 function* editPost( action ) {
     try {
-        // const postResponse = yield call( axios.put, `/api/post/${id}`, action.payload );
-        yield put({ type: 'FETCH_POSTS' })
+        console.log('edit payload', action.payload);
+        const postResponse = yield call( axios.put, `/api/post/${action.payload.id}`, action.payload );
+        yield put({ type: 'FETCH_ALL_POSTS' })
     }
     catch ( error ) {
         console.log( 'Error in postList', error );
