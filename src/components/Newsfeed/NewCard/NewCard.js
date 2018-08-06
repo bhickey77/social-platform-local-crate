@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PostDialog from '../../PostDialog/PostDialog';
+import EditPost from '../../EditPost/EditPost';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
@@ -50,15 +51,13 @@ const styles = theme => ({
 
 class NewCard extends Component {
 
-    state = { expanded: false };
+    state = {
+        expanded: false,
+    };
 
     handleExpandClick = () => {
         this.setState(state => ({ expanded: !state.expanded }));
     };
-
-    handleCardClick = () => {
-        return <PostDialog post={this.props.post}/>
-    }
 
     dateConvert = ( date ) => {
         return moment().utc( date ).format("MMM Do YYYY");
@@ -77,9 +76,7 @@ class NewCard extends Component {
                     </Avatar>
                     }
                     action={
-                    <IconButton>
-                        <EditIcon />
-                    </IconButton>
+                        <EditPost post={this.props.post} handleChange={this.handleChange}/>
                     }
    
                     title={this.props.post.partner_name}
