@@ -1,50 +1,50 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
+// import { USER_ACTIONS } from '../../redux/actions/userActions';
 import axios from 'axios';
 
 // MATERIAL UI - Upload
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+// import Button from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 import UploadBox from '../UploadBox/UploadBox';
 
 // MATERIAL UI - Card
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+// import CardHeader from '@material-ui/core/CardHeader';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardActions from '@material-ui/core/CardActions';
+// import Collapse from '@material-ui/core/Collapse';
+// import Avatar from '@material-ui/core/Avatar';
+// import IconButton from '@material-ui/core/IconButton';
+// import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import EditIcon from '@material-ui/icons/Edit';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import EditIcon from '@material-ui/icons/Edit';
 
 //UPLOAD STAGES
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
 
 //AWS
-const AWS = require('aws-sdk');
-const BUCKET_NAME = 'local-crate-social-platform';
-const IAM_USER_KEY = process.env.aws_access_key_id;
-const IAM_USER_SECRET = process.env.aws_secret_access_key;
+// const AWS = require('aws-sdk');
+// const BUCKET_NAME = 'local-crate-social-platform';
+// const IAM_USER_KEY = process.env.aws_access_key_id;
+// const IAM_USER_SECRET = process.env.aws_secret_access_key;
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -54,6 +54,7 @@ const mapStateToProps = state => ({
 const styles = theme => ({
   card: {
     maxWidth: 400,
+    height: 365,
   },
   media: {
     height: 0,
@@ -155,8 +156,6 @@ class UploadCard extends Component {
     })
   }
 
- 
-
   sendPost = () => {
     const data = new FormData();
     data.append('title', this.state.postTitle);
@@ -186,7 +185,7 @@ class UploadCard extends Component {
 
     return (
       
-      <div>
+      <div className="upload-card">
         <Card className={classes.card}>
           <UploadBox setImage={this.setImage} />
         </Card>

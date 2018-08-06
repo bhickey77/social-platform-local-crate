@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
+// import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
+// import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+import NewCard from '../Newsfeed/NewCard/NewCard';
+import UploadCard from '../UploadCard/UploadCard';
+
 
 // Material UI
 import PropTypes from 'prop-types';
@@ -30,6 +34,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
   user: state.user,
+  post: state.post
 });
 
 class PartnerPage extends Component {
@@ -55,7 +60,8 @@ class PartnerPage extends Component {
 
   render() {
     const { classes } = this.props;
-
+    // const { spacing } = this.state;
+    const posts = this.props && this.props.post && this.props.post.posts || [];       
     return (
       <div>
         <Nav />
@@ -99,11 +105,10 @@ class PartnerPage extends Component {
           </Grid>
           <CardsGrid />
         </Grid>
-
       </div>
     );
+
   }
-}
 
 PartnerPage.propTypes = {
   classes: PropTypes.object.isRequired,

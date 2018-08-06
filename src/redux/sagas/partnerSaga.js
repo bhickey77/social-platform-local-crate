@@ -17,7 +17,7 @@ function* getPartners( action ) {
 // Not sure if we want this?
 function* addPartner( action ) {
     try {
-        const partnerResponse = yield call( axios.post, `/api/partner`, action.payload );
+        yield call( axios.post, `/api/partner`, action.payload );
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {
@@ -38,7 +38,7 @@ function* hidePartner( action ) {
 function* deletePartner( action ) {
     let id = action.payload.id;
     try {
-        const partnerResponse = yield call( axios.delete, `/api/partner/${ id }` );
+        yield call( axios.delete, `/api/partner/${ id }` );
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {

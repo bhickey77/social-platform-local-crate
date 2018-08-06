@@ -6,6 +6,7 @@ const multer  = require('multer');
 const upload = multer({ dest: '../uploads/' });
 
 const { uploadPost, generateSignedUrls } = require('../modules/uploadPost');
+const { isAdmin } = require('../modules/authorization');
 
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
@@ -22,7 +23,9 @@ router.put('/:id', (req, res) => {
 
 router.put('/hide/:id', (req, res) => {
     // PUT for editing whether a post is hidden
-    if(req.isAuthenticated()){
+    console.log('HIDING ID: ', req.user);
+    
+    if(req.isAuthenticated() && isAdmin(req.user)){
         console.log( req.body )
         queryText = `UPDATE post SET is_marked_as_hidden = $1 where id = $2;`;
         pool.query(queryText, [!req.body.post_is_hidden, req.params.id]).then(result => {
@@ -58,7 +61,9 @@ router.post('/', upload.single('file'), (req, res) => {
 
 router.get('/', (req, res) => {
     // GET for ALL posts - public view (does not return flagged posts)
-        let queryText = `SELECT * FROM post where is_marked_as_hidden = false ORDER BY id DESC`;
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id as post_id, partner.name as partner_name, post.partner_id as partner_id
+        FROM post
+        INNER JOIN partner ON post.partner_id=partner.id WHERE post.is_marked_as_hidden=false ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
@@ -69,9 +74,28 @@ router.get('/', (req, res) => {
 
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
+    console.log('router test');
+    if({isAdmin}){
         console.log('in router admin post ALL');
-        let queryText = `SELECT * FROM post ORDER BY id DESC`;
+        let queryText = `SELECT * FROM post
+                        JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
+            generateSignedUrls(res, result.rows);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+router.get('/:id', (req, res) => {
+    // GET for ALL posts - public view (does not return flagged posts)
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name
+        FROM post
+        INNER JOIN partner ON post.partner_id=partner.id WHERE post.partner_id=$1 ORDER BY post.date_created DESC`;
+        pool.query(queryText, [req.params.id]).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
             console.log(error);

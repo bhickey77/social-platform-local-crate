@@ -39,9 +39,9 @@ const styles = {
 };
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -55,7 +55,9 @@ class Nav extends Component {
     const { classes } = this.props;
     let isSignedIn = false;
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
-    var currentRoute = window.location.hash.split('/')[1];
+    let user_type = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.user_type || false;
+    const currentRoute = window.location.hash.split('/')[1];
+    console.log('user', this.props.user)
     return (
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
@@ -65,22 +67,25 @@ class Nav extends Component {
                 src="/images/Secondary_Logo_HorizontalTilted.jpg"
                 alt="Local-Crate-Logo" />
             </Typography>
-            <Link to="/admin/accounts">
-                <Button color="primary">
-                  Accounts (admin)
-                </Button>
-              </Link>
-              <Link to="/admin/posts">
-                <Button color="primary">
-                  Posts (admin)
-                </Button>
-              </Link>
-              <AddNewPartner />
-              <Link to="/Register">
+            {
+              (user_type === 'admin') && 
+                [<Link to="/admin/accounts" key='accounts'>
+                  <Button color="primary">
+                    Partner accounts
+                  </Button>
+                </Link>,
+                <Link to="/admin/posts" key='posts'>
+                  <Button color="primary">
+                    Posts
+                  </Button>
+                </Link>,
+                <AddNewPartner key='new'/>]
+            }
+              {/* <Link to="/Register">
                 <Button color="primary">
                   Register (new user)
                 </Button>
-              </Link>
+              </Link> */}
             {(currentRoute !== 'newsfeed') &&
               <Link to="/newsfeed">
                 <Button color="primary">
@@ -88,13 +93,6 @@ class Nav extends Component {
                 </Button>
               </Link>
             }
-            {(this.props.user.username) && 
-              <Link to="/upload">
-                <Button color="primary">
-                  Upload
-                </Button>
-              </Link>
-            } 
             {
               isSignedIn ?
                 <Logout />

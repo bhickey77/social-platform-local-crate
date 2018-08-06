@@ -17,6 +17,7 @@
     "busboy": "^0.2.14",
     "busboy-body-parser": "^0.3.2",
     "connect-busboy": "0.0.2",
+    "connect-roles": "^3.1.2",
     "cookie-session": "^2.0.0-beta.3",
     "dotenv": "^4.0.0",
     "eslint": "^4.19.0",

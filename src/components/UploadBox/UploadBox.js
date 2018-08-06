@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import axios from 'axios';
+// import { connect } from 'react-redux';
+// import { USER_ACTIONS } from '../../redux/actions/userActions';
+// import axios from 'axios';
 
 // MATERIAL UI
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import Button from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
 
 class UploadBox extends Component {
-  constructor(props){
-    super(props);
+  // constructor(props){
+  //   super(props);
     
-  }
+  // }
 
   uppy = Uppy({
     meta: { type: 'profilePicture' },
@@ -35,16 +35,14 @@ class UploadBox extends Component {
     })
 
     return (
-      <div>
-        <DragDrop
-          uppy={this.uppy}
-          locale={{
-            strings: {
-              chooseFile: 'Pick a new avatar'
-            }
-          }}
-          />
-      </div>
+      <DragDrop
+        uppy={this.uppy}
+        locale={{
+          strings: {
+            chooseFile: 'Pick a new avatar'
+          }
+        }}
+        />
     )
   }
 }

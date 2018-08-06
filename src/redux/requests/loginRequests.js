@@ -13,7 +13,7 @@ export function callLogin(payload) {
 
   return axios.post('/api/user/login', body, config)
     .then(response => response.data)
-    console.log( 'axios' )
+    // console.log( 'axios' )
     .catch((error) => {
       throw error.response || error;
     });

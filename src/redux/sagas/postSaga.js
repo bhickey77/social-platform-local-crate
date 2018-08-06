@@ -16,6 +16,7 @@ function* getAllPosts( action ) {
     try {
         console.log('in getAllPosts saga');
         const postResponse = yield call( axios.get, `/api/post/all` );
+        console.log(`IN POST SAGA POST RESPONSE TO GET ALL POSTS: `, postResponse);
         yield put({ type: 'SET_ALL_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
@@ -35,51 +36,51 @@ function* getPartnerPosts( action ) {
 
 function* addPost( action ) {
     try {
-        const postResponse = yield call( axios.post, '/api/post', action.payload );
+        yield call( axios.post, '/api/post', action.payload );
         yield put({ type: 'SET_POST' })
     }
     catch ( error ) {
-        console.log( 'Error in newChar', error );
+        console.log( 'Error in postList', error );
     }
 }
 
 function* editPost( action ) {
     try {
-        // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
+        // const postResponse = yield call( axios.put, `/api/post/${id}`, action.payload );
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
-        console.log( 'Error in newChar', error );
+        console.log( 'Error in postList', error );
     }
 }
 
 function* hidePost( action ) {
     try {
-        const postResponse = yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
+        yield call( axios.put, `/api/post/hide/${action.payload.post_id}`, action.payload );
         yield put({ type: 'FETCH_ALL_POSTS' })
     }
     catch ( error ) {
-        console.log( 'Error in newChar', error );
+        console.log( 'Error in postList', error );
     }
 }
 
-function* deletePost( action ) {
-    let id = action.payload.id;
-    try {
-        // const postResponse = yield call( axios.delete, `/api/post/${ id }` );
-        yield put({ type: 'FETCH_POSTS' })
-    }
-    catch ( error ) {
-        console.log( 'Error in deletePost', error );
-    }
-}
+// function* deletePost( action ) {
+//     let id = action.payload.id;
+//     try {
+//         // const postResponse = yield call( axios.delete, `/api/post/${ id }` );
+//         yield put({ type: 'FETCH_POSTS' })
+//     }
+//     catch ( error ) {
+//         console.log( 'Error in deletePost', error );
+//     }
+// }
 
 function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
     yield takeLatest(POST_ACTIONS.FETCH_ALL_POSTS, getAllPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
-    // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
+    yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
     yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
     // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
   }

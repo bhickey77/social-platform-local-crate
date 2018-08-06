@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
+import moment from 'moment';
+import PostDialog from '../PostDialog/PostDialog';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,8 +17,18 @@ import Nav from '../Nav/Nav';
 
 const mapStateToProps = state => ({
   user: state.user,
-  posts: state.post.posts
+  post: state.post,
 });
+
+const styles = theme => ({
+  card: {
+    maxWidth: 400,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+})
 
 class AdminPosts extends Component {
   constructor(props) {
@@ -32,13 +45,11 @@ class AdminPosts extends Component {
       this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
   }
 
+  dateConvert = ( date ) => {
+    return moment().utc( date ).format("MMM Do YYYY");
+  }
+
   hidePost = (post_is_hidden, post_id) => () => {
-    // if(post_is_hidden === false) {
-    //   this.state.isHidden = true;
-    // } else {
-    //   this.state.isHidden = false;
-    // }
-    // this.state.id = post_id;
     console.log( 'hidden state', this.state )
     this.props.dispatch({ type: 'HIDE_POST', payload: {
         post_is_hidden,
@@ -47,13 +58,19 @@ class AdminPosts extends Component {
   }
 
   render() {
+    const posts = this.props && this.props.post && this.props.post.allPosts || [];
+    // const { classes } = this.props;
+    console.log(posts);
+    
     return (
       <div>
         <Nav />
+        <div className='adminTable'>
         <Table>
           <TableHead>
           <TableRow>
-            <TableCell>Partner ID</TableCell>
+            <TableCell>Partner Name</TableCell>
+            <TableCell>Preview (Click)</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Content</TableCell>
             <TableCell>Date Created</TableCell>
@@ -62,14 +79,17 @@ class AdminPosts extends Component {
           </TableRow>
           </TableHead>
           <TableBody>
-        {this.props.posts.map( post => {
+        {posts.map( post => {
           return (
             <TableRow key={post.id}>
-                <TableCell>{post.partner_id}</TableCell>
+                <TableCell>{post.name}</TableCell>
+                <TableCell>
+                  <PostDialog post={post} dateConvert={this.dateConvert}/>
+                </TableCell>
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.content}</TableCell>
-                <TableCell>{post.date_created}</TableCell>
-                <TableCell>{post.date_updated}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>
                   <Button onClick={this.hidePost(post.is_marked_as_hidden, post.id)}>
                   {String(post.is_marked_as_hidden)}</Button>
@@ -79,10 +99,11 @@ class AdminPosts extends Component {
             })}
             </TableBody>
         </Table>
+        </div>
       </div>
     );
   }
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(AdminPosts);
+export default compose(withStyles(styles),connect(mapStateToProps))(AdminPosts);
