@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -67,46 +62,44 @@ class PostDialog extends Component {
     return (
       <div>
         <Card onClick={this.handleClickOpen}>
-            <CardMedia
-                className={classes.media}
-                image={this.props.post.media_url}
-                title="Contemplative Reptile"/>
+          <CardMedia
+              className={classes.media}
+              image={this.props.post.media_url}
+              title="Contemplative Reptile"/>
         </Card>
-        {/* <div className='postDialog'> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-            <Card className='postDialog'>
-                    <CardHeader
-                        avatar={
-                        <Avatar aria-label="Recipe" className={classes.avatar}>
-                            R
-                        </Avatar>
-                        }
-                        action={
-                        <IconButton>
-                            <EditIcon />
-                        </IconButton>
-                        }
-                        title={this.props.post.title}
-                        subheader={String(this.props.dateConvert(this.props.post.date_created))}
-                    />
-                    <CardMedia
-                        className={classes.media}
-                        image={this.props.post.media_url}
-                        title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                        <Typography>
-                            {this.props.post.content}
-                        </Typography>
-                    </CardContent>
-                </Card>
+          <Card className='postDialog'>
+            <CardHeader
+              avatar={
+              <Avatar aria-label="Recipe" className={classes.avatar}>
+                  R
+              </Avatar>
+              }
+              action={
+              <IconButton>
+                  <EditIcon />
+              </IconButton>
+              }
+              title={this.props.post.title}
+              subheader={String(this.props.dateConvert(this.props.post.date_created))}
+            />
+            <CardMedia
+              className={classes.media}
+              image={this.props.post.media_url}
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography>
+                  {this.props.post.content}
+              </Typography>
+            </CardContent>
+          </Card>
         </Dialog>
-        {/* </div> */}
       </div>
     );
   }

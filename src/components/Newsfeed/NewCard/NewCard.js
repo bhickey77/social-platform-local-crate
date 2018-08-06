@@ -79,7 +79,7 @@ class NewCard extends Component {
                         <EditPost post={this.props.post} handleChange={this.handleChange}/>
                     }
    
-                    title={this.props.post.name}
+                    title={this.props.post.partner_name}
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 {/* <CardMedia

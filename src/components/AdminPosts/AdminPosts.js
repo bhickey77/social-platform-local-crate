@@ -17,7 +17,7 @@ import Nav from '../Nav/Nav';
 
 const mapStateToProps = state => ({
   user: state.user,
-  posts: state.post.posts
+  post: state.post,
 });
 
 const styles = theme => ({
@@ -58,8 +58,10 @@ class AdminPosts extends Component {
   }
 
   render() {
+    const posts = this.props && this.props.post && this.props.post.allPosts || [];
     // const { classes } = this.props;
-  
+    console.log(posts);
+    
     return (
       <div>
         <Nav />
@@ -77,7 +79,7 @@ class AdminPosts extends Component {
           </TableRow>
           </TableHead>
           <TableBody>
-        {this.props.posts.map( post => {
+        {posts.map( post => {
           return (
             <TableRow key={post.id}>
                 <TableCell>{post.name}</TableCell>

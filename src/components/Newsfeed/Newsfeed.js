@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearError } from '../../redux/actions/loginActions';
 import CardsGrid from './CardsGrid/CardsGrid';
+import { POST_ACTIONS } from '../../redux/actions/postActions';
 
 import Nav from '../Nav/Nav';
 
@@ -14,13 +15,8 @@ class Newsfeed extends Component {
 
   componentDidMount() {
     this.props.dispatch(clearError());
+    this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS })
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //     if (nextProps.user.userName) {
-  //         this.props.history.push('/user');
-  //     }
-  // }
 
   render() {
     return (
@@ -32,5 +28,4 @@ class Newsfeed extends Component {
   }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(Newsfeed);
