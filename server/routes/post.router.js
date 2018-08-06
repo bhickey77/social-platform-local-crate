@@ -61,7 +61,7 @@ router.post('/', upload.single('file'), (req, res) => {
 
 router.get('/', (req, res) => {
     // GET for ALL posts - public view (does not return flagged posts)
-        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id, partner.name as partner_name, post.partner_id
+        let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id as post_id, partner.name as partner_name, post.partner_id as partner_id
         FROM post
         INNER JOIN partner ON post.partner_id=partner.id WHERE post.is_marked_as_hidden=false ORDER BY post.date_created DESC`;
         pool.query(queryText).then((result) => {
