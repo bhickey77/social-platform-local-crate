@@ -55,6 +55,7 @@ class Nav extends Component {
     const { classes } = this.props;
     let isSignedIn = false;
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
+    let user_type = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.user_type || false;
     const currentRoute = window.location.hash.split('/')[1];
     console.log('user', this.props.user)
     return (
@@ -67,6 +68,8 @@ class Nav extends Component {
                 alt="Local-Crate-Logo" />
             </Typography>
             {
+              (user_type === 'admin') && 
+                [<Link to="/admin/accounts">
               (this.props.user.userInfo.user_type === 'admin') && 
                 [<Link to="/admin/accounts" key='accounts'>
                   <Button color="primary">
@@ -92,13 +95,6 @@ class Nav extends Component {
                 </Button>
               </Link>
             }
-            {(this.props.user.username) && 
-              <Link to="/upload">
-                <Button color="primary">
-                  Upload
-                </Button>
-              </Link>
-            } 
             {
               isSignedIn ?
                 <Logout />
