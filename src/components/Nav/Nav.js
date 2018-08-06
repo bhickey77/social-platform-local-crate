@@ -68,8 +68,6 @@ class Nav extends Component {
                 alt="Local-Crate-Logo" />
             </Typography>
             {
-              (user_type === 'admin') && 
-                [<Link to="/admin/accounts">
               (this.props.user.userInfo.user_type === 'admin') && 
                 [<Link to="/admin/accounts" key='accounts'>
                   <Button color="primary">
