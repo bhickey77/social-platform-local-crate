@@ -16,6 +16,7 @@ function* getAllPosts( action ) {
     try {
         console.log('in getAllPosts saga');
         const postResponse = yield call( axios.get, `/api/post/all` );
+        console.log(`IN POST SAGA POST RESPONSE TO GET ALL POSTS: `, postResponse);
         yield put({ type: 'SET_ALL_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
@@ -46,7 +47,7 @@ function* addPost( action ) {
 function* editPost( action ) {
     try {
         console.log('edit payload', action.payload);
-        const postResponse = yield call( axios.put, `/api/post/${action.payload.id}`, action.payload );
+        const postResponse = yield call( axios.put, `/api/post/${action.payload.post_id}`, action.payload );
         yield put({ type: 'FETCH_ALL_POSTS' })
     }
     catch ( error ) {
