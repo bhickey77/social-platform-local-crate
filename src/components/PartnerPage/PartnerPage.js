@@ -96,10 +96,7 @@ class PartnerPage extends Component {
               }}
               >
               <Typography variant="headline" component="h3">
-                Richardson Farms
-              </Typography>
-              <Typography component="p">
-                Red Wing, MN
+                About Us
               </Typography>
             </Paper>          
           </Grid>
