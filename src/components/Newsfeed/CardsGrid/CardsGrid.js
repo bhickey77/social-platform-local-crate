@@ -24,9 +24,9 @@ class CardsGrid extends Component {
     return (
       <div>
         <div style={{textAlign:'center'}}>
-          {/* {isSignedIn &&
+          {isSignedIn &&
             <UploadCard />
-          } */}
+          }
           {posts.map( post => {
             console.log(`mappinggggggggggg`);
             return <NewCard
