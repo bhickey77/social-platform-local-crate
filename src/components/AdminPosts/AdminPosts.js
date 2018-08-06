@@ -50,12 +50,6 @@ class AdminPosts extends Component {
   }
 
   hidePost = (post_is_hidden, post_id) => () => {
-    // if(post_is_hidden === false) {
-    //   this.state.isHidden = true;
-    // } else {
-    //   this.state.isHidden = false;
-    // }
-    // this.state.id = post_id;
     console.log( 'hidden state', this.state )
     this.props.dispatch({ type: 'HIDE_POST', payload: {
         post_is_hidden,
@@ -65,7 +59,7 @@ class AdminPosts extends Component {
 
   render() {
     // const { classes } = this.props;
-
+  
     return (
       <div>
         <Nav />

@@ -68,7 +68,7 @@ class Nav extends Component {
                 alt="Local-Crate-Logo" />
             </Typography>
             {
-              (this.props.user.userInfo.user_type === 'admin') && 
+              (user_type === 'admin') && 
                 [<Link to="/admin/accounts" key='accounts'>
                   <Button color="primary">
                     Partner accounts
