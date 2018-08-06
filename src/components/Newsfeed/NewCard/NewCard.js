@@ -55,6 +55,10 @@ class NewCard extends Component {
         this.setState(state => ({ expanded: !state.expanded }));
     };
 
+    handleAvatarClick = (id) => {
+        //ROUTE to partner page//
+    }
+
     dateConvert = ( date ) => {
         return moment().utc( date ).format("MMM Do YYYY");
     }
@@ -63,12 +67,14 @@ class NewCard extends Component {
         const { classes } = this.props;
 
         return (
+            
             <div style={{display:'inline-block', margin:'10px'}}>
                 <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                    <Avatar aria-label="Recipe" className={classes.avatar}>
-                        R
+                    <Avatar aria-label="Recipe" className={classes.avatar}
+                    onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}}>
+                        
                     </Avatar>
                     }
                     action={
@@ -77,6 +83,7 @@ class NewCard extends Component {
                     }
    
                     title={this.props.post.partner_name}
+                    
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>
