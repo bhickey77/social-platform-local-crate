@@ -39,19 +39,19 @@ function* addPost( action ) {
         yield put({ type: 'SET_POST' })
     }
     catch ( error ) {
-        console.log( 'Error in newChar', error );
+        console.log( 'Error in postList', error );
     }
 }
 
-// function* editPost( action ) {
-//     try {
-//         // const postResponse = yield call( axios.post, `/api/post/${id}`, action.payload );
-//         yield put({ type: 'FETCH_POSTS' })
-//     }
-//     catch ( error ) {
-//         console.log( 'Error in newChar', error );
-//     }
-// }
+function* editPost( action ) {
+    try {
+        // const postResponse = yield call( axios.put, `/api/post/${id}`, action.payload );
+        yield put({ type: 'FETCH_POSTS' })
+    }
+    catch ( error ) {
+        console.log( 'Error in postList', error );
+    }
+}
 
 function* hidePost( action ) {
     try {
@@ -59,7 +59,7 @@ function* hidePost( action ) {
         yield put({ type: 'FETCH_ALL_POSTS' })
     }
     catch ( error ) {
-        console.log( 'Error in newChar', error );
+        console.log( 'Error in postList', error );
     }
 }
 
@@ -79,7 +79,7 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_ALL_POSTS, getAllPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
-    // yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
+    yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
     yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
     // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
   }
