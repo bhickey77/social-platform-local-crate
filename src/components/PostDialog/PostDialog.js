@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EditPost from '../EditPost/EditPost';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
@@ -81,9 +82,9 @@ class PostDialog extends Component {
               </Avatar>
               }
               action={
-              <IconButton>
-                  <EditIcon />
-              </IconButton>
+                <EditPost post={this.props.post}
+                open={this.state.open}
+                handleClose={this.handleClose}/>
               }
               title={this.props.post.title}
               subheader={String(this.props.dateConvert(this.props.post.date_created))}
