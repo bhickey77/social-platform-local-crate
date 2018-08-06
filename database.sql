@@ -14,6 +14,8 @@ CREATE TABLE partner (
     id SERIAL PRIMARY KEY,
     name VARCHAR (100),
     location VARCHAR (120),
+    website VARCHAR (120), 
+    bio VARCHAR (500),
     date_created VARCHAR (100) NOT NULL,
     type VARCHAR (100)
 );
@@ -23,6 +25,8 @@ CREATE TABLE person (
     username VARCHAR (80) UNIQUE NOT NULL,
     first_name VARCHAR (40) NOT NULL,
     last_name VARCHAR (40) NOT NULL,
+    email VARCHAR (40) NOT NULL, 
+    phone VARCHAR (40), 
     date_created VARCHAR (100) NOT NULL,
     date_updated VARCHAR (100) NOT NULL,
     partner_id INTEGER REFERENCES partner,

@@ -28,7 +28,6 @@ class CardsGrid extends Component {
             <UploadCard />
           }
           {posts.map( post => {
-            console.log(`mappinggggggggggg`);
             return <NewCard
                     key = {post.post_id}
                     post= {post}
