@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
 
 // import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
@@ -38,19 +39,24 @@ const mapStateToProps = state => ({
 
 class PartnerPage extends Component {
   
-  state = {
-    spacing: '16',
-  };
-
-  componentDidMount() {
-    this.props.dispatch({type: "FETCH_POSTS"});
+  constructor(props){
+    super(props);
+      this.state = {
+        partner: {
+          id: 0,
+          name: '',
+          location: '', 
+          website: '', 
+          bio: ''
+        } 
+      }
   }
 
-  componentDidUpdate() {
-    // if (!this.props.user.isLoading && this.props.user.userName === null) {
-    //   this.props.history.push('home');
-    // }
-  }
+  // componentDidUpdate() {
+  //   if (!this.props.user.isLoading && this.props.user.userName === null) {
+  //     this.props.history.push('home');
+  //   }
+  // }
 
   render() {
     const { classes } = this.props;
@@ -59,10 +65,9 @@ class PartnerPage extends Component {
     return (
       <div>
         <Nav />
-        Welcome, { this.props.user.userName }!
         <Grid container spacing={24}
           style={{ 
-            marginLeft: 10,
+            marginLeft: 30,
           }}>
           <Grid item xs={10}>
             <Paper className={classes.root} elevation={1}>
@@ -78,7 +83,7 @@ class PartnerPage extends Component {
 
         <Grid container spacing={24}
           style={{ 
-            marginLeft: 10,
+            marginLeft: 30,
           }}>
           <Grid item xs={3}>
             <Paper 
@@ -87,7 +92,7 @@ class PartnerPage extends Component {
               style={{ 
                 paddingTop: 10, 
                 paddingBottom: 10, 
-                height: 300,
+                height: 600,
               }}
               >
               <Typography variant="headline" component="h3">
@@ -98,27 +103,10 @@ class PartnerPage extends Component {
               </Typography>
             </Paper>          
           </Grid>
+          <CardsGrid />
         </Grid>
-        {(this.props.user.userName) &&
-          <div>
-            <div style={{textAlign:'center'}}>
-              <UploadCard />
-            </div>
-          </div>
-        }
-        <Grid >
-          <div style={{textAlign:'center'}}>
-                {posts.map( post => {
-                  return <NewCard
-                  key = {post.id}
-                  post= {post}
-                  />
-                  })
-                }
-              </div>
-            </Grid>
-          </div>
-      );
+      </div>
+    );
     }
   }
 
