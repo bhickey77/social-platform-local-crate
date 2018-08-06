@@ -16,6 +16,7 @@ function* getAllPosts( action ) {
     try {
         console.log('in getAllPosts saga');
         const postResponse = yield call( axios.get, `/api/post/all` );
+        console.log(`IN POST SAGA POST RESPONSE TO GET ALL POSTS: `, postResponse);
         yield put({ type: 'SET_ALL_POSTS', payload: postResponse.data });
     }
     catch ( error ) {
