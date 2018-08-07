@@ -42,14 +42,14 @@ TextMaskCustom.propTypes = {
 
 class FormattedInputs extends React.Component {
   state = {
-    textmask: '(1  )    -    ',
+    textmask: '(   )    -    ',
   };
 
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
-    this.props.handleChangeForPhone(this.state.textmask);
+    this.props.handleChangeForPhone(event.target.value);
   };
 
   render() {
@@ -59,7 +59,7 @@ class FormattedInputs extends React.Component {
     return (
       <div className={classes.container}>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="formatted-text-mask-input">react-text-mask</InputLabel>
+          <InputLabel htmlFor="formatted-text-mask-input">Phone</InputLabel>
           <Input
             value={textmask}
             onChange={this.handleChange('textmask')}

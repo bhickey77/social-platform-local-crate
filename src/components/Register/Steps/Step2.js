@@ -29,17 +29,6 @@ class RegisterStep2 extends Component {
                                 margin="normal"
                             />  
                              <br/>
-                            <Phone 
-                                handleChangeForPhone={this.props.handleChangeForPhone}
-                            />
-                            {/* <TextField
-                                id="phone"
-                                label="Phone"
-                                value={this.props.state.person.phone}
-                                onChange={this.props.handleChangeFor('phone')}
-                                margin="normal"
-                            />  */}
-                            <br/>
                             <TextField
                                 id="email"
                                 label="Email"
@@ -47,6 +36,10 @@ class RegisterStep2 extends Component {
                                 onChange={this.props.handleChangeFor('email')}
                                 margin="normal"
                             /> 
+                            <br/>
+                            <Phone 
+                                handleChangeForPhone={this.props.handleChangeForPhone}
+                            />
                             <br/>
                             <Button variant="contained" color="primary" >
                                 Cancel

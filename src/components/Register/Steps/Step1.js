@@ -39,6 +39,10 @@ const ranges = [
       value: 'Supplier',
       label: 'Supplier',
     },
+    {
+      value: 'Other',
+      label: 'Other',
+      },
   ];  
 
 class Step1 extends Component {
