@@ -10,6 +10,9 @@ const { isAdmin } = require('../modules/authorization');
 
 router.put('/:id', (req, res) => {
     // PUT for editing text in a post
+    console.log('hitting put post route');
+    console.log(req);
+    
     if(req.isAuthenticated()){
         queryText = `UPDATE post SET title = $1, content = $2 where id = $3;`;
         pool.query(queryText, [req.body.title, req.body.content, req.params.id]).then(result => {

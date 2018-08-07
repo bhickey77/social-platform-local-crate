@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { TextField } from '../../../node_modules/@material-ui/core';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
-import UploadBox from '../UploadBox/UploadBox';
+import EditImageBox from '../EditImageBox/EditImageBox';
 
 const styles = theme => ({
     card: {
@@ -48,12 +48,20 @@ const styles = theme => ({
     avatar: {
       backgroundColor: red[500],
     },
+    editText: {
+      width: '100%',
+    },
+    saveWarning: {
+      color: 'red',
+    }
   });
 
 class EditPost extends Component {
   state = {
     open: false,
-    post: this.props.post
+    post: this.props.post,
+    imageHasBeenUpdated: false,
+    areChanges: false,
   };
 
   handleClickOpen = () => {
@@ -74,6 +82,7 @@ class EditPost extends Component {
   handleChange = ( property ) => event => {
     this.setState({
         ...this.state,
+        areChanges: true,
         post: {
           ...this.state.post,
           [property]: event.target.value,
@@ -94,7 +103,11 @@ class EditPost extends Component {
           date_updated: this.dateConvert(this.date),
         } 
       });
-      this.props.dispatch({ type: POST_ACTIONS.EDIT_POST, payload: this.state.post });
+      this.props.dispatch({ 
+        type: POST_ACTIONS.EDIT_POST,
+        payload: this.state.post, 
+        image: this.state.post.newImage,
+      });
       this.handleClose();
   }
 
@@ -102,14 +115,32 @@ class EditPost extends Component {
     return moment().utc( date ).format("MMM Do YYYY");
   }
 
+  setImage = imageData => {
+    console.log(`SETTING IMAGE: `, imageData);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      console.log(reader.result);
+      this.setState({
+        ...this.state,
+        areChanges: true,
+        imageHasBeenUpdated: true,
+        imageUrl: reader.result,
+        post: {
+          ...this.state.post,
+          newImage: imageData,
+        }
+      })
+    }
+    reader.readAsDataURL(imageData);
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div>
-        {/* <EditIcon onClick={this.handleClickOpen} /> */}
-        <IconButton aria-label="Edit">
-          <EditIcon onClick={this.handleClickOpen}/>
+        <IconButton onClick={this.handleClickOpen} aria-label="Edit">
+          <EditIcon />
         </IconButton>
         <Dialog
           open={this.state.open}
@@ -124,33 +155,50 @@ class EditPost extends Component {
                       R
                   </Avatar>
                   }
-                  title={<TextField
-                          value={this.state.post.title}
-                          onChange={this.handleChange('title')}/>}
+                  title={this.state.post.partner_name}
               >
               </CardHeader>
-              <CardMedia
-                  className={classes.media}
-                  image={this.state.post.media_url}
-                  title="Contemplative Reptile"
-              />
               <CardContent>
-                  <Typography>
-                      <TextField
-                      value={this.state.post.content}
-                      onChange={this.handleChange('content')}
-                      />
-                  </Typography>
+                <img className="edit-image" src={(!this.state.imageHasBeenUpdated) ? this.state.post.media_url : this.state.imageUrl} alt=""/>
+                <br />
+                <br />
+                <span className="edit-media-container">
+                  <EditImageBox setImage={this.setImage} />
+                </span>
+                  <span className="edit-text-fields">
+                    <Typography>
+                        <TextField
+                          className={classes.editText}
+                          value={this.state.post.title}
+                          label="Title"
+                          onChange={this.handleChange('title')}/>
+                          <br />
+                          <br />
+                          <br />
+                        <TextField
+                          className={classes.editText}
+                          value={this.state.post.content}
+                          label="Text Content"
+                          onChange={this.handleChange('content')}
+                          rows={3}
+                          multiline={true}
+                          />
+                    </Typography>
+                  </span>
                   <Button onClick={this.handleClose} >
-                      Cancel Edit
+                    Cancel Edit
                   </Button>
                   <Button onClick={this.edit} >
-                      Confirm Edit
+                    Save Edit
                   </Button>
+                  {(this.state.areChanges) &&
+                    <Typography className={classes.saveWarning}>
+                      Don't forget to save your changes
+                    </Typography>
+                  }
               </CardContent>
             </Card>
         </Dialog>
-        {/* </div> */}
       </div>
     );
   }
