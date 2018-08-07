@@ -51,7 +51,9 @@ router.delete('/:id', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
-    // console.log('hit the post post route: ', req.file);
+    console.log('hit the post post route: ');
+    console.log(req.user);
+    
     if (req.isAuthenticated()){
         uploadPost(req, res);
     } else {

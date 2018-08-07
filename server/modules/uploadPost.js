@@ -64,7 +64,7 @@ function uploadToSQL(req, media_key) {
     const queryText = `INSERT INTO post ("partner_id", "title", "content", "media_key", "date_created", "date_updated", "is_marked_as_hidden")
     VALUES($1, $2, $3, $4, $5, $6, $7)`;
     pool.query(queryText, [
-        1,
+        req.body.partner_id,
         req.body.title,
         req.body.content,
         media_key,
