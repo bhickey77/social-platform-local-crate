@@ -1,5 +1,5 @@
-database name:
-local_crate
+--database name:
+--local_crate
 
 DROP TABLE post_tags;
 DROP TABLE tag;
@@ -7,25 +7,24 @@ DROP TABLE post;
 DROP TABLE person;
 DROP TABLE partner;
 
-database name:
-local_crate
-
 CREATE TABLE partner (
     id SERIAL PRIMARY KEY,
     name VARCHAR (100),
-    location VARCHAR (120),
+    city VARCHAR (100),
+    state VARCHAR (50),
     website VARCHAR (120), 
     bio VARCHAR (500),
     date_created VARCHAR (100) NOT NULL,
     type VARCHAR (100)
 );
 
+
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     username VARCHAR (80) UNIQUE NOT NULL,
     first_name VARCHAR (40) NOT NULL,
     last_name VARCHAR (40) NOT NULL,
-    email VARCHAR (40) NOT NULL, 
+    email VARCHAR (40), 
     phone VARCHAR (40), 
     date_created VARCHAR (100) NOT NULL,
     date_updated VARCHAR (100) NOT NULL,

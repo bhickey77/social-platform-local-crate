@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* registerUser( action ) {
     try {
-      const registerResponse = yield call(axios.post, '/api/user/register/', action.payload);
+      yield call(axios.post, '/api/user/register/', action.payload);
     }
     catch {
         console.log( 'Error in registerUser', error );
