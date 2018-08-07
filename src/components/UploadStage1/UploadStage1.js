@@ -2,21 +2,40 @@ import React, { Component } from 'react';
 
 // MATERIAL UI
 import Button from '@material-ui/core/Button';
-// import TextField from '@material-ui/core/TextField';
-// import Dialog from '@material-ui/core/Dialog';
+import CardMedia from '@material-ui/core/CardMedia';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
+const imageStyle = {
+  margin: '0 auto',
+  width: '100%',
+  height: 'auto',
+}
+
+const testImage = {
+  margin: '0 auto',
+  width: '100%',
+  height: 'auto',
+  /* height: 250px; */
+}
+
+const imageContainerStyle = {
+  height: 'auto', 
+  width: 'auto',
+  maxWidth: 350, 
+  maxHeight: 300,
+  margin: '0 auto',
+}
 
 class UploadStage1 extends Component {
   render() {
     return (
-      <div>
-        <DialogTitle id="form-dialog-title">Are you sure this is the image you would like to upload?</DialogTitle>
+      <div >
         <DialogContent>
-          <img className="uploadImage" src={this.props.profilePictureUrl} alt="profilePictureUrl" />          
+            <img src={this.props.imageUrl} className="uploadImage" alt=""/>
         </DialogContent>
+        <DialogTitle id="form-dialog-title">Are you sure this is the image you would like to upload?</DialogTitle>
         <DialogActions>
           <Button onClick={this.props.handlePostCancel} color="primary">
             No, cancel Post Creation

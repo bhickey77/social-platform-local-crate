@@ -19,32 +19,12 @@ import UploadBox from '../UploadBox/UploadBox';
 // MATERIAL UI - Card
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-// import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
-// import IconButton from '@material-ui/core/IconButton';
-// import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ShareIcon from '@material-ui/icons/Share';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import EditIcon from '@material-ui/icons/Edit';
 
 //UPLOAD STAGES
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
-
-//AWS
-// const AWS = require('aws-sdk');
-// const BUCKET_NAME = 'local-crate-social-platform';
-// const IAM_USER_KEY = process.env.aws_access_key_id;
-// const IAM_USER_SECRET = process.env.aws_secret_access_key;
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -83,7 +63,7 @@ class UploadCard extends Component {
     super(props);
     this.state = {
       open: false,
-      profilePictureUrl: '',
+      imageUrl: '',
       imageData: '', 
       currentUploadStage: 1,
       postTitle: '',
@@ -118,7 +98,7 @@ class UploadCard extends Component {
     this.sendPost();
     this.setState({
       open: false,
-      profilePictureUrl: '',
+      imageUrl: '',
       imageData: '',
       currentUploadStage: 1,
     })
@@ -145,7 +125,7 @@ class UploadCard extends Component {
       console.log(reader.result);
       this.setState({
         ...this.state,
-        profilePictureUrl: reader.result,
+        imageUrl: reader.result,
       })
     }
     reader.readAsDataURL(imageData);
@@ -186,13 +166,9 @@ class UploadCard extends Component {
     return (
       
       <div className="upload-card">
-        <Card className={classes.card}>
+        {/* <Card className={classes.card}> */}
           <UploadBox setImage={this.setImage} />
-        </Card>
-
-        {/* <UploadBox setImage={this.setImage} /> */}
-
-        {/* <input type="file" name="image" onChange={this.handleUploadCard} /> */}
+        {/* </Card> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -201,7 +177,7 @@ class UploadCard extends Component {
         {
           this.state.currentUploadStage === 1 &&
             <UploadStage1 
-              profilePictureUrl={this.state.profilePictureUrl} 
+              imageUrl={this.state.imageUrl} 
               handlePostCancel = {this.handlePostCancel}
               handleConfirmImage = {this.handleConfirmImage}
             />
@@ -209,7 +185,7 @@ class UploadCard extends Component {
         {
           this.state.currentUploadStage === 2 &&
             <UploadStage2 
-              profilePictureUrl={this.state.profilePictureUrl} 
+              imageUrl={this.state.imageUrl} 
               backToImageUpload = {this.backToImageUpload}
               handleSubmitPost = {this.handleSubmitPost}
               handleChangeFor = {this.handleChangeFor}
