@@ -61,9 +61,17 @@ class Step1 extends Component {
                             />
                             <br/>
                             <TextField
+                                id="website"
+                                label="Business Website"
+                                value={this.props.state.partner.website}
+                                onChange={this.props.handleChangeFor('website')}
+                                margin="normal"
+                            /> 
+                            <br/>
+                            <TextField
                             id="city"
                             label="City"
-                            value={this.props.state.partner.location}
+                            value={this.props.state.partner.city}
                             onChange={this.props.handleChangeFor('city')}
                             margin="normal"
                             />
@@ -71,7 +79,7 @@ class Step1 extends Component {
                             <TextField
                             id="state"
                             label="State"
-                            value={this.props.state.partner.location}
+                            value={this.props.state.partner.state}
                             onChange={this.props.handleChangeFor('state')}
                             margin="normal"
                             />

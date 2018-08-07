@@ -23,13 +23,14 @@ class Register extends Component {
         name: '',
         city: '',
         state: '',
+        website: '',
+        type: ''
       },
       person: {
         username: '',
         first_name: '',
         last_name: '',
         email: '',
-        website: '',
         phone: '',
         password: '',
         password1: '',
@@ -59,7 +60,7 @@ class Register extends Component {
   }
 
   handleChangeFor = property => event => {
-    if(property === 'name' || property === 'location' || property === 'type'){
+    if(property === 'name' || property === 'city' || property === 'state' || property === 'website' || property === 'type'){
       this.setState({
         ...this.state,
         partner: {

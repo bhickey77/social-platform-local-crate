@@ -45,14 +45,6 @@ class RegisterStep2 extends Component {
                                 margin="normal"
                             /> 
                             <br/>
-                            <TextField
-                                id="website"
-                                label="Business Website"
-                                value={this.props.state.person.website}
-                                onChange={this.props.handleChangeFor('website')}
-                                margin="normal"
-                            /> 
-                            <br/>
                             <Button variant="contained" color="primary" >
                                 Cancel
                             </Button>
