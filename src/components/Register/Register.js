@@ -21,12 +21,17 @@ class Register extends Component {
     this.state = {
       partner: {
         name: '',
-        location: '',
+        city: '',
+        state: '',
+        website: '',
+        type: ''
       },
       person: {
         username: '',
         first_name: '',
         last_name: '',
+        email: '',
+        phone: '',
         password: '',
         password1: '',
         password2: ''
@@ -54,8 +59,18 @@ class Register extends Component {
     }
   }
 
+  handleChangeForPhone = input => {
+    this.setState({
+      ...this.state,
+      person: {
+        ...this.state.person,
+        phone: input,
+      }
+    })
+  }
+
   handleChangeFor = property => event => {
-    if(property === 'name' || property === 'location' || property === 'type'){
+    if(property === 'name' || property === 'city' || property === 'state' || property === 'website' || property === 'type'){
       this.setState({
         ...this.state,
         partner: {
@@ -98,6 +113,7 @@ class Register extends Component {
         {(this.state.step === 2) && 
           <Step2 state={this.state}
             handleChangeFor={this.handleChangeFor}
+            handleChangeForPhone={this.handleChangeForPhone}
             nextStep={this.nextStep}
             previousStep={this.previousStep}
           />

@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/info', rejectUnauthenticated, (req, res) => {
   console.log('In the route api/user/info', req.user);
-  const queryText = `SELECT partner.name as "partner_name", username, first_name, partner_id, user_type, location FROM person
+  const queryText = `SELECT partner.name as "partner_name", username, first_name, partner_id, user_type, city, state FROM person
                      JOIN partner ON partner.id = person.partner_id 
                      WHERE person.id = $1;`
   pool.query(queryText, [req.user.id])
@@ -39,19 +39,19 @@ router.post('/register', (req, res, next) => {
   const currentDateTime = new Date().toJSON().toString();
 
   const partnerQuery = `INSERT INTO partner
-                        (name, location, date_created, type)
+                        (name, city, state, website, date_created, type)
                         VALUES
-                        ($1, $2, $3, $4)
+                        ($1, $2, $3, $4, $5, $6)
                         RETURNING id;`
-  const partnerValues = [partner.name, partner.location, currentDateTime, partner.type];
+  const partnerValues = [partner.name, partner.city, partner.state, partner.website, currentDateTime, partner.type];
   pool.query(partnerQuery, partnerValues)
     .then(response => {
       console.log(response.rows[0]);
       const personQuery = `INSERT INTO person
-                           (username, first_name, last_name, date_created, date_updated, partner_id, is_verified, user_type, password)
+                           (username, first_name, last_name, email, phone, date_created, date_updated, partner_id, is_verified, user_type, password)
                            VALUES
-                           ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
-      const personValues = [person.username, person.first_name, person.last_name, currentDateTime, currentDateTime, response.rows[0].id, true, 'user', password];
+                           ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+      const personValues = [person.username, person.first_name, person.last_name, person.email, person.phone, currentDateTime, currentDateTime, response.rows[0].id, true, 'user', password];
       pool.query(personQuery, personValues)
         .then(response => {
           console.log(`successfully inserted into person: `, response);
