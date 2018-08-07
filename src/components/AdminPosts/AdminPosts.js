@@ -73,8 +73,9 @@ class AdminPosts extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS_FILTERED,
-      payload: {filter: this.state.filter, filteredBy: this.state.filteredBy }})
+    console.log('state', this.state.filter, this.state.filteredBy)
+      this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS_FILTERED,
+        payload: {filter: this.state.filter, filteredBy: this.state.filteredBy }});
   }
 
   render() {
