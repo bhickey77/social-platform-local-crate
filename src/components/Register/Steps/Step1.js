@@ -3,9 +3,48 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
+const styles = theme => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    margin: {
+      margin: theme.spacing.unit,
+    },
+    withoutLabel: {
+      marginTop: theme.spacing.unit * 3,
+    },
+    textField: {
+      flexBasis: 200,
+    },
+});
+
+const ranges = [
+    {
+      value: 'Farmer',
+      label: 'Farmer',
+    },
+    {
+      value: 'Maker',
+      label: 'Maker',
+    },
+    {
+      value: 'Supplier',
+      label: 'Supplier',
+    },
+  ];  
 
 class Step1 extends Component {
     render() {
+        const { classes } = this.props;
+
         return (
             <div>
             <div className="registration-container">
@@ -30,12 +69,21 @@ class Step1 extends Component {
                             />
                             <br/>
                             <TextField
-                            id="type"
-                            label="Type"
-                            value={this.props.state.partner.type}
-                            onChange={this.props.handleChangeFor('type')}
-                            margin="normal"
-                            />
+                                select
+                                label="Partner"
+                                className={classNames(classes.margin, classes.textField)}
+                                value={this.props.state.partner.type}
+                                onChange={this.props.handleChangeFor('type')}
+                                InputProps={{
+                                    startAdornment: <InputAdornment position="start"></InputAdornment>,
+                                }}
+                                >
+                                {ranges.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                             <br/>
                             <Button variant="contained" color="primary" >
                                 Cancel
@@ -51,4 +99,8 @@ class Step1 extends Component {
     }
 }
 
-export default Step1;
+Step1.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+export default withStyles(styles)(Step1);
