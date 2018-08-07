@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import PostFilterSelect from '../AdminPostFilter/PostFilterSelect';
+import PostFilterConditional from '../AdminPostFilter/PostFilterConditional';
 import HideIcon from '../HideIcon/HideIcon';
+import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
+import { POST_ACTIONS } from '../../redux/actions/postActions'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
@@ -19,6 +23,7 @@ import Nav from '../Nav/Nav';
 const mapStateToProps = state => ({
   user: state.user,
   post: state.post,
+  partner: state.partner,
 });
 
 const styles = theme => ({
@@ -36,7 +41,10 @@ class AdminPosts extends Component {
     super(props);
     this.state = {
       isHidden: null,
-      id: 0
+      id: 0,
+      open: false,
+      filter: '',
+      filteredBy: ''
     };
   }
 
@@ -44,20 +52,56 @@ class AdminPosts extends Component {
   componentDidMount() {
       this.props.dispatch(clearError());
       this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
+      this.props.dispatch({ type: PARTNER_ACTIONS.FETCH_PARTNERS });
+      this.setState({ filteredBy: 'none' });
+      console.log('filtered by', this.state.filteredBy);
   }
 
   dateConvert = ( date ) => {
     return moment().utc( date ).format("MMM Do YYYY");
   }
 
+  handleFilterChange = event => {
+    this.setState({ filter: event.target.value });
+    console.log('filter', this.state.filter)
+  }
+
+  handleChange = event => {
+    this.setState({ filteredBy: event.target.value });
+    console.log('filtered by', this.state.filteredBy);
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS_FILTERED,
+      payload: {filter: this.state.filter, filteredBy: this.state.filteredBy }})
+  }
+
   render() {
     const posts = this.props && this.props.post && this.props.post.allPosts || [];
+    const partner = this.props && this.props.partner && this.props.partner.partners || [];
     // const { classes } = this.props;
     console.log(posts);
+    console.log(partner);
     
     return (
       <div>
         <Nav />
+        <form>
+        <PostFilterSelect
+        filter={this.state.filter}
+        handleChange={this.handleFilterChange}
+        />
+        <PostFilterConditional
+        filter={this.state.filter}
+        filteredBy={this.state.filteredBy}
+        handleChange={this.handleChange}
+        partner={partner}
+        />
+        <Button onClick={this.handleSubmit}>
+          Filter
+        </Button>
+        </form>
         <div className='adminTable'>
         <Table>
           <TableHead>
@@ -75,7 +119,7 @@ class AdminPosts extends Component {
         {posts.map( post => {
           return (
             <TableRow key={post.post_id}>
-                <TableCell>{post.name}</TableCell>
+                <TableCell>{post.partner_name}</TableCell>
                 <TableCell>
                   <PostDialog post={post} dateConvert={this.dateConvert}/>
                 </TableCell>

@@ -34,6 +34,18 @@ function* getPartnerPosts( action ) {
     }
 }
 
+function* getFilteredPosts( action ) {
+    console.log( 'payload test 1', action.payload );
+    try {
+        const postResponse = yield call( axios.get, `/api/post/all` );
+        console.log( 'payload test 2', postResponse.data)
+        yield put({ type: POST_ACTIONS.GET_POSTS_FILTERED, payload: postResponse.data });
+    }
+    catch ( error ) {
+        console.log( 'Error in postList', error );
+    }
+}
+
 function* addPost( action ) {
     try {
         yield call( axios.post, '/api/post', action.payload );
@@ -81,6 +93,7 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
     yield takeLatest(POST_ACTIONS.FETCH_ALL_POSTS, getAllPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
+    yield takeLatest(POST_ACTIONS.FETCH_POSTS_FILTERED, getFilteredPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
     yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
     yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
