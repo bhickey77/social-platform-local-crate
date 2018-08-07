@@ -181,6 +181,8 @@ li a:hover {
 .uploadImage {
     margin: 0 auto;
     width: 100%;
+    height: auto;
+    max-height: 500px;
     /* height: 250px; */
 }
 
@@ -218,6 +220,7 @@ li a:hover {
     width: 600px;
     height: inherit;
 }
-  .upload-card {
+
+.upload-card {
     display: inline-block;
 }
