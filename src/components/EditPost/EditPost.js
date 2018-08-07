@@ -4,11 +4,6 @@ import { compose } from 'redux';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -21,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { TextField } from '../../../node_modules/@material-ui/core';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
+import UploadBox from '../UploadBox/UploadBox';
 
 const styles = theme => ({
     card: {
@@ -91,7 +87,6 @@ class EditPost extends Component {
 
   edit = () => {
       this.date = new Date();
-    //   this.dateConvert(date);
       this.setState({
         ...this.state,
         post: {
@@ -123,37 +118,37 @@ class EditPost extends Component {
           aria-describedby="alert-dialog-description"
         >
             <Card className='postDialog'>
-                    <CardHeader
-                        avatar={
-                        <Avatar aria-label="Recipe" className={classes.avatar}>
-                            R
-                        </Avatar>
-                        }
-                        title={<TextField
-                                value={this.state.post.title}
-                                onChange={this.handleChange('title')}/>}
-                    >
-                    </CardHeader>
-                    <CardMedia
-                        className={classes.media}
-                        image={this.state.post.media_url}
-                        title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                        <Typography>
-                            <TextField
-                            value={this.state.post.content}
-                            onChange={this.handleChange('content')}
-                            />
-                        </Typography>
-                        <Button onClick={this.handleClose} >
-                            Cancel Edit
-                        </Button>
-                        <Button onClick={this.edit} >
-                            Confirm Edit
-                        </Button>
-                    </CardContent>
-                </Card>
+              <CardHeader
+                  avatar={
+                  <Avatar aria-label="Recipe" className={classes.avatar}>
+                      R
+                  </Avatar>
+                  }
+                  title={<TextField
+                          value={this.state.post.title}
+                          onChange={this.handleChange('title')}/>}
+              >
+              </CardHeader>
+              <CardMedia
+                  className={classes.media}
+                  image={this.state.post.media_url}
+                  title="Contemplative Reptile"
+              />
+              <CardContent>
+                  <Typography>
+                      <TextField
+                      value={this.state.post.content}
+                      onChange={this.handleChange('content')}
+                      />
+                  </Typography>
+                  <Button onClick={this.handleClose} >
+                      Cancel Edit
+                  </Button>
+                  <Button onClick={this.edit} >
+                      Confirm Edit
+                  </Button>
+              </CardContent>
+            </Card>
         </Dialog>
         {/* </div> */}
       </div>
