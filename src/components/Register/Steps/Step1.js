@@ -54,28 +54,36 @@ class Step1 extends Component {
                             <br/>
                             <TextField
                             id="name"
-                            label="Name"
+                            label="Business Name"
                             value={this.props.state.partner.name}
                             onChange={this.props.handleChangeFor('name')}
                             margin="normal"
                             />
                             <br/>
                             <TextField
-                            id="location"
-                            label="Location"
+                            id="city"
+                            label="City"
                             value={this.props.state.partner.location}
-                            onChange={this.props.handleChangeFor('location')}
+                            onChange={this.props.handleChangeFor('city')}
+                            margin="normal"
+                            />
+                            <br/>
+                            <TextField
+                            id="state"
+                            label="State"
+                            value={this.props.state.partner.location}
+                            onChange={this.props.handleChangeFor('state')}
                             margin="normal"
                             />
                             <br/>
                             <TextField
                                 select
-                                label="Partner"
+                                label=""
                                 className={classNames(classes.margin, classes.textField)}
                                 value={this.props.state.partner.type}
                                 onChange={this.props.handleChangeFor('type')}
                                 InputProps={{
-                                    startAdornment: <InputAdornment position="start"></InputAdornment>,
+                                    startAdornment: <InputAdornment position="start">Partner</InputAdornment>,
                                 }}
                                 >
                                 {ranges.map(option => (

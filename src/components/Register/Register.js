@@ -21,7 +21,8 @@ class Register extends Component {
     this.state = {
       partner: {
         name: '',
-        location: '',
+        city: '',
+        state: '',
       },
       person: {
         username: '',
