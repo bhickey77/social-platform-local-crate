@@ -142,6 +142,7 @@ class UploadCard extends Component {
     data.append('content', this.state.postContent);
     data.append('userName', this.props.user.userName);
     data.append('file', this.state.imageData);
+    data.append('partner_id', this.props.user.userInfo.partner_id);
     axios.post('api/post', data, { headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
