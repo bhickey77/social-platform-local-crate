@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/info', rejectUnauthenticated, (req, res) => {
   console.log('In the route api/user/info', req.user);
-  const queryText = `SELECT partner.name as "partner_name", username, first_name, partner_id, user_type, location FROM person
+  const queryText = `SELECT partner.name as "partner_name", username, first_name, partner_id, user_type, city, state FROM person
                      JOIN partner ON partner.id = person.partner_id 
                      WHERE person.id = $1;`
   pool.query(queryText, [req.user.id])
