@@ -47,7 +47,8 @@ class PartnerPage extends Component {
           name: '',
           location: '', 
           website: '', 
-          bio: ''
+          // img
+          bio: 'Edit your profile photo and bio by clicking on the edit icon'
         } 
       }
   }
@@ -64,6 +65,11 @@ class PartnerPage extends Component {
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     return (
       <div>
+
+
+
+
+        
         <Nav />
         <Grid container spacing={24}
           style={{ 
@@ -77,6 +83,7 @@ class PartnerPage extends Component {
               <Typography component="p">
                 Red Wing, MN
               </Typography>
+              
             </Paper>          
           </Grid>
         </Grid>
@@ -84,6 +91,8 @@ class PartnerPage extends Component {
         <Grid container spacing={24}
           style={{ 
             marginLeft: 30,
+            display:'inline-block', 
+            margin:'10px'
           }}>
           <Grid item xs={3}>
             <Paper 
@@ -98,9 +107,18 @@ class PartnerPage extends Component {
               <Typography variant="headline" component="h3">
                 About Us
               </Typography>
+              <img id="partnerPagePhoto"
+                src="/images/background.jpg"
+                alt="Profile-Photo" />
+                 <Typography variant="bio" component="h3">
+                Bio: {this.state.bio}
+              </Typography>
             </Paper>          
+              <Grid 
+                container spacing={10}>
+                <CardsGrid />
+              </Grid>
           </Grid>
-          <CardsGrid />
         </Grid>
       </div>
     );

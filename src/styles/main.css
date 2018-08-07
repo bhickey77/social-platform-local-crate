@@ -224,3 +224,12 @@ li a:hover {
 .upload-card {
     display: inline-block;
 }
+
+
+/* PARTNER PAGE */
+#partnerPagePhoto {
+    width: inherit;
+    max-width: 18vw;
+    height: 15vw;
+    float: left;
+}
