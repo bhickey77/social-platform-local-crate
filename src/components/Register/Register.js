@@ -59,6 +59,16 @@ class Register extends Component {
     }
   }
 
+  handleChangeForPhone = input => {
+    this.setState({
+      ...this.state,
+      person: {
+        ...this.state.person,
+        phone: input,
+      }
+    })
+  }
+
   handleChangeFor = property => event => {
     if(property === 'name' || property === 'city' || property === 'state' || property === 'website' || property === 'type'){
       this.setState({
@@ -103,6 +113,7 @@ class Register extends Component {
         {(this.state.step === 2) && 
           <Step2 state={this.state}
             handleChangeFor={this.handleChangeFor}
+            handleChangeForPhone={this.handleChangeForPhone}
             nextStep={this.nextStep}
             previousStep={this.previousStep}
           />

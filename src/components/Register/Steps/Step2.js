@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import Phone from './Phone';
 class RegisterStep2 extends Component {
     render() {
         return (
@@ -29,13 +29,16 @@ class RegisterStep2 extends Component {
                                 margin="normal"
                             />  
                              <br/>
-                            <TextField
+                            <Phone 
+                                handleChangeForPhone={this.props.handleChangeForPhone}
+                            />
+                            {/* <TextField
                                 id="phone"
                                 label="Phone"
                                 value={this.props.state.person.phone}
                                 onChange={this.props.handleChangeFor('phone')}
                                 margin="normal"
-                            /> 
+                            />  */}
                             <br/>
                             <TextField
                                 id="email"
