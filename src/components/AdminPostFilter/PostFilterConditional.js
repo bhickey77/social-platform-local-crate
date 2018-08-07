@@ -26,7 +26,7 @@ class PostFilterConditional extends Component {
 
         let postFilter = null;
 
-        if (this.props.filter === 'partner_name') {
+        if (this.props.filter === 'partner.name') {
             postFilter = 
                 <FormControl className={classes.formControl}>
                     <TextField

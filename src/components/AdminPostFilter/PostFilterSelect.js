@@ -41,12 +41,12 @@ class PostFilterSelect extends Component {
                         <MenuItem value="">
                         <em>None</em>
                         </MenuItem>
-                        <MenuItem value='partner_name'>Partner Name</MenuItem>
-                        <MenuItem value='title'>Title</MenuItem>
-                        <MenuItem value='content'>Content</MenuItem>
-                        <MenuItem value='date_created'>Date Created</MenuItem>
-                        <MenuItem value='date_updated'>Date Updated</MenuItem>
-                        <MenuItem value='is_marked_as_hidden'>Hidden Status</MenuItem>
+                        <MenuItem value='partner.name'>Partner Name</MenuItem>
+                        <MenuItem value='post.title'>Title</MenuItem>
+                        <MenuItem value='post.content'>Content</MenuItem>
+                        <MenuItem value='post.date_created'>Date Created</MenuItem>
+                        <MenuItem value='post.date_updated'>Date Updated</MenuItem>
+                        <MenuItem value='post.is_marked_as_hidden'>Hidden Status</MenuItem>
                     </Select>
                 </FormControl>
         )

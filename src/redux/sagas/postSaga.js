@@ -38,10 +38,12 @@ function* getPartnerPosts( action ) {
 function* getFilteredPosts( action ) {
     console.log( 'payload test 1', action.payload );
     try {
-        const postResponse = yield call( axios.get, `/api/post/filter`);
+        const postResponse = yield call( axios.get,
+            `/api/post/filter/${action.payload.filter}/${action.payload.filteredBy}`);
         console.log( 'payload test 2', postResponse.data)
         yield put({ type: POST_ACTIONS.GET_POSTS_FILTERED, payload: postResponse.data,
-        query:{filter: action.payload.filter, filteredBy: action.payload.filteredBy}} );
+        // params:{filter: action.payload.filter, filteredBy: action.payload.filteredBy}
+    } );
     }
     catch ( error ) {
         console.log( 'Error in postList', error );

@@ -74,14 +74,20 @@ router.get('/', (req, res) => {
         })
 });
 
-router.get('/filter', (req, res) => {
+router.get('/filter/:filter/:filteredBy', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
+    console.log(req.params)
     console.log('router test');
         if(req.isAuthenticated() && isAdmin(req.user)){
-            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id as post_id, partner.name as partner_name, post.partner_id as partner_id
+            console.log('req.params', req.params);
+            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as partner_name
             FROM post
-            INNER JOIN partner ON post.partner_id=partner.id WHERE $1 = $2`;
-            pool.query(queryText[req.query.filter, req.query.filteredBy]).then((result) => {
+            INNER JOIN partner ON post.partner_id=partner.id WHERE`;
+            if(req.params.filter === 'partner.name') {
+                queryText = queryText + ` partner.name=$1`;
+            }
+            pool.query(queryText,[req.params.filteredBy]).then((result) => {
+                console.log('rows', result.rows)
                 generateSignedUrls(res, result.rows);
             }).catch((error) => {
                 console.log(error);
