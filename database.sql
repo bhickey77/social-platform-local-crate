@@ -7,13 +7,11 @@ DROP TABLE post;
 DROP TABLE person;
 DROP TABLE partner;
 
-database name:
-local_crate
-
 CREATE TABLE partner (
     id SERIAL PRIMARY KEY,
     name VARCHAR (100),
-    location VARCHAR (120),
+    city VARCHAR (100),
+    state VARCHAR (50),
     website VARCHAR (120), 
     bio VARCHAR (500),
     date_created VARCHAR (100) NOT NULL,
