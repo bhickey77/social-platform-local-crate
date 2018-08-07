@@ -150,6 +150,8 @@ class UploadCard extends Component {
       }})
       .then(response => {
         console.log('successfully uploaded to the S3: ', response); // do something with the response
+        this.props.dispatch({type:'FETCH_POSTS'});
+
       })
       .catch(error => {
         console.log('error uploading file: ', error);
