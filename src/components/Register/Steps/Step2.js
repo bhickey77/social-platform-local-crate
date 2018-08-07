@@ -28,6 +28,30 @@ class RegisterStep2 extends Component {
                                 onChange={this.props.handleChangeFor('last_name')}
                                 margin="normal"
                             />  
+                             <br/>
+                            <TextField
+                                id="phone"
+                                label="Phone"
+                                value={this.props.state.person.phone}
+                                onChange={this.props.handleChangeFor('phone')}
+                                margin="normal"
+                            /> 
+                            <br/>
+                            <TextField
+                                id="email"
+                                label="Email"
+                                value={this.props.state.person.email}
+                                onChange={this.props.handleChangeFor('email')}
+                                margin="normal"
+                            /> 
+                            <br/>
+                            <TextField
+                                id="website"
+                                label="Business Website"
+                                value={this.props.state.person.website}
+                                onChange={this.props.handleChangeFor('website')}
+                                margin="normal"
+                            /> 
                             <br/>
                             <Button variant="contained" color="primary" >
                                 Cancel

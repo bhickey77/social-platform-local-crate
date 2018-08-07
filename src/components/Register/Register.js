@@ -28,6 +28,9 @@ class Register extends Component {
         username: '',
         first_name: '',
         last_name: '',
+        email: '',
+        website: '',
+        phone: '',
         password: '',
         password1: '',
         password2: ''
