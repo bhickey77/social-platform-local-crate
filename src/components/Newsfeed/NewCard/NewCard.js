@@ -17,6 +17,8 @@ import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 
 
@@ -57,7 +59,9 @@ class NewCard extends Component {
     };
 
     handleAvatarClick = (id) => {
-        //ROUTE to partner page//
+        console.log('on avatar click', id);
+        
+
     }
 
     dateConvert = ( date ) => {
@@ -73,10 +77,11 @@ class NewCard extends Component {
                 <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                    <Avatar aria-label="Recipe" className={classes.avatar}
-                    onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}}>
-                        
-                    </Avatar>
+                    <Link to={`/partner/${this.props.post.partner_id}`}>
+                        <Avatar aria-label="Recipe" className={classes.avatar}>
+                        </Avatar>
+                    </Link>
+                    
                     }
                     action={
                         <div>
@@ -86,7 +91,7 @@ class NewCard extends Component {
                         </div>
                     }
    
-                    title={this.props.post.partner_name}
+                    title={this.props.post.partner_name} 
                     
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />

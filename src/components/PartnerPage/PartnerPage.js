@@ -7,7 +7,6 @@ import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
 
 // import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
-// import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
 import NewCard from '../Newsfeed/NewCard/NewCard';
 import UploadCard from '../UploadCard/UploadCard';
 
@@ -56,7 +55,7 @@ class PartnerPage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({type: PARTNER_ACTIONS.SET_PARTNER});
+    // this.props.dispatch({type: PARTNER_ACTIONS.SET_PARTNER});
   }
 
   render() {
