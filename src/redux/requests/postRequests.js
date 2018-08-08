@@ -1,18 +1,5 @@
 import axios from 'axios';
 
-// export function sendEditPost(postData) {
-//   const config = {
-//     headers: { 'Content-Type': 'application/json' },
-//     withCredentials: true,
-//   };
-
-//   return axios.get('/api/user/logout', config)
-//     .then(response => response.data)
-//     .catch((error) => {
-//       throw error.response || error;
-//     });
-// }
-
 export function sendEditPost(postData, image) {
   console.log('IN POST REQUEST: ', postData);
   console.log('IN POST REQUEST: ', image);
@@ -42,6 +29,3 @@ export function sendEditPost(postData, image) {
       console.log('error uploading file: ', error);
     })
 }
-
-
-// yield call( axios.put, `/api/post/${action.payload.post_id}`, action.payload );
