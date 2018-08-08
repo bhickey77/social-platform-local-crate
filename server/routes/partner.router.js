@@ -3,6 +3,11 @@ const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+const multer  = require('multer');
+const upload = multer({ dest: '../uploads/' });
+
+const { updateProfilePicture } = require('../modules/uploadPost');
+
 router.get('/', (req, res) => {
     // GET for ALL partners - admin view (can limit volume in query)
     if (req.isAuthenticated()){
@@ -12,8 +17,8 @@ router.get('/', (req, res) => {
         // supplier_location, supplier_type, date_created, date_updated
         // FROM partner WHERE user_type != 'admin'`;
         let queryText = `SELECT * FROM person
-        JOIN partner ON partner.id = person.partner_id
-        WHERE user_type != 'admin';`
+                         JOIN partner ON partner.id = person.partner_id
+                         WHERE user_type != 'admin';`
         pool.query(queryText).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
@@ -88,6 +93,14 @@ router.put('/:id', (req, res) => {
             res.sendStatus(200);
         }).catch(error => {
             console.log('Error handling PUT for /editPartner:', error);});
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+router.put('/profilePicture/:id', upload.single('file'), (req, res) => {
+    if(req.isAuthenticated()){
+        updateProfilePicture(req, res);
     } else {
         res.sendStatus(403);
     }

@@ -29,6 +29,13 @@ const updatePost = async(req, res) => {
   res.sendStatus(200);
 }
 
+const updateProfilePicture = async(req, res) => {
+  let media_key = await uploadToS3(req.file);
+  await uploadToSQLProfilePicture(req, media_key);
+  res.sendStatus(200);
+}
+
+
 const generateSignedUrls = async (res, rows) => {
   const newRows = await addSignedUrls(rows);
   res.send(newRows);
@@ -67,6 +74,21 @@ generateSignedUrl = (media_key) => {
   })
 }
 
+function uploadToSQLProfilePicture(req, media_key) {
+  return new Promise(resolve => {
+    let queryText = `UPDATE partner
+                     SET media_key = $2
+                     WHERE id = $1;`
+    pool.query(queryText, [req.params.id, media_key])
+      .then(response => {
+        resolve();
+      })
+      .catch(error => {
+        resolve();
+      })
+  })
+} 
+
 function updateSQL(req, media_key) {
   return new Promise(resolve => {
     const date_updated = new Date().toJSON().toString();
@@ -74,19 +96,19 @@ function updateSQL(req, media_key) {
     let values = [req.params.id, req.body.title, req.body.content, date_updated];
     if(media_key){
       queryText = `UPDATE post 
-                   SET "title" = $2, "content" = $3, "date_updated" = $4, "media_key" = $5
-                   WHERE id = $1;`;
+      SET "title" = $2, "content" = $3, "date_updated" = $4, "media_key" = $5
+      WHERE id = $1;`;
       values.push(media_key);
     } else {
       queryText = `UPDATE post 
-                   SET "title" = $2, "content" = $3, "date_updated" = $4
-                   WHERE id = $1;`;
+      SET "title" = $2, "content" = $3, "date_updated" = $4
+      WHERE id = $1;`;
     }
-
+    
     pool.query(queryText, values)
     .then((result) => {
-        console.log('back from db with:', result);
-        resolve(200);
+      console.log('back from db with:', result);
+      resolve(200);
     }).catch((error) => {
         console.log('error in POST', error);
         resolve(500);
@@ -153,4 +175,4 @@ function uploadToS3(file) {
   })
 }
 
-module.exports = { uploadPost, generateSignedUrls, updatePost };
+module.exports = { uploadPost, generateSignedUrls, updatePost, updateProfilePicture };

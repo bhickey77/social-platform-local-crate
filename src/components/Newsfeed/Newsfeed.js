@@ -5,6 +5,7 @@ import CardsGrid from './CardsGrid/CardsGrid';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
 
 import Nav from '../Nav/Nav';
+import UpdatePartnerPicture from '../UpdatePartnerPicture/UpdatePartnerPicture';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -23,6 +24,7 @@ class Newsfeed extends Component {
       <div>
         <Nav />
         <CardsGrid />
+        <UpdatePartnerPicture />
       </div>
     );
   }

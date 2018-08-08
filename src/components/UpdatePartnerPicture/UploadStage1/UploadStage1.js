@@ -6,6 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import UploadBox from '../../UploadBox/UploadBox';
+
 const imageStyle = {
   margin: '0 auto',
   width: '100%',
@@ -29,18 +31,21 @@ const imageContainerStyle = {
 
 class UploadStage1 extends Component {
   render() {
+    console.log(`PROPS IN UPLOAD STAGE 1: `, this.props);
+    
     return (
       <div >
+        <DialogTitle id="form-dialog-title">Update your partner profile image</DialogTitle>
         <DialogContent>
-            <img src={this.props.imageUrl} className="uploadImage" alt=""/>
+          <img src={this.props.imageUrl || "images/FreshnessAssuredBy.png"} className="upload-image-profile-picture" alt=""/>
+          <UploadBox setImage={this.props.setImage} />
         </DialogContent>
-        <DialogTitle id="form-dialog-title">Are you sure this is the image you would like to upload?</DialogTitle>
         <DialogActions>
-          <Button onClick={this.props.handlePostCancel} color="primary">
-            No, cancel Post Creation
+          <Button onClick={this.props.handleClose} color="primary">
+            Cancel update
           </Button>
-          <Button onClick={this.props.handleConfirmImage} color="primary">
-            Yes, confirm image
+          <Button onClick={this.props.updateImage} color="primary">
+            Save new image
           </Button>
         </DialogActions>
       </div>
