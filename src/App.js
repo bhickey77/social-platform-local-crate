@@ -55,6 +55,9 @@ const App = () => (
           exact path="/Register"
           component={Register}
         />
+        <Route 
+          path="/partner/:id"
+          component={PartnerPage} />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
       </Switch>

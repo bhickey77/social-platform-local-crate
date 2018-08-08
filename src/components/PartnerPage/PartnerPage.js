@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
+
 
 // import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
-// import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
 import NewCard from '../Newsfeed/NewCard/NewCard';
 import UploadCard from '../UploadCard/UploadCard';
 
@@ -47,16 +48,15 @@ class PartnerPage extends Component {
           name: '',
           location: '', 
           website: '', 
-          bio: ''
+          // img
+          bio: 'Edit your profile photo and bio by clicking on the edit icon'
         } 
       }
   }
 
-  // componentDidUpdate() {
-  //   if (!this.props.user.isLoading && this.props.user.userName === null) {
-  //     this.props.history.push('home');
-  //   }
-  // }
+  componentDidMount() {
+    // this.props.dispatch({type: PARTNER_ACTIONS.SET_PARTNER});
+  }
 
   render() {
     const { classes } = this.props;
@@ -84,6 +84,8 @@ class PartnerPage extends Component {
         <Grid container spacing={24}
           style={{ 
             marginLeft: 30,
+            display:'inline-block', 
+            margin: 30,
           }}>
           <Grid item xs={3}>
             <Paper 
@@ -98,9 +100,18 @@ class PartnerPage extends Component {
               <Typography variant="headline" component="h3">
                 About Us
               </Typography>
+              <img id="partnerPagePhoto"
+                src="/images/background.jpg"
+                alt="Profile-Photo" />
+                 <Typography variant="bio" component="h3">
+                Bio: {this.state.bio}
+              </Typography>
             </Paper>          
+              <Grid 
+                container spacing={10}>
+                <CardsGrid />
+              </Grid>
           </Grid>
-          <CardsGrid />
         </Grid>
       </div>
     );

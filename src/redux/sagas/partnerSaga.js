@@ -14,6 +14,17 @@ function* getPartners( action ) {
     }
 }
 
+function* getPartner( action ) {
+    try {
+        const partnerResponse = yield call( axios.get, `/api/partner/id` );
+        console.log( 'partnerResponse', partnerResponse.data )
+        yield put({ type: 'SET_PARTNER', payload: partnerResponse.data });
+    }
+    catch ( error ) {
+        console.log( 'Error in getPartner', error );
+    }
+}
+
 // Not sure if we want this?
 function* addPartner( action ) {
     try {
