@@ -15,7 +15,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 // Components
 import Nav from '../Nav/Nav';
@@ -28,7 +29,7 @@ const mapStateToProps = state => ({
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    minWidth: 275,
   },
   media: {
     height: 0,
@@ -83,12 +84,12 @@ class AdminPosts extends Component {
     console.log('state', this.state.filter, this.state.filteredBy)
       this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS_FILTERED,
         payload: {filter: this.state.filter, filteredBy: this.state.filteredBy }});
-    this.setState({filter: '', filteredBy: ''});
   }
 
   clearFilter = event => {
     event.preventDefault();
     this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
+    this.setState({filter: '', filteredBy: ''});
   }
 
   render() {
@@ -101,22 +102,24 @@ class AdminPosts extends Component {
     return (
       <div>
         <Nav />
-        <form>
-        <PostFilterSelect
-        filter={this.state.filter}
-        handleChange={this.handleFilterChange}
-        />
-        <PostFilterConditional
-        filter={this.state.filter}
-        filteredBy={this.state.filteredBy}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        clearFilter={this.clearFilter}
-        partner={partner}
-        />
-        </form>
-        <div className='adminTable'>
-        <Table>
+        <div className="adminTable">
+          <Card className="postCard">
+            <CardContent>
+              <PostFilterSelect
+                filter={this.state.filter}
+                handleChange={this.handleFilterChange}
+              />
+              <PostFilterConditional
+                filter={this.state.filter}
+                filteredBy={this.state.filteredBy}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                clearFilter={this.clearFilter}
+                partner={partner}
+              />
+            </CardContent>
+          </Card>
+        <Table className="postTable">
           <TableHead>
           <TableRow>
             <TableCell>Partner Name</TableCell>
@@ -148,7 +151,7 @@ class AdminPosts extends Component {
             })}
             </TableBody>
         </Table>
-        </div>
+          </div>
       </div>
     );
   }

@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -28,6 +29,7 @@ class PostFilterConditional extends Component {
         const { classes } = this.props;
 
         let postFilter = null;
+        let clearButton = null;
 
         if (this.props.filter === 'partner.name') {
             postFilter = 
@@ -58,15 +60,26 @@ class PostFilterConditional extends Component {
                 </FormControl>
         }
 
-        return (
-            <div>
-                {postFilter}
+        if(this.props.filteredBy === 'none' || this.props.filteredBy === '') {
+            clearButton = null;
+        } else {
+            clearButton = 
                 <Button onClick={this.props.clearFilter}>
                     Clear Filter
                 </Button>
-                <Button onClick={this.props.handleSubmit}>
-                    Filter
-                </Button>
+        }
+
+        return (
+            <div>
+                <div>
+                    {postFilter}
+                </div>
+                <div>
+                    {clearButton}
+                    <Button onClick={this.props.handleSubmit}>
+                        Filter
+                    </Button>
+                </div>
             </div>
         )
     }

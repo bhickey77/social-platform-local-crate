@@ -224,3 +224,11 @@ li a:hover {
 .upload-card {
     display: inline-block;
 }
+
+.postCard {
+    width: 15%;
+}
+
+.postTable {
+    width: 50%;
+}
