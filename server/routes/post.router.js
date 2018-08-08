@@ -70,11 +70,34 @@ router.get('/', (req, res) => {
         })
 });
 
+router.get('/filter/:filter/:filteredBy', (req, res) => {
+    // GET for FILTERED posts - admin view (shows posts based on filter)
+        if(req.isAuthenticated() && isAdmin(req.user)){
+            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as partner_name
+            FROM post
+            INNER JOIN partner ON post.partner_id=partner.id WHERE`;
+            if(req.params.filter === 'partner.name') {
+                queryText = queryText + ` partner.name=$1`;
+            }
+            else if(req.params.filter === 'post.is_marked_as_hidden') {
+                queryText = queryText + ` post.is_marked_as_hidden=$1`;
+            }
+            pool.query(queryText,[req.params.filteredBy]).then((result) => {
+                generateSignedUrls(res, result.rows);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            })
+        
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
-    console.log('router test');
-    if({isAdmin}){
-        console.log('in router admin post ALL');
+    console.log('router test filter');
+    if(req.isAuthenticated() && isAdmin(req.user)){
         let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, post.id as post_id, partner.name as partner_name, post.partner_id as partner_id
         FROM post
         INNER JOIN partner ON post.partner_id=partner.id ORDER BY post.date_created DESC`;
