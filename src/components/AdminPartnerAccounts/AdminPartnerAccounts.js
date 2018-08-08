@@ -22,7 +22,7 @@ class AdminPartnerAccounts extends Component {
   }
 
   dateConvert = ( date ) => {
-    return moment().utc( date ).format("MMM Do YYYY");
+    return moment().utc( date ).local().format("MMM Do YYYY");
   }
 
   render() {
@@ -33,24 +33,32 @@ class AdminPartnerAccounts extends Component {
         <Table>
           <TableHead>
           <TableRow>
-            <TableCell>Partner Name</TableCell>
-            <TableCell>Location</TableCell>
             <TableCell>First Name</TableCell>
             <TableCell>Last Name</TableCell>
+            <TableCell>City</TableCell>
+            <TableCell>State</TableCell>
+            <TableCell>Website</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Phone Number</TableCell>
             <TableCell>Date Created</TableCell>
             <TableCell>Date Updated</TableCell>
+            <TableCell>Type</TableCell>
           </TableRow>
           </TableHead>
             <TableBody>
                 {this.props.partners.map( partner => {
                   return (
                     <TableRow key={partner.id}>
-                        <TableCell>{partner.name}</TableCell>
-                        <TableCell>{partner.location}</TableCell>
                         <TableCell>{partner.first_name}</TableCell>
-                        <TableCell>{partner.last_name}</TableCell>
+                        <TableCell>{partner.last_name}</TableCell>                        
+                        <TableCell>{partner.city}</TableCell>
+                        <TableCell>{partner.state}</TableCell>
+                        <TableCell>{partner.website}</TableCell>
+                        <TableCell>{partner.email}</TableCell>
+                        <TableCell>{partner.phone}</TableCell>
                         <TableCell>{String(this.dateConvert(partner.date_created))}</TableCell>
                         <TableCell>{String(this.dateConvert(partner.date_updated))}</TableCell>
+                        <TableCell>{partner.type}</TableCell>
                     </TableRow> 
                   );
                 })}
