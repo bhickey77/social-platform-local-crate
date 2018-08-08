@@ -61,6 +61,10 @@ class AdminPosts extends Component {
     return moment().utc( date ).format("MMM Do YYYY");
   }
 
+  dateConvertDatabase = ( date ) => {
+    return moment().utc( date ).format("YYYY-DD-MM");
+  }
+
   handleFilterChange = event => {
     this.setState({ filter: event.target.value });
     console.log('filter', this.state.filter)
@@ -79,6 +83,12 @@ class AdminPosts extends Component {
     console.log('state', this.state.filter, this.state.filteredBy)
       this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS_FILTERED,
         payload: {filter: this.state.filter, filteredBy: this.state.filteredBy }});
+    this.setState({filter: '', filteredBy: ''});
+  }
+
+  clearFilter = event => {
+    event.preventDefault();
+    this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
   }
 
   render() {
@@ -100,11 +110,10 @@ class AdminPosts extends Component {
         filter={this.state.filter}
         filteredBy={this.state.filteredBy}
         handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        clearFilter={this.clearFilter}
         partner={partner}
         />
-        <Button onClick={this.handleSubmit}>
-          Filter
-        </Button>
         </form>
         <div className='adminTable'>
         <Table>
@@ -130,7 +139,7 @@ class AdminPosts extends Component {
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.content}</TableCell>
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
-                <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
+                <TableCell>{String(this.dateConvert(post.date_updated))}</TableCell>
                 <TableCell>
                   <HideIcon post={post}/>
                 </TableCell>

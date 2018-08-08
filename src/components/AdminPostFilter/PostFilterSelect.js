@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -42,10 +40,6 @@ class PostFilterSelect extends Component {
                         <em>None</em>
                         </MenuItem>
                         <MenuItem value='partner.name'>Partner Name</MenuItem>
-                        <MenuItem value='post.title'>Title</MenuItem>
-                        <MenuItem value='post.content'>Content</MenuItem>
-                        <MenuItem value='post.date_created'>Date Created</MenuItem>
-                        <MenuItem value='post.date_updated'>Date Updated</MenuItem>
                         <MenuItem value='post.is_marked_as_hidden'>Hidden Status</MenuItem>
                     </Select>
                 </FormControl>

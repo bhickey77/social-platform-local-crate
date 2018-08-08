@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -38,10 +41,32 @@ class PostFilterConditional extends Component {
                     />
                 </FormControl>
         }
+        else if (this.props.filter === 'post.is_marked_as_hidden') {
+            postFilter = 
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="post-filter">Filter</InputLabel>
+                    <Select
+                    value={this.props.filteredBy}
+                    onChange={this.props.handleChange}
+                    inputProps={{
+                    id: 'post-filter',
+                    }}
+                    >
+                        <MenuItem value='TRUE'>Hidden</MenuItem>
+                        <MenuItem value='FALSE'>Unhidden</MenuItem>
+                    </Select>
+                </FormControl>
+        }
 
         return (
             <div>
                 {postFilter}
+                <Button onClick={this.props.clearFilter}>
+                    Clear Filter
+                </Button>
+                <Button onClick={this.props.handleSubmit}>
+                    Filter
+                </Button>
             </div>
         )
     }
