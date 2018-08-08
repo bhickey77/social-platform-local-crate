@@ -14,7 +14,18 @@ const IAM_USER_SECRET = process.env.aws_secret_access_key;
  
 const uploadPost = async(req, res) => {
   let media_key = await uploadToS3(req.file);
-  let status = await uploadToSQL(req, media_key);
+  await uploadToSQL(req, media_key);
+  res.sendStatus(200);
+}
+
+const updatePost = async(req, res) => {
+  let media_key = false;
+  console.log('IN UPDATEPOST: ', req.body.isNewImage);
+  console.log(req.body.isNewImage);
+  if(req.body.isNewImage !== 'false'){
+    media_key = await uploadToS3(req.file);
+  } 
+  await updateSQL(req, media_key);
   res.sendStatus(200);
 }
 
@@ -52,6 +63,33 @@ generateSignedUrl = (media_key) => {
         // console.log(`url from getsignedurl: `, url);
         resolve(url);
       }       
+    })
+  })
+}
+
+function updateSQL(req, media_key) {
+  return new Promise(resolve => {
+    const date_updated = new Date().toJSON().toString();
+    let queryText = '';
+    let values = [req.params.id, req.body.title, req.body.content, date_updated];
+    if(media_key){
+      queryText = `UPDATE post 
+                   SET "title" = $2, "content" = $3, "date_updated" = $4, "media_key" = $5
+                   WHERE id = $1;`;
+      values.push(media_key);
+    } else {
+      queryText = `UPDATE post 
+                   SET "title" = $2, "content" = $3, "date_updated" = $4
+                   WHERE id = $1;`;
+    }
+
+    pool.query(queryText, values)
+    .then((result) => {
+        console.log('back from db with:', result);
+        resolve(200);
+    }).catch((error) => {
+        console.log('error in POST', error);
+        resolve(500);
     })
   })
 }
@@ -115,4 +153,4 @@ function uploadToS3(file) {
   })
 }
 
-module.exports = { uploadPost, generateSignedUrls };
+module.exports = { uploadPost, generateSignedUrls, updatePost };

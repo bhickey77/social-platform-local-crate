@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { POST_ACTIONS } from '../actions/postActions';
+import { sendEditPost } from '../requests/postRequests';
 import axios from 'axios';
 
 function* getPosts( action ) {
@@ -47,7 +48,7 @@ function* addPost( action ) {
 function* editPost( action ) {
     try {
         console.log('edit payload', action.payload);
-        const postResponse = yield call( axios.put, `/api/post/${action.payload.post_id}`, action.payload );
+        yield sendEditPost(action.payload, action.image);
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
