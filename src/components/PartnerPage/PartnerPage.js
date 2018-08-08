@@ -72,10 +72,10 @@ class PartnerPage extends Component {
           <Grid item xs={10}>
             <Paper className={classes.root} elevation={1}>
               <Typography variant="headline" component="h3">
-                Richardson Farms
+                <h4>Richardson Farms</h4>
               </Typography>
               <Typography component="p">
-                Red Wing, MN
+                <h4>Red Wing, MN</h4>
               </Typography>
             </Paper>          
           </Grid>
@@ -98,19 +98,19 @@ class PartnerPage extends Component {
               }}
               >
               <Typography variant="headline" component="h3">
-                About Us
+                <h4>About Us</h4>
               </Typography>
               <img id="partnerPagePhoto"
                 src="/images/background.jpg"
                 alt="Profile-Photo" />
                  <Typography variant="bio" component="h3">
-                Bio: {this.state.bio}
+                <h4>Bio:</h4><h5>{this.state.bio}</h5>
               </Typography>
             </Paper>          
               <Grid 
                 container spacing={10}>
-                <CardsGrid />
               </Grid>
+            <CardsGrid />
           </Grid>
         </Grid>
       </div>

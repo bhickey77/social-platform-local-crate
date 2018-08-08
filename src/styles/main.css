@@ -254,3 +254,11 @@ div.edit-media-container > div > div.uppy-Root uppy-DragDrop-container uppy-Drag
     margin-top: 25px;
     margin-bottom: 20px;
 }
+
+/* Partner Page */
+#partnerPagePhoto {
+    width: inherit;
+    max-width: 20vw;
+    height: 15vw;
+    float: left;
+}
