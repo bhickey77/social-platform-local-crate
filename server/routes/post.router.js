@@ -5,20 +5,13 @@ const router = express.Router();
 const multer  = require('multer');
 const upload = multer({ dest: '../uploads/' });
 
-const { uploadPost, generateSignedUrls } = require('../modules/uploadPost');
+const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploadPost');
 const { isAdmin } = require('../modules/authorization');
 
-router.put('/:id', (req, res) => {
-    // PUT for editing text in a post
-    console.log('hitting put post route');
-    console.log(req);
-    
+router.put('/:id', upload.single('file'), (req, res) => {
+    // PUT for editing a post
     if(req.isAuthenticated()){
-        queryText = `UPDATE post SET title = $1, content = $2 where id = $3;`;
-        pool.query(queryText, [req.body.title, req.body.content, req.params.id]).then(result => {
-            res.sendStatus(200);
-        }).catch(error => {
-            console.log('Error handling PUT for /editPost:', error);});
+        updatePost(req, res);
     } else {
         res.sendStatus(403);
     }

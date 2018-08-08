@@ -106,7 +106,7 @@ class EditPost extends Component {
       this.props.dispatch({ 
         type: POST_ACTIONS.EDIT_POST,
         payload: this.state.post, 
-        image: this.state.post.newImage,
+        image: this.state.imageHasBeenUpdated ? this.state.post.newImage: false,
       });
       this.handleClose();
   }
