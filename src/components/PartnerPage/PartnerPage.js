@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
+
 
 // import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
@@ -53,11 +55,9 @@ class PartnerPage extends Component {
       }
   }
 
-  // componentDidUpdate() {
-  //   if (!this.props.user.isLoading && this.props.user.userName === null) {
-  //     this.props.history.push('home');
-  //   }
-  // }
+  componentDidMount() {
+    this.props.dispatch({type: PARTNER_ACTIONS.SET_PARTNER});
+  }
 
   render() {
     const { classes } = this.props;
@@ -86,7 +86,7 @@ class PartnerPage extends Component {
           style={{ 
             marginLeft: 30,
             display:'inline-block', 
-            margin:'10px'
+            margin: 30,
           }}>
           <Grid item xs={3}>
             <Paper 

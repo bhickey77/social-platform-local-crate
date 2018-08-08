@@ -25,13 +25,30 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    // GET for bio from specific partner
+    if (req.isAuthenticated()){
+        console.log('in GET route to get a partner bio');
+        console.log('user', req.user);
+        let queryText = `SELECT bio FROM partner WHERE id =$1`;
+        pool.query(queryText, [req.body.id]).then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.get('/:id/posts', (req, res) => {
     // GET for all posts from specific partner
     if (req.isAuthenticated()){
         console.log('in GET route to get all posts from a partner');
         console.log('user', req.user);
         let queryText = `SELECT * FROM post WHERE partner_id =$1`;
-        pool.query(queryText, [req.body.supplier_id]).then((result) => {
+        pool.query(queryText, [req.body.partner_id]).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
             console.log(error);
