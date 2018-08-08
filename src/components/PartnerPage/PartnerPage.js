@@ -65,11 +65,6 @@ class PartnerPage extends Component {
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     return (
       <div>
-
-
-
-
-        
         <Nav />
         <Grid container spacing={24}
           style={{ 
@@ -83,7 +78,6 @@ class PartnerPage extends Component {
               <Typography component="p">
                 Red Wing, MN
               </Typography>
-              
             </Paper>          
           </Grid>
         </Grid>
