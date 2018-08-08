@@ -4,7 +4,7 @@ import DragDrop from '@uppy/react/lib/DragDrop';
 
 class UploadBox extends Component {
   uppy = Uppy({
-    meta: { type: 'profilePicture' },
+    meta: { type: 'newImage' },
     restrictions: { maxNumberOfFiles: 1 },
     autoProceed: true
   })
@@ -19,13 +19,15 @@ class UploadBox extends Component {
 
     return (
       <DragDrop
+        height="20%"
         uppy={this.uppy}
         locale={{
           strings: {
-            chooseFile: 'Pick a new avatar'
+            chooseFile: 'Pick a new avatar',
+            dropHereOr: 'Drop here to change image or %{browse} for image',
           }
         }}
-        />
+      />
     )
   }
 }
