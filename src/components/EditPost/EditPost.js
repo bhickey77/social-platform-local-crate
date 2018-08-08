@@ -61,6 +61,7 @@ class EditPost extends Component {
   state = {
     open: false,
     post: this.props.post,
+    partner: this.props.partner,
     imageHasBeenUpdated: false,
     areChanges: false,
   };
@@ -138,7 +139,14 @@ class EditPost extends Component {
   render() {
     const { classes } = this.props;
 
-    return (
+    let editStatus = null;
+
+
+    if( this.props.user.userInfo === null ) {
+      editStatus = null;
+    }
+    else if( this.props.user.userInfo.partner_id === this.props.post.partner_id) {
+      editStatus = 
       <div>
         <IconButton onClick={this.handleClickOpen} aria-label="Edit">
           <EditIcon />
@@ -201,6 +209,14 @@ class EditPost extends Component {
               </CardContent>
             </Card>
         </Dialog>
+      </div>
+    } else {
+      editStatus = null;
+    }
+
+    return (
+      <div>
+        {editStatus}
       </div>
     );
   }

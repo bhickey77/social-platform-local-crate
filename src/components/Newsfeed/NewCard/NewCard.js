@@ -86,8 +86,10 @@ class NewCard extends Component {
                     action={
                         <div>
                         <EditPost post={this.props.post}
+                        user={this.props.user}
                         handleChange={this.handleChange}/>
-                        <HideIcon post={this.props.post}/>
+                        <HideIcon post={this.props.post}
+                        user={this.props.user}/>
                         </div>
                     }
    

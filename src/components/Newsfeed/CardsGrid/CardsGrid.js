@@ -9,7 +9,8 @@ import { POST_ACTIONS } from '../../../redux/actions/postActions';
 
 const mapStateToProps = state => ({
   user: state.user,
-  post: state.post
+  post: state.post,
+  partner: state.partner
 });
 
 class CardsGrid extends Component {
@@ -21,6 +22,8 @@ class CardsGrid extends Component {
     const posts = this.props && this.props.post && this.props.post.unHiddenPosts || [];
     console.log(`POSTSSSS: ` , posts);
     const isSignedIn = this.props && this.props.user && this.props.user.userName || false;
+    let userConditional = null;
+
     return (
       <div>
         <div style={{textAlign:'center'}}>
@@ -31,6 +34,7 @@ class CardsGrid extends Component {
             return <NewCard
                     key = {post.post_id}
                     post= {post}
+                    user= {this.props.user}
                     />
             })
           }
