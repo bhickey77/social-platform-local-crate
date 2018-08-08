@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { POST_ACTIONS } from '../actions/postActions';
+import { sendEditPost } from '../requests/postRequests';
 import axios from 'axios';
 
 function* getPosts( action ) {
@@ -34,6 +35,22 @@ function* getPartnerPosts( action ) {
     }
 }
 
+
+function* getFilteredPosts( action ) {
+    console.log( 'payload test 1', action.payload );
+    try {
+        const postResponse = yield call( axios.get,
+            `/api/post/filter/${action.payload.filter}/${action.payload.filteredBy}`);
+        console.log( 'payload test 2', postResponse.data)
+        yield put({ type: POST_ACTIONS.GET_POSTS_FILTERED, payload: postResponse.data,
+        // params:{filter: action.payload.filter, filteredBy: action.payload.filteredBy}
+    } );
+    }
+    catch ( error ) {
+        console.log( 'Error in postList', error );
+    }
+}
+
 function* addPost( action ) {
     try {
         yield call( axios.post, '/api/post', action.payload );
@@ -47,7 +64,7 @@ function* addPost( action ) {
 function* editPost( action ) {
     try {
         console.log('edit payload', action.payload);
-        const postResponse = yield call( axios.put, `/api/post/${action.payload.post_id}`, action.payload );
+        yield sendEditPost(action.payload, action.image);
         yield put({ type: 'FETCH_POSTS' })
     }
     catch ( error ) {
@@ -81,6 +98,7 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
     yield takeLatest(POST_ACTIONS.FETCH_ALL_POSTS, getAllPosts);
     yield takeLatest(POST_ACTIONS.FETCH_PARTNER_POSTS, getPartnerPosts);
+    yield takeLatest(POST_ACTIONS.FETCH_POSTS_FILTERED, getFilteredPosts);
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
     yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
     yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);

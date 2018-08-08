@@ -225,11 +225,32 @@ li a:hover {
     display: inline-block;
 }
 
+.postCard {
+    width: 15%;
+}
 
-/* PARTNER PAGE */
-#partnerPagePhoto {
-    width: inherit;
-    max-width: 18vw;
-    height: 15vw;
-    float: left;
+.postTable {
+    width: 50%;
+}
+
+.edit-media-container {
+    width: 400px;
+}
+
+.edit-image {
+    width: 30%;
+    height: auto;
+}
+
+div.edit-media-container > div > div > div.uppy-DragDrop-inner {
+    height: 10px;
+}
+
+div.edit-media-container > div > div.uppy-Root uppy-DragDrop-container uppy-DragDrop--is-dragdrop-supported {
+    width: 10px;
+}
+
+.edit-text-fields {
+    margin-top: 25px;
+    margin-bottom: 20px;
 }
