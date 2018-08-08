@@ -91,7 +91,7 @@ class NewCard extends Component {
                         </div>
                     }
    
-                    title={this.props.post.partner_name} 
+                    title={this.props.post.name} 
                     
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />

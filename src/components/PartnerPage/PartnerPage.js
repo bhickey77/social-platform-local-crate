@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+import PartnerGrid from './PartnerGrid/PartnerGrid';
 import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
 
 
@@ -55,8 +55,14 @@ class PartnerPage extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch({type: PARTNER_ACTIONS.SET_PARTNER});
+   let partner_id = window.location.hash.split('/')[2];
+    this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
+    this.getPosts();
   }
+
+  getPosts = () => {
+    //Fetch for getting posts by org id//
+  } 
 
   render() {
     const { classes } = this.props;
@@ -110,7 +116,7 @@ class PartnerPage extends Component {
               <Grid 
                 container spacing={10}>
               </Grid>
-            <CardsGrid />
+            <PartnerGrid />
           </Grid>
         </Grid>
       </div>
