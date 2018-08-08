@@ -17,6 +17,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { TextField } from '../../../node_modules/@material-ui/core';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
 import EditImageBox from '../EditImageBox/EditImageBox';
+import DeletePost from '../DeletePost/DeletePost';
 
 const styles = theme => ({
     card: {
@@ -191,6 +192,7 @@ class EditPost extends Component {
                   <Button onClick={this.edit} >
                     Save Edit
                   </Button>
+                  <DeletePost id={this.state.post.post_id}/>
                   {(this.state.areChanges) &&
                     <Typography className={classes.saveWarning}>
                       Don't forget to save your changes
