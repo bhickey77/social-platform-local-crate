@@ -2,6 +2,8 @@ const express = require('express');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploadPost');
+
 
 router.get('/', (req, res) => {
     // GET for ALL partners - admin view (can limit volume in query)
@@ -26,20 +28,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    // GET for bio from specific partner
-    if (req.isAuthenticated()){
+    // GET for specific partner - partner and post info
         console.log('in GET route to get a partner bio');
-        console.log('user', req.user);
-        let queryText = `SELECT bio FROM partner WHERE id =$1`;
-        pool.query(queryText, [req.body.id]).then((result) => {
-            res.send(result.rows);
+        console.log('in router.get', req.params.id);
+        let queryText = `SELECT * FROM partner
+        INNER JOIN post ON partner.id=post.partner_id WHERE partner.id=$1
+        ORDER BY post.date_created DESC;`;
+        pool.query(queryText, [req.params.id]).then((result) => {
+            generateSignedUrls(res, result.rows);
         }).catch((error) => {
             console.log(error);
             res.sendStatus(500);
         })
-    } else {
-        res.sendStatus(403);
-    }
 });
 
 router.get('/:id/posts', (req, res) => {
