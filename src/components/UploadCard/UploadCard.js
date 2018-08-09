@@ -24,8 +24,7 @@ const mapStateToProps = state => ({
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
-    height: 365,
+    minHeight: 435,
   },
   media: {
     height: 0,

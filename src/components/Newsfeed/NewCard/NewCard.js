@@ -23,8 +23,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const styles = theme => ({
     card: {
-      width: '215%',
-    //   minWidth: 400,
+        margin: 20,
+        minHeight: 435,
+    },
+    header: {
+        minHeight: 80,
     },
     media: {
       height: 0,
@@ -69,9 +72,11 @@ class NewCard extends Component {
         const { classes } = this.props;
         const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
         return (
-            <div style={{display:'inline-block', margin:'10px'}}>
+
+            <div className='upload-card'>
                 <Card className={classes.card}>
                 <CardHeader
+                    className={classes.header}
                     avatar={
                     <Link to={`/partner/${this.props.post.partner_id}`}>
                          <Avatar
