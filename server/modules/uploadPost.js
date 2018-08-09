@@ -42,6 +42,7 @@ const generateSignedUrlForCurrentUser = async(res, userInfo) => {
 }
 
 const generateSignedUrls = async (res, rows) => {
+  console.log(rows);
   const newRows = await addSignedUrls(rows);
   res.send(newRows);
 }
