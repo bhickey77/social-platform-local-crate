@@ -223,6 +223,7 @@ li a:hover {
 
 .upload-card {
     display: inline-block;
+    width: 400px;
 }
 
 .postCard {

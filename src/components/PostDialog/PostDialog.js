@@ -83,8 +83,7 @@ class PostDialog extends Component {
               }
               action={
                 <EditPost post={this.props.post}
-                open={this.state.open}
-                handleClose={this.handleClose}/>
+                user={this.props.user}/>
               }
               title={this.props.post.title}
               subheader={String(this.props.dateConvert(this.props.post.date_created))}
