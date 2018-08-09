@@ -62,15 +62,6 @@ class UpdatePartnerPicture extends Component {
     })
   }
 
-  componentDidMount = () => {
-    if(!this.props.user.userInfo.is_default_image){
-      this.setState({
-        ...this.state,
-        imageUrl: this.props.user.userInfo.media_url,
-      })
-    }
-  }
-
   backToImageUpload = () => {
     this.setState({
       ...this.state,
@@ -88,6 +79,13 @@ class UpdatePartnerPicture extends Component {
 
   render() {
     const { classes } = this.props;
+    let imageUrl = false;
+    if(!this.props.user.userInfo.is_default_image){
+      imageUrl = this.props.user.userInfo.partner_media_url
+    } 
+    if(this.state.imageUrl){
+      imageUrl = this.state.imageUrl;
+    }
     return (
       <div className="upload-card">
         <IconButton onClick={this.handleClickOpen} aria-label="Edit">
@@ -103,7 +101,7 @@ class UpdatePartnerPicture extends Component {
           handleClose = {this.handleClose}
           updateImage = {this.updateImage}
           setImage = {this.setImage}
-          imageUrl = {this.state.imageUrl}
+          imageUrl = {imageUrl}
         />
         </Dialog>
       </div>

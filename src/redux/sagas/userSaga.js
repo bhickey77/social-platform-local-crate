@@ -8,6 +8,7 @@ function* fetchUser() {
     yield put({ type: USER_ACTIONS.REQUEST_START });
     const user = yield callUser();
     const otherData = yield callUserInfo();
+    console.log({otherData});
     for(const key in otherData[0]){
       user[key] = otherData[0][key];
     }

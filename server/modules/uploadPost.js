@@ -35,10 +35,22 @@ const updateProfilePicture = async(req, res) => {
   res.sendStatus(200);
 }
 
+const generateSignedUrlForCurrentUser = async(res, userInfo) => {
+  const newInfo = await addSignedUrlForCurrentUser(userInfo);
+  console.log('NEW INFO: ', newInfo);
+  res.send([newInfo]);
+}
 
 const generateSignedUrls = async (res, rows) => {
   const newRows = await addSignedUrls(rows);
   res.send(newRows);
+}
+
+const addSignedUrlForCurrentUser = async userInfo => {
+  userInfo.partner_media_url = await generateSignedUrl(userInfo.media_key);
+  return new Promise(resolve => {
+    resolve(userInfo);
+  })
 }
 
 const addSignedUrls = async rows => {
@@ -55,7 +67,7 @@ const addSignedUrls = async rows => {
   })
 }
 
-generateSignedUrl = (media_key) => {
+const generateSignedUrl = (media_key) => {
   return new Promise(resolve => {
     let s3bucket = new AWS.S3({
       accessKeyId: IAM_USER_KEY,
@@ -177,4 +189,4 @@ function uploadToS3(file) {
   })
 }
 
-module.exports = { uploadPost, generateSignedUrls, updatePost, updateProfilePicture };
+module.exports = { uploadPost, generateSignedUrls, updatePost, updateProfilePicture, generateSignedUrlForCurrentUser };

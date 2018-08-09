@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
-const { generateSignedUrls } = require('../modules/uploadPost');
+const { generateSignedUrlForCurrentUser } = require('../modules/uploadPost');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -25,7 +25,7 @@ router.get('/info', rejectUnauthenticated, (req, res) => {
     .then(response => {
       console.log('Back from the db in the get user info route: ', response.rows[0]);
       if(!response.rows[0].is_default_image){
-        res.send(generateSignedUrl(response.rows));
+        generateSignedUrlForCurrentUser(res, response.rows[0]);
       } else {
         res.send((response.rows));
       }
