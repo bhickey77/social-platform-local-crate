@@ -8,15 +8,15 @@ class UploadBox extends Component {
     restrictions: { maxNumberOfFiles: 1 },
     autoProceed: true
   })
-  
-  render() {
-    this.uppy.on('upload', file => {
+    .on('upload', file => {
       let fileKey = Object.keys(this.uppy.state.files)[0];
       let imageData = this.uppy.state.files[fileKey].data;
+      console.log('UPPY STATE: ', imageData);
       this.props.setImage(imageData);
       this.uppy.state.files = [];
     })
-
+  
+  render() {
     return (
       <DragDrop
         uppy={this.uppy}

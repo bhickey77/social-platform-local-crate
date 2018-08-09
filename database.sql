@@ -15,9 +15,10 @@ CREATE TABLE partner (
     website VARCHAR (120), 
     bio VARCHAR (500),
     date_created VARCHAR (100) NOT NULL,
-    type VARCHAR (100)
+    type VARCHAR (100),
+    media_key VARCHAR (2000),
+    is_default_image BOOLEAN NOT NULL
 );
-
 
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
