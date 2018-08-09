@@ -14,7 +14,6 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -41,9 +40,6 @@ const styles = theme => ({
     expandOpen: {
       transform: 'rotate(180deg)',
     },
-    avatar: {
-      backgroundColor: red[500],
-    },
   });
 
 class NewCard extends Component {
@@ -66,17 +62,17 @@ class NewCard extends Component {
 
     render() {
         const { classes } = this.props;
-
+        const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
         return (
-            
             <div style={{display:'inline-block', margin:'10px'}}>
                 <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                    <Avatar aria-label="Recipe" className={classes.avatar}
-                    onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}}>
-                        
-                    </Avatar>
+                    <Avatar
+                        aria-label="Recipe" 
+                        onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}} 
+                        src={avatar_url}
+                    />   
                     }
                     action={
                         <div>
@@ -85,9 +81,7 @@ class NewCard extends Component {
                         <HideIcon post={this.props.post}/>
                         </div>
                     }
-   
                     title={this.props.post.partner_name}
-                    
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>

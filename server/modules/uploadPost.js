@@ -46,8 +46,10 @@ const addSignedUrls = async rows => {
   for(const row of rows){
     const media_url = await generateSignedUrl(row.media_key);
     row.media_url = media_url;
+    const partner_media_url = await generateSignedUrl(row.partner_media_key);
+    row.partner_media_url = partner_media_url;
     newRows.push(row);
-  }  
+  } 
   return new Promise(resolve => {
     resolve(newRows);
   })
@@ -77,9 +79,9 @@ generateSignedUrl = (media_key) => {
 function uploadToSQLProfilePicture(req, media_key) {
   return new Promise(resolve => {
     let queryText = `UPDATE partner
-                     SET media_key = $2
+                     SET media_key = $2, is_default_image = $3
                      WHERE id = $1;`
-    pool.query(queryText, [req.params.id, media_key])
+    pool.query(queryText, [req.params.id, media_key, false])
       .then(response => {
         resolve();
       })
