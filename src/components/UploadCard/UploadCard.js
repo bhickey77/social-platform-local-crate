@@ -11,6 +11,7 @@ import UploadBox from '../UploadBox/UploadBox';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import red from '@material-ui/core/colors/red';
 
 //UPLOAD STAGES
@@ -160,6 +161,7 @@ class UploadCard extends Component {
       
       <div className="upload-card">
         <Card id='newPost'>
+          <CardHeader style={{height: 81}} title='Upload an image here!'/>
           <UploadBox setImage={this.setImage} />
         </Card>
         <Dialog
