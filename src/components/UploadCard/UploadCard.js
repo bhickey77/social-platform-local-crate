@@ -159,9 +159,9 @@ class UploadCard extends Component {
     return (
       
       <div className="upload-card">
-        {/* <Card className={classes.card}> */}
+        <Card id='newPost'>
           <UploadBox setImage={this.setImage} />
-        {/* </Card> */}
+        </Card>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
