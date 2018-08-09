@@ -4,12 +4,10 @@ import { compose } from 'redux';
 import PartnerGrid from './PartnerGrid/PartnerGrid';
 import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
 
-
-// import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
 import NewCard from '../Newsfeed/NewCard/NewCard';
 import UploadCard from '../UploadCard/UploadCard';
-
+import UpdatePartnerPicture from '../UpdatePartnerPicture/UpdatePartnerPicture';
 
 // Material UI
 import PropTypes from 'prop-types';
@@ -35,6 +33,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
   user: state.user,
+  partner: state.partner,
   post: state.post
 });
 
@@ -57,68 +56,35 @@ class PartnerPage extends Component {
   componentDidMount() {
    let partner_id = window.location.hash.split('/')[2];
     this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
-    // this.getPosts();
   }
-
-  // getPosts = () => {
-    //Fetch for getting posts by org id//
-  // } 
 
   render() {
     const { classes } = this.props;
     // const { spacing } = this.state;
     const posts = this.props && this.props.post && this.props.post.posts || [];       
+    let partnerInfo = this.props && this.props.partner && this.props.partner.partner && this.props.partner.partner;
     return (
       <div>
         <Nav />
-        <Grid container spacing={24}
-          style={{ 
-            marginLeft: 30,
-          }}>
-          <Grid item xs={10}>
-            <Paper className={classes.root} elevation={1}>
-              <Typography variant="headline" component="h3">
-                <h4>Richardson Farms</h4>
-              </Typography>
-              <Typography component="p">
-                <h4>Red Wing, MN</h4>
-              </Typography>
-            </Paper>          
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={24}
-          style={{ 
-            marginLeft: 30,
-            display:'inline-block', 
-            margin: 30,
-          }}>
-          <Grid item xs={3}>
-            <Paper 
-              className={classes.root} 
-              elevation={1}
-              style={{ 
-                paddingTop: 10, 
-                paddingBottom: 10, 
-                height: 600,
-              }}
-              >
-              <Typography variant="headline" component="h3">
-                <h4>About Us</h4>
-              </Typography>
+        <div className="partner-page-header-container">
+          <Paper className={classes.root} elevation={1}>
+            <div className="partner-page-header">
               <img id="partnerPagePhoto"
                 src="/images/background.jpg"
                 alt="Profile-Photo" />
-                 <Typography variant="bio" component="h3">
-                <h4>Bio:</h4><h5>{this.state.bio}</h5>
+            <UpdatePartnerPicture />
+            </div>
+            <div className="partner-page-header">
+              <Typography variant="headline" component="h3">
+                <h4>{partnerInfo.name}</h4>
               </Typography>
-            </Paper>          
-              <Grid 
-                container spacing={10}>
-              </Grid>
-            <PartnerGrid />
-          </Grid>
-        </Grid>
+              <Typography component="p">
+                <h4>{partnerInfo.city + ', ' + partnerInfo.state}</h4>
+              </Typography>
+            </div>
+          </Paper>          
+        </div>
+        <PartnerGrid />
       </div>
     );
     }

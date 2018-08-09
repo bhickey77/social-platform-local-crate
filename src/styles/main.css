@@ -268,5 +268,13 @@ div.edit-media-container > div > div.uppy-Root uppy-DragDrop-container uppy-Drag
     max-width: 20vw;
     height: 15vw;
     float: left;
+}
 
+.partner-page-header {
+    display: inline-block;
+}
+
+.partner-page-header-container {
+    margin-left: 4%;
+    margin-right: 4%;
 }

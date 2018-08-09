@@ -18,7 +18,7 @@ class PartnerGrid extends Component {
   // }
 
   render() {
-    const posts = this.props && this.props.partner && this.props.partner.partner || [];
+    const posts = this.props && this.props.partner && this.props.partner.partnerPosts || [];
     console.log(`looking for partner posts: ` , this.props);
     const isSignedIn = this.props && this.props.user && this.props.user.userName || false;
     return (
