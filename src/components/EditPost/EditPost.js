@@ -139,82 +139,76 @@ class EditPost extends Component {
   render() {
     const { classes } = this.props;
 
-    let editStatus = null;
-
-
-    if( this.props.user.userInfo === null || this.props.user.userInfo.partner_id !== this.props.post.partner_id ) {
-      editStatus = null;
-    }
-    else {
-      editStatus = 
-      <div>
-        <IconButton onClick={this.handleClickOpen} aria-label="Edit">
-          <EditIcon />
-        </IconButton>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-            <Card className='postDialog'>
-              <CardHeader
-                  avatar={
-                  <Avatar aria-label="Recipe" className={classes.avatar}>
-                      R
-                  </Avatar>
-                  }
-                  title={this.state.post.partner_name}
-              >
-              </CardHeader>
-              <CardContent>
-                <img className="edit-image" src={(!this.state.imageHasBeenUpdated) ? this.state.post.media_url : this.state.imageUrl} alt=""/>
-                <br />
-                <br />
-                <span className="edit-media-container">
-                  <EditImageBox setImage={this.setImage} />
-                </span>
-                  <span className="edit-text-fields">
-                    <Typography>
-                        <TextField
-                          className={classes.editText}
-                          value={this.state.post.title}
-                          label="Title"
-                          onChange={this.handleChange('title')}/>
-                          <br />
-                          <br />
-                          <br />
-                        <TextField
-                          className={classes.editText}
-                          value={this.state.post.content}
-                          label="Text Content"
-                          onChange={this.handleChange('content')}
-                          rows={3}
-                          multiline={true}
-                          />
-                    </Typography>
-                  </span>
-                  <Button onClick={this.handleClose} >
-                    Cancel Edit
-                  </Button>
-                  <Button onClick={this.edit} >
-                    Save Edit
-                  </Button>
-                  <DeletePost id={this.state.post.post_id}/>
-                  {(this.state.areChanges) &&
-                    <Typography className={classes.saveWarning}>
-                      Don't forget to save your changes
-                    </Typography>
-                  }
-              </CardContent>
-            </Card>
-        </Dialog>
-      </div>
-    }
+    let editable = false;
+    editable = this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id === this.props.post.partner_id;
 
     return (
       <div>
-        {editStatus}
+        {editable &&
+          <div>
+            <IconButton onClick={this.handleClickOpen} aria-label="Edit">
+              <EditIcon />
+            </IconButton>
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+                <Card className='postDialog'>
+                  <CardHeader
+                      avatar={
+                      <Avatar aria-label="Recipe" className={classes.avatar}>
+                          R
+                      </Avatar>
+                      }
+                      title={this.state.post.partner_name}
+                  >
+                  </CardHeader>
+                  <CardContent>
+                    <img className="edit-image" src={(!this.state.imageHasBeenUpdated) ? this.state.post.media_url : this.state.imageUrl} alt=""/>
+                    <br />
+                    <br />
+                    <span className="edit-media-container">
+                      <EditImageBox setImage={this.setImage} />
+                    </span>
+                      <span className="edit-text-fields">
+                        <Typography>
+                            <TextField
+                              className={classes.editText}
+                              value={this.state.post.title}
+                              label="Title"
+                              onChange={this.handleChange('title')}/>
+                              <br />
+                              <br />
+                              <br />
+                            <TextField
+                              className={classes.editText}
+                              value={this.state.post.content}
+                              label="Text Content"
+                              onChange={this.handleChange('content')}
+                              rows={3}
+                              multiline={true}
+                              />
+                        </Typography>
+                      </span>
+                      <Button onClick={this.handleClose} >
+                        Cancel Edit
+                      </Button>
+                      <Button onClick={this.edit} >
+                        Save Edit
+                      </Button>
+                      <DeletePost id={this.state.post.post_id}/>
+                      {(this.state.areChanges) &&
+                        <Typography className={classes.saveWarning}>
+                          Don't forget to save your changes
+                        </Typography>
+                      }
+                  </CardContent>
+                </Card>
+            </Dialog>
+          </div>
+          }
       </div>
     );
   }
