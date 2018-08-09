@@ -142,10 +142,10 @@ class EditPost extends Component {
     let editStatus = null;
 
 
-    if( this.props.user.userInfo === null ) {
+    if( this.props.user.userInfo === null || this.props.user.userInfo.partner_id !== this.props.post.partner_id ) {
       editStatus = null;
     }
-    else if( this.props.user.userInfo.partner_id === this.props.post.partner_id) {
+    else {
       editStatus = 
       <div>
         <IconButton onClick={this.handleClickOpen} aria-label="Edit">
@@ -210,8 +210,6 @@ class EditPost extends Component {
             </Card>
         </Dialog>
       </div>
-    } else {
-      editStatus = null;
     }
 
     return (

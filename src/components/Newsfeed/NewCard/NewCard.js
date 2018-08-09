@@ -24,7 +24,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const styles = theme => ({
     card: {
-      maxWidth: 400,
+      width: '215%',
+    //   minWidth: 400,
     },
     media: {
       height: 0,
@@ -97,7 +98,9 @@ class NewCard extends Component {
                     
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
-                <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>
+                <PostDialog post={this.props.post}
+                user={this.props.user}
+                dateConvert={this.dateConvert}/>
                 <CardContent>
                 <Typography component="p">
                     {this.props.post.title}
