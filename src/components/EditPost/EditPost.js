@@ -17,6 +17,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { TextField } from '../../../node_modules/@material-ui/core';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
 import EditImageBox from '../EditImageBox/EditImageBox';
+import DeletePost from '../DeletePost/DeletePost';
 
 const styles = theme => ({
     card: {
@@ -60,6 +61,7 @@ class EditPost extends Component {
   state = {
     open: false,
     post: this.props.post,
+    partner: this.props.partner,
     imageHasBeenUpdated: false,
     areChanges: false,
   };
@@ -137,7 +139,14 @@ class EditPost extends Component {
   render() {
     const { classes } = this.props;
 
-    return (
+    let editStatus = null;
+
+
+    if( this.props.user.userInfo === null || this.props.user.userInfo.partner_id !== this.props.post.partner_id ) {
+      editStatus = null;
+    }
+    else {
+      editStatus = 
       <div>
         <IconButton onClick={this.handleClickOpen} aria-label="Edit">
           <EditIcon />
@@ -191,6 +200,7 @@ class EditPost extends Component {
                   <Button onClick={this.edit} >
                     Save Edit
                   </Button>
+                  <DeletePost id={this.state.post.post_id}/>
                   {(this.state.areChanges) &&
                     <Typography className={classes.saveWarning}>
                       Don't forget to save your changes
@@ -199,6 +209,12 @@ class EditPost extends Component {
               </CardContent>
             </Card>
         </Dialog>
+      </div>
+    }
+
+    return (
+      <div>
+        {editStatus}
       </div>
     );
   }

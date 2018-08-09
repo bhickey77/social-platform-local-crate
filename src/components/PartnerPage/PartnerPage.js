@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
+import PartnerGrid from './PartnerGrid/PartnerGrid';
+import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
+
 
 // import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../Nav/Nav';
-// import CardsGrid from '../Newsfeed/CardsGrid/CardsGrid';
 import NewCard from '../Newsfeed/NewCard/NewCard';
 import UploadCard from '../UploadCard/UploadCard';
 
@@ -47,16 +48,21 @@ class PartnerPage extends Component {
           name: '',
           location: '', 
           website: '', 
-          bio: ''
+          // img
+          bio: 'Edit your profile photo and bio by clicking on the edit icon'
         } 
       }
   }
 
-  // componentDidUpdate() {
-  //   if (!this.props.user.isLoading && this.props.user.userName === null) {
-  //     this.props.history.push('home');
-  //   }
-  // }
+  componentDidMount() {
+   let partner_id = window.location.hash.split('/')[2];
+    this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
+    this.getPosts();
+  }
+
+  getPosts = () => {
+    //Fetch for getting posts by org id//
+  } 
 
   render() {
     const { classes } = this.props;
@@ -72,10 +78,10 @@ class PartnerPage extends Component {
           <Grid item xs={10}>
             <Paper className={classes.root} elevation={1}>
               <Typography variant="headline" component="h3">
-                Richardson Farms
+                <h4>Richardson Farms</h4>
               </Typography>
               <Typography component="p">
-                Red Wing, MN
+                <h4>Red Wing, MN</h4>
               </Typography>
             </Paper>          
           </Grid>
@@ -84,6 +90,8 @@ class PartnerPage extends Component {
         <Grid container spacing={24}
           style={{ 
             marginLeft: 30,
+            display:'inline-block', 
+            margin: 30,
           }}>
           <Grid item xs={3}>
             <Paper 
@@ -96,11 +104,20 @@ class PartnerPage extends Component {
               }}
               >
               <Typography variant="headline" component="h3">
-                About Us
+                <h4>About Us</h4>
+              </Typography>
+              <img id="partnerPagePhoto"
+                src="/images/background.jpg"
+                alt="Profile-Photo" />
+                 <Typography variant="bio" component="h3">
+                <h4>Bio:</h4><h5>{this.state.bio}</h5>
               </Typography>
             </Paper>          
+              <Grid 
+                container spacing={10}>
+              </Grid>
+            <PartnerGrid />
           </Grid>
-          <CardsGrid />
         </Grid>
       </div>
     );

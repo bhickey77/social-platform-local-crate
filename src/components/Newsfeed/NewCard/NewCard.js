@@ -16,12 +16,15 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 
 
 const styles = theme => ({
     card: {
-      maxWidth: 400,
+      width: '215%',
+    //   minWidth: 400,
     },
     media: {
       height: 0,
@@ -53,7 +56,9 @@ class NewCard extends Component {
     };
 
     handleAvatarClick = (id) => {
-        //ROUTE to partner page//
+        console.log('on avatar click', id);
+        
+
     }
 
     dateConvert = ( date ) => {
@@ -68,23 +73,29 @@ class NewCard extends Component {
                 <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                    <Avatar
-                        aria-label="Recipe" 
-                        onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}} 
-                        src={avatar_url}
-                    />   
+                    <Link to={`/partner/${this.props.post.partner_id}`}>
+                         <Avatar
+                          aria-label="Recipe" 
+                          onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}} 
+                          src={avatar_url}
+                        />   
+                    </Link>
                     }
                     action={
                         <div>
                         <EditPost post={this.props.post}
+                        user={this.props.user}
                         handleChange={this.handleChange}/>
-                        <HideIcon post={this.props.post}/>
+                        <HideIcon post={this.props.post}
+                        user={this.props.user}/>
                         </div>
                     }
                     title={this.props.post.partner_name}
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
-                <PostDialog post={this.props.post} dateConvert={this.dateConvert}/>
+                <PostDialog post={this.props.post}
+                user={this.props.user}
+                dateConvert={this.dateConvert}/>
                 <CardContent>
                 <Typography component="p">
                     {this.props.post.title}

@@ -81,7 +81,7 @@ router.get('/', (req, res) => {
 router.get('/filter/:filter/:filteredBy', (req, res) => {
     // GET for FILTERED posts - admin view (shows posts based on filter)
         if(req.isAuthenticated() && isAdmin(req.user)){
-            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as partner_name
+            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as name
             FROM post
             INNER JOIN partner ON post.partner_id=partner.id WHERE`;
             if(req.params.filter === 'partner.name') {

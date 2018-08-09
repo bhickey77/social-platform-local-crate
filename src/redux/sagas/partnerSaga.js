@@ -15,6 +15,17 @@ function* getPartners( action ) {
     }
 }
 
+function* getPartner( action ) {
+    try {
+        let id = action.payload;
+        const partnerResponse = yield call( axios.get, `/api/partner/${id}` );
+        yield put({ type: 'SET_PARTNER', payload: partnerResponse.data });
+    }
+    catch ( error ) {
+        console.log( 'Error in getPartner', error );
+    }
+}
+
 // Not sure if we want this?
 function* addPartner( action ) {
     try {
@@ -60,6 +71,7 @@ function* editProfileImage( action ) {
 function* partnerSaga() {
     yield takeLatest(PARTNER_ACTIONS.FETCH_PARTNERS, getPartners);
     yield takeLatest(PARTNER_ACTIONS.ADD_PARTNER, addPartner);
+    yield takeLatest(PARTNER_ACTIONS.GET_PARTNER, getPartner);
     // yield takeLatest(PARTNER_ACTIONS.EDIT_PARTNER, editPartner);
     yield takeLatest(PARTNER_ACTIONS.HIDE_PARTNER, hidePartner);
     yield takeLatest(PARTNER_ACTIONS.DELETE_PARTNER, deletePartner);

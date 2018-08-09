@@ -223,6 +223,7 @@ li a:hover {
 
 .upload-card {
     display: inline-block;
+    width: 400px;
 }
 
 .postCard {
@@ -258,4 +259,12 @@ div.edit-media-container > div > div.uppy-Root uppy-DragDrop-container uppy-Drag
 .upload-image-profile-picture {
     width: 30%;
     height: auto;
+
+/* Partner Page */
+#partnerPagePhoto {
+    width: inherit;
+    max-width: 20vw;
+    height: 15vw;
+    float: left;
+
 }

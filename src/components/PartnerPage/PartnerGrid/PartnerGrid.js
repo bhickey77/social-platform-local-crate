@@ -3,27 +3,24 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import NewCard from '../NewCard/NewCard';
+import NewCard from '../../Newsfeed/NewCard/NewCard';
 import UploadCard from '../../UploadCard/UploadCard';
-import { POST_ACTIONS } from '../../../redux/actions/postActions';
+import { PARTNER_ACTIONS } from '../../../redux/actions/partnerActions';
 
 const mapStateToProps = state => ({
   user: state.user,
-  post: state.post,
   partner: state.partner
 });
 
-class CardsGrid extends Component {
+class PartnerGrid extends Component {
   componentDidMount() {
-    this.props.dispatch({type: POST_ACTIONS.FETCH_POSTS});
+    this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER});
   }
 
   render() {
-    const posts = this.props && this.props.post && this.props.post.unHiddenPosts || [];
-    console.log(`POSTSSSS: ` , posts);
+    const posts = this.props && this.props.partner && this.props.partner.partner || [];
+    console.log(`looking for partner posts: ` , this.props);
     const isSignedIn = this.props && this.props.user && this.props.user.userName || false;
-    let userConditional = null;
-
     return (
       <div>
         <div style={{textAlign:'center'}}>
@@ -34,7 +31,6 @@ class CardsGrid extends Component {
             return <NewCard
                     key = {post.post_id}
                     post= {post}
-                    user= {this.props.user}
                     />
             })
           }
@@ -44,8 +40,8 @@ class CardsGrid extends Component {
   }
 }
 
-CardsGrid.propTypes = {
+PartnerGrid.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps)(CardsGrid);
+export default connect(mapStateToProps)(PartnerGrid);

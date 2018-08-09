@@ -83,16 +83,16 @@ function* hidePost( action ) {
     }
 }
 
-// function* deletePost( action ) {
-//     let id = action.payload.id;
-//     try {
-//         // const postResponse = yield call( axios.delete, `/api/post/${ id }` );
-//         yield put({ type: 'FETCH_POSTS' })
-//     }
-//     catch ( error ) {
-//         console.log( 'Error in deletePost', error );
-//     }
-// }
+function* deletePost( action ) {
+    let id = action.payload;
+    try {
+        const postResponse = yield call( axios.delete, `/api/post/${ id }` );
+        yield put({ type: POST_ACTIONS.FETCH_POSTS });
+    }
+    catch ( error ) {
+        console.log( 'Error in deletePost', error );
+    }
+}
 
 function* postSaga() {
     yield takeLatest(POST_ACTIONS.FETCH_POSTS, getPosts);
@@ -102,7 +102,7 @@ function* postSaga() {
     yield takeLatest(POST_ACTIONS.ADD_POST, addPost);
     yield takeLatest(POST_ACTIONS.EDIT_POST, editPost);
     yield takeLatest(POST_ACTIONS.HIDE_POST, hidePost);
-    // yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
+    yield takeLatest(POST_ACTIONS.DELETE_POST, deletePost);
   }
   
   export default postSaga;
