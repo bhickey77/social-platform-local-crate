@@ -29,9 +29,28 @@ const updatePost = async(req, res) => {
   res.sendStatus(200);
 }
 
+const updateProfilePicture = async(req, res) => {
+  let media_key = await uploadToS3(req.file);
+  await uploadToSQLProfilePicture(req, media_key);
+  res.sendStatus(200);
+}
+
+const generateSignedUrlForCurrentUser = async(res, userInfo) => {
+  const newInfo = await addSignedUrlForCurrentUser(userInfo);
+  console.log('NEW INFO: ', newInfo);
+  res.send([newInfo]);
+}
+
 const generateSignedUrls = async (res, rows) => {
   const newRows = await addSignedUrls(rows);
   res.send(newRows);
+}
+
+const addSignedUrlForCurrentUser = async userInfo => {
+  userInfo.partner_media_url = await generateSignedUrl(userInfo.media_key);
+  return new Promise(resolve => {
+    resolve(userInfo);
+  })
 }
 
 const addSignedUrls = async rows => {
@@ -39,14 +58,16 @@ const addSignedUrls = async rows => {
   for(const row of rows){
     const media_url = await generateSignedUrl(row.media_key);
     row.media_url = media_url;
+    const partner_media_url = await generateSignedUrl(row.partner_media_key);
+    row.partner_media_url = partner_media_url;
     newRows.push(row);
-  }  
+  } 
   return new Promise(resolve => {
     resolve(newRows);
   })
 }
 
-generateSignedUrl = (media_key) => {
+const generateSignedUrl = (media_key) => {
   return new Promise(resolve => {
     let s3bucket = new AWS.S3({
       accessKeyId: IAM_USER_KEY,
@@ -67,6 +88,21 @@ generateSignedUrl = (media_key) => {
   })
 }
 
+function uploadToSQLProfilePicture(req, media_key) {
+  return new Promise(resolve => {
+    let queryText = `UPDATE partner
+                     SET media_key = $2, is_default_image = $3
+                     WHERE id = $1;`
+    pool.query(queryText, [req.params.id, media_key, false])
+      .then(response => {
+        resolve();
+      })
+      .catch(error => {
+        resolve();
+      })
+  })
+} 
+
 function updateSQL(req, media_key) {
   return new Promise(resolve => {
     const date_updated = new Date().toJSON().toString();
@@ -74,19 +110,19 @@ function updateSQL(req, media_key) {
     let values = [req.params.id, req.body.title, req.body.content, date_updated];
     if(media_key){
       queryText = `UPDATE post 
-                   SET "title" = $2, "content" = $3, "date_updated" = $4, "media_key" = $5
-                   WHERE id = $1;`;
+      SET "title" = $2, "content" = $3, "date_updated" = $4, "media_key" = $5
+      WHERE id = $1;`;
       values.push(media_key);
     } else {
       queryText = `UPDATE post 
-                   SET "title" = $2, "content" = $3, "date_updated" = $4
-                   WHERE id = $1;`;
+      SET "title" = $2, "content" = $3, "date_updated" = $4
+      WHERE id = $1;`;
     }
-
+    
     pool.query(queryText, values)
     .then((result) => {
-        console.log('back from db with:', result);
-        resolve(200);
+      console.log('back from db with:', result);
+      resolve(200);
     }).catch((error) => {
         console.log('error in POST', error);
         resolve(500);
@@ -153,4 +189,4 @@ function uploadToS3(file) {
   })
 }
 
-module.exports = { uploadPost, generateSignedUrls, updatePost };
+module.exports = { uploadPost, generateSignedUrls, updatePost, updateProfilePicture, generateSignedUrlForCurrentUser };

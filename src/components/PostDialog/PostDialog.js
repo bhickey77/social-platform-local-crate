@@ -59,14 +59,14 @@ class PostDialog extends Component {
 
   render() {
     const { classes } = this.props;
-
+    const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
     return (
       <div>
         <Card onClick={this.handleClickOpen}>
           <CardMedia
               className={classes.media}
               image={this.props.post.media_url}
-              title="Contemplative Reptile"/>
+              title="Post Image"/>
         </Card>
         <Dialog
           open={this.state.open}
@@ -77,9 +77,11 @@ class PostDialog extends Component {
           <Card className='postDialog'>
             <CardHeader
               avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                  R
-              </Avatar>
+              <Avatar
+                aria-label="Recipe" 
+                onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}} 
+                src={avatar_url}
+              />   
               }
               action={
                 <EditPost post={this.props.post}

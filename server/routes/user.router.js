@@ -5,6 +5,7 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
+const { generateSignedUrlForCurrentUser } = require('../modules/uploadPost');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -14,13 +15,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/info', rejectUnauthenticated, (req, res) => {
   console.log('In the route api/user/info', req.user);
-  const queryText = `SELECT partner.name as "partner_name", username, first_name, partner_id, user_type, city, state FROM person
+  const queryText = `SELECT partner.name as "partner_name", 
+                      username, first_name, partner_id, user_type, 
+                      city, state, is_default_image, media_key  
+                     FROM person
                      JOIN partner ON partner.id = person.partner_id 
                      WHERE person.id = $1;`
   pool.query(queryText, [req.user.id])
     .then(response => {
       console.log('Back from the db in the get user info route: ', response.rows[0]);
-      res.send(response.rows);
+      if(!response.rows[0].is_default_image){
+        generateSignedUrlForCurrentUser(res, response.rows[0]);
+      } else {
+        res.send((response.rows));
+      }
     })
     .catch(error => {
       // console.log('Error with the get user info route: ', error);
@@ -39,11 +47,11 @@ router.post('/register', (req, res, next) => {
   const currentDateTime = new Date().toJSON().toString();
 
   const partnerQuery = `INSERT INTO partner
-                        (name, city, state, website, date_created, type)
+                        (name, city, state, website, date_created, type, media_key, is_default_image)
                         VALUES
-                        ($1, $2, $3, $4, $5, $6)
-                        RETURNING id;`
-  const partnerValues = [partner.name, partner.city, partner.state, partner.website, currentDateTime, partner.type];
+                        ($1, $2, $3, $4, $5, $6, $7, $8)
+                        RETURNING id;`;
+  const partnerValues = [partner.name, partner.city, partner.state, partner.website, currentDateTime, partner.type, null, true];
   pool.query(partnerQuery, partnerValues)
     .then(response => {
       console.log(response.rows[0]);
