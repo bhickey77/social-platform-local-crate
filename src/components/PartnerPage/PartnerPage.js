@@ -57,12 +57,12 @@ class PartnerPage extends Component {
   componentDidMount() {
    let partner_id = window.location.hash.split('/')[2];
     this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
-    this.getPosts();
+    // this.getPosts();
   }
 
-  getPosts = () => {
+  // getPosts = () => {
     //Fetch for getting posts by org id//
-  } 
+  // } 
 
   render() {
     const { classes } = this.props;

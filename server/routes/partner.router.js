@@ -8,17 +8,15 @@ const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploa
 const multer  = require('multer');
 const upload = multer({ dest: '../uploads/' });
 
-const { updateProfilePicture } = require('../modules/uploadPost');
+const { updateProfilePicture, generateSignedUrlForCurrentUser } = require('../modules/uploadPost');
 
 router.get('/', (req, res) => {
     // GET for ALL partners - admin view (can limit volume in query)
     if (req.isAuthenticated()){
         console.log('in GET route to get all partners');
         console.log('user', req.user);
-        // let queryText = `SELECT username, organization_name,
-        // supplier_location, supplier_type, date_created, date_updated
-        // FROM partner WHERE user_type != 'admin'`;
-        let queryText = `SELECT * FROM person
+        let queryText = `SELECT *
+                         FROM person
                          JOIN partner ON partner.id = person.partner_id
                          WHERE user_type != 'admin';`
         pool.query(queryText).then((result) => {
@@ -34,29 +32,42 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     // GET for specific partner - partner and post info
-        console.log('in GET route to get a partner bio');
+        console.log('IN GET PARTNER INFO ROUTE');
+        const id = Number(req.params.id);
+        console.log('in router.get', id);
         console.log('in router.get', req.params.id);
         let queryText = `SELECT * FROM partner
-        INNER JOIN post ON partner.id=post.partner_id WHERE partner.id=$1
-        ORDER BY post.date_created DESC;`;
-        pool.query(queryText, [req.params.id]).then((result) => {
-            generateSignedUrls(res, result.rows);
-        }).catch((error) => {
-            console.log(error);
-            res.sendStatus(500);
-        })
+                         WHERE id = $1;`;
+        pool.query(queryText, [id])
+            .then((result) => {
+                generateSignedUrlForCurrentUser(res, result.rows[0]);
+            }).catch((error) => {
+                console.log('error getting partner info: ', error);
+                res.sendStatus(500);
+            })
 });
 
 router.get('/:id/posts', (req, res) => {
     // GET for all posts from specific partner
     if (req.isAuthenticated()){
         console.log('in GET route to get all posts from a partner');
-        console.log('user', req.user);
-        let queryText = `SELECT * FROM post WHERE partner_id =$1`;
-        pool.query(queryText, [req.body.partner_id]).then((result) => {
-            res.send(result.rows);
+        console.log('user', req.params.id);
+        let queryText = `SELECT post.title, post.content, post.media_key, 
+                            post.date_created, post.is_marked_as_hidden, 
+                            post.id as post_id, partner.name as partner_name, 
+                            post.partner_id as partner_id,
+                            partner.media_key as partner_media_key,
+                            partner.is_default_image
+                        FROM post
+                        INNER JOIN partner 
+                        ON post.partner_id=partner.id 
+                        WHERE post.is_marked_as_hidden=false AND partner_id =$1 
+                        ORDER BY post.date_created DESC`;
+        pool.query(queryText, [req.params.id]).then((result) => {
+            console.log(`BACK IN THE PARTNER ROUTER FOR PARTNER POSTS:`, result.rows);
+            generateSignedUrls(res, result.rows);
         }).catch((error) => {
-            console.log(error);
+            console.log('ERROR WITH THE GET PARTNER POSTS ROUTE: ', error);
             res.sendStatus(500);
         })
     } else {

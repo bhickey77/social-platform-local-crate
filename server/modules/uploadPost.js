@@ -36,8 +36,8 @@ const updateProfilePicture = async(req, res) => {
 }
 
 const generateSignedUrlForCurrentUser = async(res, userInfo) => {
+  console.log('NEW INFO: ', userInfo);
   const newInfo = await addSignedUrlForCurrentUser(userInfo);
-  console.log('NEW INFO: ', newInfo);
   res.send([newInfo]);
 }
 
