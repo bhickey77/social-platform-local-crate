@@ -47,15 +47,20 @@ class PartnerPage extends Component {
           name: '',
           location: '', 
           website: '', 
-          // img
           bio: 'Edit your profile photo and bio by clicking on the edit icon'
         } 
       }
   }
 
   componentDidMount() {
-   let partner_id = window.location.hash.split('/')[2];
+    let partner_id = window.location.hash.split('/')[2];
     this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
+    let isAdmin = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo && (this.props.user.userInfo.user_type === 'admin');
+    console.log(`NOT REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
+    if(isAdmin){
+      console.log(`REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
+      this.location.history.push('/newsfeed');
+    }
   }
 
   render() {
