@@ -142,6 +142,11 @@ class UploadCard extends Component {
       .then(response => {
         console.log('successfully uploaded to the S3: ', response); // do something with the response
         this.props.dispatch({type:'FETCH_POSTS'});
+        console.log('BACK FROM SUBMIT: ', window.location.hash.split('/'));
+        
+        if(window.location.hash.split('/')[1] === 'partner'){
+          this.props.dispatch({type: 'GET_PARTNER', payload: window.location.hash.split('/')[2] });
+        }
 
       })
       .catch(error => {

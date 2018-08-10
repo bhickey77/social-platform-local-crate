@@ -56,22 +56,11 @@ class PartnerPage extends Component {
     let partner_id = window.location.hash.split('/')[2];
     this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
     let isAdmin = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo && (this.props.user.userInfo.user_type === 'admin');
-  //   console.log(`NOT REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
-  //   if(isAdmin){
-  //     console.log(`REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
-  //     window.location.hash = '#/newsfeed';
-  //   }
   }
   
   render() {
     let isAdmin = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo && (this.props.user.userInfo.user_type === 'admin');
-    // console.log(`NOT REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
-    // if(isAdmin){
-    //   console.log(`REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
-    //   window.location.hash = '#/newsfeed';
-    // }
     const { classes } = this.props;
-    // const { spacing } = this.state;
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     let partnerInfo = this.props && this.props.partner && this.props.partner.partner && this.props.partner.partner;
     let currentLoggedInPartnerId = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id;
