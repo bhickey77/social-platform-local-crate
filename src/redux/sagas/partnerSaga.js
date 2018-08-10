@@ -2,7 +2,6 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import { PARTNER_ACTIONS } from '../actions/partnerActions';
 import { updateProfileImage } from '../requests/partnerRequests';
-import sagaMiddleware from 're'
 
 
 function* getPartners( action ) {
