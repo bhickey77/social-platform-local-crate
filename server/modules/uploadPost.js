@@ -48,8 +48,10 @@ const generateSignedUrls = async (res, rows) => {
 }
 
 const addSignedUrlForCurrentUser = async userInfo => {
-  userInfo.partner_media_url = await generateSignedUrl(userInfo.media_key);
-  return new Promise(resolve => {
+  if(!userInfo.is_default_image){
+    userInfo.partner_media_url = await generateSignedUrl(userInfo.media_key);
+  }
+    return new Promise(resolve => {
     resolve(userInfo);
   })
 }
@@ -57,6 +59,7 @@ const addSignedUrlForCurrentUser = async userInfo => {
 const addSignedUrls = async rows => {
   const newRows = [];
   for(const row of rows){
+    console.log(row);
     const media_url = await generateSignedUrl(row.media_key);
     row.media_url = media_url;
     if(!row.is_default_image){

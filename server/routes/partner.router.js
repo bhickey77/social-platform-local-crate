@@ -49,30 +49,26 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/posts', (req, res) => {
     // GET for all posts from specific partner
-    if (req.isAuthenticated()){
-        console.log('in GET route to get all posts from a partner');
-        console.log('user', req.params.id);
-        let queryText = `SELECT post.title, post.content, post.media_key, 
-                            post.date_created, post.is_marked_as_hidden, 
-                            post.id as post_id, partner.name as partner_name, 
-                            post.partner_id as partner_id,
-                            partner.media_key as partner_media_key,
-                            partner.is_default_image
-                        FROM post
-                        INNER JOIN partner 
-                        ON post.partner_id=partner.id 
-                        WHERE post.is_marked_as_hidden=false AND partner_id =$1 
-                        ORDER BY post.date_created DESC`;
-        pool.query(queryText, [req.params.id]).then((result) => {
-            console.log(`BACK IN THE PARTNER ROUTER FOR PARTNER POSTS:`, result.rows);
-            generateSignedUrls(res, result.rows);
-        }).catch((error) => {
-            console.log('ERROR WITH THE GET PARTNER POSTS ROUTE: ', error);
-            res.sendStatus(500);
-        })
-    } else {
-        res.sendStatus(403);
-    }
+    console.log('in GET route to get all posts from a partner');
+    console.log('user', req.params.id);
+    let queryText = `SELECT post.title, post.content, post.media_key, 
+                        post.date_created, post.is_marked_as_hidden, 
+                        post.id as post_id, partner.name as partner_name, 
+                        post.partner_id as partner_id,
+                        partner.media_key as partner_media_key,
+                        partner.is_default_image
+                    FROM post
+                    INNER JOIN partner 
+                    ON post.partner_id=partner.id 
+                    WHERE post.is_marked_as_hidden=false AND partner_id =$1 
+                    ORDER BY post.date_created DESC`;
+    pool.query(queryText, [req.params.id]).then((result) => {
+        console.log(`BACK IN THE PARTNER ROUTER FOR PARTNER POSTS:`, result.rows);
+        generateSignedUrls(res, result.rows);
+    }).catch((error) => {
+        console.log('ERROR WITH THE GET PARTNER POSTS ROUTE: ', error);
+        res.sendStatus(500);
+    })
 });
 
 router.put('/:id', (req, res) => {

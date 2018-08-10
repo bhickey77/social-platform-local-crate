@@ -47,15 +47,20 @@ class PartnerPage extends Component {
           name: '',
           location: '', 
           website: '', 
-          // img
           bio: 'Edit your profile photo and bio by clicking on the edit icon'
         } 
       }
   }
 
   componentDidMount() {
-   let partner_id = window.location.hash.split('/')[2];
+    let partner_id = window.location.hash.split('/')[2];
     this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER, payload: partner_id });
+    let isAdmin = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo && (this.props.user.userInfo.user_type === 'admin');
+    console.log(`NOT REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
+    if(isAdmin){
+      console.log(`REDIRECTING FROM PARTNERPAGE: `, isAdmin);      
+      this.location.history.push('/newsfeed');
+    }
   }
 
   render() {
@@ -63,7 +68,8 @@ class PartnerPage extends Component {
     // const { spacing } = this.state;
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     let partnerInfo = this.props && this.props.partner && this.props.partner.partner && this.props.partner.partner;
-  
+    let currentLoggedInPartnerId = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id;
+
     return (
       <div>
         <Nav />
@@ -74,7 +80,7 @@ class PartnerPage extends Component {
                 src={partnerInfo.is_default_image ? "images/FreshnessAssuredBy.png" : partnerInfo.partner_media_url}
                 alt="Profile-Photo" />
             {
-              (partnerInfo.id === this.props.user.userInfo.partner_id) &&
+              (partnerInfo.id === currentLoggedInPartnerId) &&
                 <UpdatePartnerPicture />
             }
             </div>
