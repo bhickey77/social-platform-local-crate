@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -40,6 +41,14 @@ const styles = {
   social: {
     flexGrow: 1,
     margin: '0 auto',
+  },
+  button: {
+    backgroundColor: '#00bce4',
+    fontFamily: 'Clarendon-Text-Pro',
+    margin: 5,
+  },
+  profile: {
+    marginRight: 10
   }
 };
 
@@ -58,6 +67,8 @@ class Nav extends Component {
 
   render() {
     const { classes } = this.props;
+    const avatar_url = (this.props.user.userInfo.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.user.userInfo.partner_media_url;
+
     let isSignedIn = false;
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
     let user_type = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.user_type || false;
@@ -80,12 +91,12 @@ class Nav extends Component {
             {
               (user_type === 'admin') && 
                 [<Link style={{ textDecoration: 'none' }} to="/admin/accounts" key='accounts'>
-                  <Button color="primary">
+                  <Button className={classes.button}>
                     Partner accounts
                   </Button>
                 </Link>,
                 <Link style={{ textDecoration: 'none' }} to="/admin/posts" key='posts'>
-                  <Button color="primary">
+                  <Button className={classes.button}>
                     Posts
                   </Button>
                 </Link>,
@@ -98,17 +109,28 @@ class Nav extends Component {
               </Link> */}
             {(currentRoute !== 'newsfeed') &&
               <Link style={{ textDecoration: 'none' }} to="/newsfeed">
-                <Button color="primary">
+                <Button className={classes.button}>
                   Newsfeed
                 </Button>
               </Link>
             }
             {(currentRoute !== 'partner' && isSignedIn) &&
-            <Link style={{ textDecoration: 'none' }} to={`/partner/${this.props.user.userInfo.partner_id}`}>
-              <Button color="primary">
-                Your Profile
-              </Button>
+            [ <span>
+            <Link style={{ textDecoration: 'none', marginRight: 5 }} to={`/partner/${this.props.user.userInfo.partner_id}`}>
+                <Avatar
+                aria-label="Recipe" 
+                src={avatar_url}
+                className={classes.profile}
+                />
             </Link>
+            </span>,
+            <span>
+            <Link style={{ textDecoration: 'none', marginRight: 5 }} to={`/partner/${this.props.user.userInfo.partner_id}`}>
+                <Typography className={classes.profile}>
+                Your Profile
+                </Typography>
+            </Link>
+            </span> ]
             }
             {
               isSignedIn ?

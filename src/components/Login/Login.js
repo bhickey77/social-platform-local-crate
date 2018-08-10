@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -18,6 +20,14 @@ const mapStateToProps = state => ({
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
 }
+
+const styles = {
+  button: {
+    backgroundColor: '#A83F2E',
+    fontFamily: 'Clarendon-Text-Pro',
+    margin: 5,
+  }
+};
 
 class Login extends Component {
   constructor(props) {
@@ -76,9 +86,10 @@ class Login extends Component {
   
   
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <Button color="primary" className="whiteButton" onClick={this.handleOpen}>Login</Button>
+        <Button className={classes.button} onClick={this.handleOpen}>Login</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -124,4 +135,4 @@ class Login extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Login);
+export default compose(withStyles(styles),connect(mapStateToProps))(Login);
