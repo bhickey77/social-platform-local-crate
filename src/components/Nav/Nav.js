@@ -67,7 +67,7 @@ class Nav extends Component {
 
   render() {
     const { classes } = this.props;
-    const avatar_url = (this.props.user.userInfo.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.user.userInfo.partner_media_url;
+    const avatar_url = (this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_media_url;
 
     let isSignedIn = false;
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
