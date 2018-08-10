@@ -92,6 +92,18 @@ class AdminPosts extends Component {
     this.setState({filter: '', filteredBy: ''});
   }
 
+  contentCount = null;
+
+  contentTrimmer = ( content ) => {
+      if (content.length > 20) {
+         this.contentCount = content.slice(0,20);
+         this.contentCount += '...';
+         return this.contentCount;
+      } else {
+          return content;
+      }
+  }
+
   render() {
     const posts = this.props && this.props.post && this.props.post.allPosts || [];
     const partner = this.props && this.props.partner && this.props.partner.partners || [];
@@ -139,12 +151,12 @@ class AdminPosts extends Component {
                 <TableCell>
                   <PostDialog post={post} dateConvert={this.dateConvert}/>
                 </TableCell>
-                <TableCell>{post.title}</TableCell>
-                <TableCell>{post.content}</TableCell>
+                <TableCell>{this.contentTrimmer(post.title)}</TableCell>
+                <TableCell>{this.contentTrimmer(post.content)}</TableCell>
                 <TableCell>{String(this.dateConvert(post.date_created))}</TableCell>
                 <TableCell>{String(this.dateConvert(post.date_updated))}</TableCell>
                 <TableCell>
-                  <HideIcon post={post}/>
+                  <HideIcon post={post} user={this.props.user}/>
                 </TableCell>
               </TableRow> 
             );
