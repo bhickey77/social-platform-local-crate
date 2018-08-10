@@ -53,8 +53,13 @@ function* getFilteredPosts( action ) {
 
 function* addPost( action ) {
     try {
+        console.log(`adding post`);
         yield call( axios.post, '/api/post', action.payload );
         yield put({ type: 'SET_POST' })
+        console.log(`adding post 2`);
+        yield getPosts();
+        console.log(`adding post 2`);
+        yield getPartnerPosts();
     }
     catch ( error ) {
         console.log( 'Error in postList', error );
