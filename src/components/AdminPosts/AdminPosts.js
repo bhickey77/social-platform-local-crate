@@ -72,9 +72,6 @@ class AdminPosts extends Component {
   }
 
   handleChange = event => {
-    // if(event.target.value.indexOf('%20')) {
-    //   event.taret.value.indexOf('%20') === ' '; 
-    // }
     this.setState({ filteredBy: event.target.value });
     console.log('filtered by', this.state.filteredBy);
   };
