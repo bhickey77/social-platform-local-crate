@@ -14,6 +14,13 @@ const mapStateToProps = state => ({
   partners: state.partner.partners,
 });
 
+
+const styles = {
+  tableHeaderCells: {
+    fontWeight: 'bolder', 
+  },
+}
+
 class AdminPartnerAccounts extends Component {
 
   componentDidMount() {

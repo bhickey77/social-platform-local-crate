@@ -18,6 +18,7 @@ body {
     margin: 0;
     padding-top: 150px;
     background: url('/images/bg_woodgrain_lighter.jpg');
+    background-size: cover;
 }
 
 .container-parent {
