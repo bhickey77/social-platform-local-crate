@@ -47,7 +47,7 @@ class PartnerPage extends Component {
           name: '',
           location: '', 
           website: '', 
-          bio: 'Edit your profile photo and bio by clicking on the edit icon'
+          bio: 'Edit your profile photo and bio by clicking on the edit icon',
         } 
       }
   }

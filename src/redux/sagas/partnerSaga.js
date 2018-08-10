@@ -63,8 +63,7 @@ function* deletePartner( action ) {
 function* editProfileImage( action ) {
     try {
         yield updateProfileImage(action.payload.imageData, action.payload.partner_id);
-        const partnerResponse = yield call( axios.get, `/api/partner/${action.payload.partner_id}` );
-        yield put({ type: 'SET_PARTNER', payload: partnerResponse.data[0] });
+        yield put({type: PARTNER_ACTIONS.GET_PARTNER, payload: action.payload.partner_id })
     }
     catch ( error ) {
         console.log( 'Error in deletePartner', error );
