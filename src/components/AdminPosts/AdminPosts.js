@@ -27,15 +27,11 @@ const mapStateToProps = state => ({
   partner: state.partner,
 });
 
-const styles = theme => ({
-  card: {
-    minWidth: 275,
+const styles = {
+  tableHeaderCells: {
+    fontWeight: 'bolder', 
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-})
+}
 
 class AdminPosts extends Component {
   constructor(props) {
@@ -130,14 +126,17 @@ class AdminPosts extends Component {
           </Card>
         <Table className="postTable">
           <TableHead>
-          <TableRow>
-            <TableCell>Partner Name</TableCell>
-            <TableCell>Preview (Click)</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Content</TableCell>
-            <TableCell>Date Created</TableCell>
-            <TableCell>Date Updated</TableCell>
-            <TableCell>Hide/Unhide</TableCell>
+          <TableRow style={{ 
+              backgroundColor: '#00bce4', 
+              borderRadius: '5px',
+              }}>
+            <TableCell style={styles.tableHeaderCells} >Partner Name</TableCell>
+            <TableCell style={styles.tableHeaderCells}>Preview (Click)</TableCell>
+            <TableCell style={styles.tableHeaderCells}>Title</TableCell>
+            <TableCell style={styles.tableHeaderCells}>Content</TableCell>
+            <TableCell style={styles.tableHeaderCells}>Date Created</TableCell>
+            <TableCell style={styles.tableHeaderCells}>Date Updated</TableCell>
+            <TableCell style={styles.tableHeaderCells}>Hide/Unhide</TableCell>
           </TableRow>
           </TableHead>
           <TableBody>

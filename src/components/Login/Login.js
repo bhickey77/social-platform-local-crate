@@ -78,7 +78,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Button className="whiteButton" onClick={this.handleOpen}>Login</Button>
+        <Button color="primary" className="whiteButton" onClick={this.handleOpen}>Login</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

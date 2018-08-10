@@ -79,12 +79,12 @@ class Nav extends Component {
             </Typography>
             {
               (user_type === 'admin') && 
-                [<Link to="/admin/accounts" key='accounts'>
+                [<Link style={{ textDecoration: 'none' }} to="/admin/accounts" key='accounts'>
                   <Button color="primary">
                     Partner accounts
                   </Button>
                 </Link>,
-                <Link to="/admin/posts" key='posts'>
+                <Link style={{ textDecoration: 'none' }} to="/admin/posts" key='posts'>
                   <Button color="primary">
                     Posts
                   </Button>
@@ -97,14 +97,14 @@ class Nav extends Component {
                 </Button>
               </Link> */}
             {(currentRoute !== 'newsfeed') &&
-              <Link to="/newsfeed">
+              <Link style={{ textDecoration: 'none' }} to="/newsfeed">
                 <Button color="primary">
                   Newsfeed
                 </Button>
               </Link>
             }
             {(currentRoute !== 'partner' && isSignedIn) &&
-            <Link to={`/partner/${this.props.user.userInfo.partner_id}`}>
+            <Link style={{ textDecoration: 'none' }} to={`/partner/${this.props.user.userInfo.partner_id}`}>
               <Button color="primary">
                 Your Profile
               </Button>
