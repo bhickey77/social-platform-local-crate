@@ -52,6 +52,7 @@ function* logoutUser(action) {
     yield put({
       type: USER_ACTIONS.UNSET_USER,
     });
+    window.location.hash = '#/newsfeed';
   } catch (error) {
     console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
   }
