@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 // import { USER_ACTIONS } from '../../redux/actions/userActions';
 // Components
 // import Nav from '../../components/Nav/Nav';
 // Material UI
+import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -18,6 +20,15 @@ const mapStateToProps = state => ({
 function TransitionUp(props) {
   return <Slide {...props} direction="up" />;
 }
+
+
+const styles = {
+  button: {
+    backgroundColor: '#00bce4',
+    fontFamily: 'Clarendon-Text-Pro',
+    margin: 5,
+  }
+};
 
 class AddNewPartner extends Component {
   constructor(props){
@@ -88,12 +99,11 @@ class AddNewPartner extends Component {
     }
   }
 
-
-
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <Button color="primary" onClick={this.handleClick}>
+        <Button className={classes.button} onClick={this.handleClick}>
           Add New Partner
         </Button>
 
@@ -143,4 +153,4 @@ class AddNewPartner extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(AddNewPartner);
+export default compose(withStyles(styles),connect(mapStateToProps))(AddNewPartner);
