@@ -229,7 +229,9 @@ li a:hover {
 }
 
 .postCard {
-    width: 15%;
+    margin: 0 auto;
+    width: 50%;
+    align-items: center;
 }
 
 .postTable {
