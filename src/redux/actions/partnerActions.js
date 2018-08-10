@@ -8,6 +8,7 @@ export const PARTNER_ACTIONS = {
     HIDE_PARTNER: 'HIDE_PARTNER',
     DELETE_PARTNER: 'DELETE_PARTNER',
     EDIT_PROFILE_IMAGE: 'EDIT_PROFILE_IMAGE',
+    SET_PARTNER_POSTS: 'SET_PARTNER_POSTS',
   };
 
   export const triggerProfileImageUpload = (imageData, partner_id) => ({

@@ -12,6 +12,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 
+import Image from 'material-ui-image';
+
 const styles = theme => ({
     card: {
     //   maxWidth: 1000,
@@ -60,13 +62,14 @@ class PostDialog extends Component {
   render() {
     const { classes } = this.props;
     const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
+    let image_url = this.props.post.media_url;
     return (
       <div>
         <Card onClick={this.handleClickOpen}>
           <CardMedia
               className={classes.media}
-              image={this.props.post.media_url}
-              title="Post Image"/>
+              title="Post Image"
+              image={image_url} />
         </Card>
         <Dialog
           open={this.state.open}

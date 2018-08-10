@@ -40,13 +40,10 @@ class RegisterStep3 extends Component {
                                 margin="normal"
                             />
                             <br/>
-                            <Button variant="contained" color="primary" >
-                                Cancel
-                            </Button>
-                            <Button variant="contained" color="primary" onClick={this.props.previousStep}>
+                            <Button color="primary" onClick={this.props.previousStep}>
                                 Previous Step
                             </Button>
-                            <Button variant="contained" color="primary" onClick={this.props.handleSubmit}>
+                            <Button color="primary" onClick={this.props.handleSubmit}>
                                 Create Account
                             </Button>
                         </div>

@@ -87,7 +87,7 @@ class UpdatePartnerPicture extends Component {
       imageUrl = this.state.imageUrl;
     }
     return (
-      <div className="upload-card">
+      <div>
         <IconButton onClick={this.handleClickOpen} aria-label="Edit">
           <EditIcon />
         </IconButton>

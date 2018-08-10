@@ -36,6 +36,10 @@ const styles = {
     height: 100,
     backgroundColor: 'white',
   },
+  social: {
+    flexGrow: 1,
+    margin: '0 auto',
+  }
 };
 
 class Nav extends Component {
@@ -66,6 +70,11 @@ class Nav extends Component {
               <img id="logo"
                 src="/images/Secondary_Logo_HorizontalTilted.jpg"
                 alt="Local-Crate-Logo" />
+            </Typography>
+            <Typography onClick={this.sendToNewsfeed} variant="title" className={classes.social}>
+              <span className="social-crate">
+                Social Crate
+              </span>
             </Typography>
             {
               (user_type === 'admin') && 

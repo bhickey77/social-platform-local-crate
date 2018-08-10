@@ -41,7 +41,7 @@ class HideIcon extends Component {
             } else {
                 isAdmin = null;
             }
-        }
+        }    
 
         return(
             <div>

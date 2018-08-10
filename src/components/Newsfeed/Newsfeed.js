@@ -24,7 +24,6 @@ class Newsfeed extends Component {
       <div>
         <Nav />
         <CardsGrid />
-        <UpdatePartnerPicture />
       </div>
     );
   }

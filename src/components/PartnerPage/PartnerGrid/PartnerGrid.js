@@ -13,12 +13,12 @@ const mapStateToProps = state => ({
 });
 
 class PartnerGrid extends Component {
-  componentDidMount() {
-    this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER});
-  }
+  // componentDidMount() {
+  //   this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER});
+  // }
 
   render() {
-    const posts = this.props && this.props.partner && this.props.partner.partner || [];
+    const posts = this.props && this.props.partner && this.props.partner.partnerPosts || [];
     console.log(`looking for partner posts: ` , this.props);
     const isSignedIn = this.props && this.props.user && this.props.user.userName || false;
     return (
