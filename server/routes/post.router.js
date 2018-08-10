@@ -81,7 +81,9 @@ router.get('/', (req, res) => {
 router.get('/filter/:filter/:filteredBy', (req, res) => {
     // GET for FILTERED posts - admin view (shows posts based on filter)
         if(req.isAuthenticated() && isAdmin(req.user)){
-            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as name
+            console.log('filter test')
+            let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as name,
+                            partner.media_key as partner_media_key, partner.is_default_image
                             FROM post
                             INNER JOIN partner ON post.partner_id=partner.id WHERE`;
             if(req.params.filter === 'partner.name') {
@@ -104,7 +106,6 @@ router.get('/filter/:filter/:filteredBy', (req, res) => {
 
 router.get('/all', (req, res) => {
     // GET for ALL posts - admin view (shows flagged and non-flagged posts)
-    console.log('router test filter');
     if(req.isAuthenticated() && isAdmin(req.user)){
         let queryText = `SELECT post.title, post.content, post.media_key, 
                             post.date_created, post.is_marked_as_hidden, post.id as post_id, 
