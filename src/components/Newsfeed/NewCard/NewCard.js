@@ -112,8 +112,8 @@ class NewCard extends Component {
                     subheader={String(this.dateConvert(this.props.post.date_created))}
                 />
                 <PostDialog post={this.props.post}
-                user={this.props.user}
-                dateConvert={this.dateConvert}/>
+                    user={this.props.user}
+                    dateConvert={this.dateConvert}/>
                 <CardContent>
                 <Typography component="p">
                     {this.props.post.title}
