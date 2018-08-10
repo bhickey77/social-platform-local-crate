@@ -140,6 +140,9 @@ class EditPost extends Component {
     const { classes } = this.props;
 
     let editable = false;
+    console.log('EDITPOST COMPONENT: ', this.props.post.partner_id);
+    console.log('EDITPOST COMPONENT: ', this.props.user);
+    
     editable = this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id === this.props.post.partner_id;
 
     return (

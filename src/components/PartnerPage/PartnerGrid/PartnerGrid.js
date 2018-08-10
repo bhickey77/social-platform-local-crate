@@ -22,7 +22,7 @@ class PartnerGrid extends Component {
     console.log(`looking for partner posts: ` , this.props);
     const isSignedIn = this.props && this.props.user && this.props.user.userName || false;
     return (
-      <div>
+      <div style={{marginTop: '20px'}}>
         <div style={{textAlign:'center'}}>
           {isSignedIn &&
             <UploadCard />
@@ -31,6 +31,7 @@ class PartnerGrid extends Component {
             return <NewCard
                     key = {post.post_id}
                     post= {post}
+                    user= {this.props.user}
                     />
             })
           }

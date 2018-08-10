@@ -64,7 +64,10 @@ class PartnerPage extends Component {
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     let partnerInfo = this.props && this.props.partner && this.props.partner.partner && this.props.partner.partner;
     let currentLoggedInPartnerId = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id;
-
+    let partnerUrl = partnerInfo.website;
+    if(partnerUrl && partnerUrl.substring(0,3) !== 'http'){
+      partnerUrl = 'https://' + partnerUrl;
+    }
     return (
       <div>
         <Nav />
@@ -85,6 +88,9 @@ class PartnerPage extends Component {
               </Typography>
               <Typography component="h4">
                 <h4>{partnerInfo.city + ', ' + partnerInfo.state}</h4>
+              </Typography>
+              <Typography component="h5">
+                <a href={partnerUrl} target="_blank"><h5>{partnerInfo.website}</h5></a>
               </Typography>
             </div>
           </Paper>          
