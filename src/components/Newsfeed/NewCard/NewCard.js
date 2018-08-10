@@ -68,9 +68,22 @@ class NewCard extends Component {
         return moment().utc( date ).format("MMM Do YYYY");
     }
 
+    contentCount = null;
+
+    contentTrimmer = ( content ) => {
+        if (content.length > 45) {
+           this.contentCount = content.slice(0,45);
+           this.contentCount += '...';
+           return this.contentCount;
+        } else {
+            return content;
+        }
+    }
+
     render() {
         const { classes } = this.props;
         const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
+
         return (
 
             <div className='upload-card'>
@@ -107,7 +120,7 @@ class NewCard extends Component {
                     </Typography>
                     <hr/>
                     <Typography component="p">
-                    {this.props.post.content}
+                        {this.contentTrimmer(this.props.post.content)}
                     </Typography>
                 </CardContent>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

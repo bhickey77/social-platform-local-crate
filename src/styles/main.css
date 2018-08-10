@@ -252,6 +252,14 @@ div.edit-media-container > div > div.uppy-Root uppy-DragDrop-container uppy-Drag
     width: 10px;
 }
 
+#newPost {
+    display: inline-block;
+    width: 360px;
+    height: 273px;
+    margin-bottom: 19px;
+    padding-bottom: 162px;
+}
+
 .edit-text-fields {
     margin-top: 25px;
     margin-bottom: 20px;
