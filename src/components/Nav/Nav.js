@@ -19,6 +19,7 @@ import AddNewPartner from '../AddNewPartner/AddNewPartner';
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
+  post: state.post.unHiddenPosts
 });
 
 const styles = {
@@ -101,6 +102,13 @@ class Nav extends Component {
                   Newsfeed
                 </Button>
               </Link>
+            }
+            {(currentRoute !== 'partner' && isSignedIn) &&
+            <Link to={`/partner/${this.props.user.userInfo.partner_id}`}>
+              <Button color="primary">
+                Your Profile
+              </Button>
+            </Link>
             }
             {
               isSignedIn ?
