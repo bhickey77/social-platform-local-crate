@@ -62,7 +62,7 @@ function* deletePartner( action ) {
 
 function* editProfileImage( action ) {
     try {
-        yield put({ type: 'SET_PARTNER', payload: partnerResponse.data[0] });
+        yield updateProfileImage(action.payload.imageData, action.payload.partner_id);
     }
     catch ( error ) {
         console.log( 'Error in deletePartner', error );
