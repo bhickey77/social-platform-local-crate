@@ -63,6 +63,7 @@ class PartnerPage extends Component {
     // const { spacing } = this.state;
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     let partnerInfo = this.props && this.props.partner && this.props.partner.partner && this.props.partner.partner;
+  
     return (
       <div>
         <Nav />
@@ -70,15 +71,18 @@ class PartnerPage extends Component {
           <Paper className={classes.root} elevation={1}>
             <div className="partner-page-header">
               <img id="partnerPagePhoto"
-                src="/images/background.jpg"
+                src={partnerInfo.is_default_image ? "images/FreshnessAssuredBy.png" : partnerInfo.partner_media_url}
                 alt="Profile-Photo" />
-            <UpdatePartnerPicture />
+            {
+              (partnerInfo.id === this.props.user.userInfo.partner_id) &&
+                <UpdatePartnerPicture />
+            }
             </div>
-            <div className="partner-page-header">
-              <Typography variant="headline" component="h3">
-                <h4>{partnerInfo.name}</h4>
+            <div className="partner-page-header2">
+              <Typography variant="headline" component="h2">
+                <h2>{partnerInfo.name}</h2>
               </Typography>
-              <Typography component="p">
+              <Typography component="h4">
                 <h4>{partnerInfo.city + ', ' + partnerInfo.state}</h4>
               </Typography>
             </div>

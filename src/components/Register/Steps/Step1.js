@@ -105,10 +105,7 @@ class Step1 extends Component {
                                 ))}
                             </TextField>
                             <br/>
-                            <Button variant="contained" color="primary" >
-                                Cancel
-                            </Button>
-                            <Button variant="contained" color="primary" onClick={this.props.nextStep}>
+                            <Button color="primary" onClick={this.props.nextStep}>
                                 Next
                             </Button>
                         </div>

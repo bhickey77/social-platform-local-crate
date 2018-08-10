@@ -282,7 +282,17 @@ div.edit-media-container > div > div.uppy-Root uppy-DragDrop-container uppy-Drag
     display: inline-block;
 }
 
+.partner-page-header2 {
+    display: inline-block;
+    margin-left: 30px;
+}
+
 .partner-page-header-container {
     margin-left: 4%;
     margin-right: 4%;
+}
+
+.social-crate {
+    font-family: Clarendon-Text-Pro;
+    margin: 0 auto;
 }

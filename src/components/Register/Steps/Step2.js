@@ -41,13 +41,10 @@ class RegisterStep2 extends Component {
                                 handleChangeForPhone={this.props.handleChangeForPhone}
                             />
                             <br/>
-                            <Button variant="contained" color="primary" >
-                                Cancel
-                            </Button>
-                            <Button variant="contained" color="primary" onClick={this.props.previousStep}>
+                            <Button color="primary" onClick={this.props.previousStep}>
                                 Previous Step
                             </Button>
-                            <Button variant="contained" color="primary" onClick={this.props.nextStep}>
+                            <Button color="primary" onClick={this.props.nextStep}>
                                 Next Step
                             </Button>
                         </div>
