@@ -17,6 +17,7 @@ class HideIcon extends Component {
 
         let isAdmin = null;
 
+        if(this.props.user) {
             if(this.props.user.userName === null) {
                 isAdmin = null;
             }
@@ -38,6 +39,7 @@ class HideIcon extends Component {
                     )}
                 </div>
             }    
+        }
 
         return(
             <div>

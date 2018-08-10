@@ -70,18 +70,14 @@ class PostFilterConditional extends Component {
         }
 
         return (
-            <div>
-                <div>
-                    {postFilter}
-                </div>
-                <div>
-                    {clearButton}
-                    <Button onClick={this.props.handleSubmit}>
-                        Filter
-                    </Button>
-                </div>
-            </div>
-        )
+            <span>                    
+                {postFilter}
+
+                {clearButton}
+                <Button onClick={this.props.handleSubmit}>
+                    Filter
+                </Button>
+            </span>        )
     }
 }
 
