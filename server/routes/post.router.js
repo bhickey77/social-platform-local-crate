@@ -109,7 +109,8 @@ router.get('/all', (req, res) => {
         let queryText = `SELECT post.title, post.content, post.media_key, 
                             post.date_created, post.is_marked_as_hidden, post.id as post_id, 
                             partner.name as partner_name, post.partner_id as partner_id,
-                            partner.media_key as partner_media_key
+                            partner.media_key as partner_media_key,
+                            partner.is_default_image
                          FROM post
                          INNER JOIN partner 
                          ON post.partner_id=partner.id 

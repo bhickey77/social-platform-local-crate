@@ -63,7 +63,8 @@ class PartnerPage extends Component {
     // const { spacing } = this.state;
     const posts = this.props && this.props.post && this.props.post.posts || [];       
     let partnerInfo = this.props && this.props.partner && this.props.partner.partner && this.props.partner.partner;
-  
+    let currentLoggedInPartnerId = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id;
+
     return (
       <div>
         <Nav />
@@ -74,7 +75,7 @@ class PartnerPage extends Component {
                 src={partnerInfo.is_default_image ? "images/FreshnessAssuredBy.png" : partnerInfo.partner_media_url}
                 alt="Profile-Photo" />
             {
-              (partnerInfo.id === this.props.user.userInfo.partner_id) &&
+              (partnerInfo.id === currentLoggedInPartnerId) &&
                 <UpdatePartnerPicture />
             }
             </div>
