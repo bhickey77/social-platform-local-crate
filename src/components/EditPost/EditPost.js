@@ -150,7 +150,6 @@ class EditPost extends Component {
   }
 
   setImage = imageData => {
-    console.log(`SETTING IMAGE: `, imageData);
     const reader = new FileReader();
     reader.onloadend = () => {
       console.log(reader.result);
@@ -172,9 +171,6 @@ class EditPost extends Component {
     const { classes } = this.props;
 
     let editable = false;
-    console.log('EDITPOST COMPONENT: ', this.props.post.partner_id);
-    console.log('EDITPOST COMPONENT: ', this.props.user);
-    
     editable = this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id === this.props.post.partner_id;
     const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
 

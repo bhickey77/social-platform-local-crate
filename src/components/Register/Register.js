@@ -33,7 +33,7 @@ class Register extends Component {
         password1: '',
         password2: ''
       },
-      step: 1
+      step: 1,
     }
   }
 
@@ -45,6 +45,7 @@ class Register extends Component {
         }
       })
       this.props.dispatch(triggerRegistration(this.state.partner, this.state.person));
+      this.props.dispatch({ type: 'JUST_REGISTERED'});
       this.props.history.push('/');
     } else {
       this.setState({person: {
