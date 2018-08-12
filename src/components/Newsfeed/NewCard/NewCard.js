@@ -58,12 +58,6 @@ class NewCard extends Component {
         this.setState(state => ({ expanded: !state.expanded }));
     };
 
-    handleAvatarClick = (id) => {
-        console.log('on avatar click', id);
-        
-
-    }
-
     dateConvert = ( date ) => {
         return moment().utc( date ).format("MMM Do YYYY");
     }
@@ -94,7 +88,6 @@ class NewCard extends Component {
                     <Link to={`/partner/${this.props.post.partner_id}`}>
                          <Avatar
                           aria-label="Recipe" 
-                          onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}} 
                           src={avatar_url}
                         />   
                     </Link>

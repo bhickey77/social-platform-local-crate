@@ -11,7 +11,7 @@ import red from '@material-ui/core/colors/red';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Image from 'material-ui-image';
 
 const styles = theme => ({
@@ -80,11 +80,12 @@ class PostDialog extends Component {
           <Card className='postDialog'>
             <CardHeader
               avatar={
-              <Avatar
-                aria-label="Recipe" 
-                onClick={() => {this.handleAvatarClick(this.props.post.partner_id)}} 
-                src={avatar_url}
-              />   
+              <Link to={`/partner/${this.props.post.partner_id}`}>
+                <Avatar
+                  aria-label="Recipe" 
+                  src={avatar_url}
+                />   
+              </Link>
               }
               action={
                 <EditPost post={this.props.post}
