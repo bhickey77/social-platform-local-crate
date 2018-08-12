@@ -124,6 +124,8 @@ class AdminPosts extends Component {
               />
             </CardContent>
           </Card>
+          <br/>
+          <br/>
         <Table className="postTable">
           <TableHead>
           <TableRow style={{ 
