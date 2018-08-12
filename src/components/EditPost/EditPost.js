@@ -18,6 +18,8 @@ import { TextField } from '../../../node_modules/@material-ui/core';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
 import EditImageBox from '../EditImageBox/EditImageBox';
 import DeletePost from '../DeletePost/DeletePost';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 const styles = theme => ({
     card: {
@@ -144,6 +146,8 @@ class EditPost extends Component {
     console.log('EDITPOST COMPONENT: ', this.props.user);
     
     editable = this.props.user && this.props.user.userInfo && this.props.user.userInfo.partner_id === this.props.post.partner_id;
+    const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
+
 
     return (
       <div>
@@ -161,11 +165,15 @@ class EditPost extends Component {
                 <Card className='postDialog'>
                   <CardHeader
                       avatar={
-                      <Avatar aria-label="Recipe" className={classes.avatar}>
-                          R
-                      </Avatar>
+                        <Link to={`/partner/${this.props.post.partner_id}`}>
+                          <Avatar
+                            aria-label="Recipe" 
+                            src={avatar_url}
+                          />   
+                        </Link>
                       }
-                      title={this.state.post.partner_name}
+                      title={this.props.post.partner_name}
+                      subheader={String(this.dateConvert(this.props.post.date_created))}
                   >
                   </CardHeader>
                   <CardContent>
