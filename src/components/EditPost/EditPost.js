@@ -20,6 +20,8 @@ import EditImageBox from '../EditImageBox/EditImageBox';
 import DeletePost from '../DeletePost/DeletePost';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 const styles = theme => ({
     card: {
@@ -66,7 +68,23 @@ class EditPost extends Component {
     partner: this.props.partner,
     imageHasBeenUpdated: false,
     areChanges: false,
+    snackOpen: false,
   };
+
+  handleCloseSnack = () => {
+    this.setState({ 
+      ...this.state,
+      snackOpen: false,
+     });
+  };
+
+  handleSnackOpen = () => {
+    this.setState({ 
+      ...this.state,
+      snackOpen: true,
+     });
+  };
+
 
   handleClickOpen = () => {
     this.setState({
@@ -98,6 +116,13 @@ class EditPost extends Component {
     return moment().utc( date ).format("MMM Do YYYY");
   }
 
+  handleDialogAndSnack = () => {
+    this.setState({
+      open: false,
+      snackOpen: true,
+    })
+  }
+
   edit = () => {
       this.date = new Date();
       this.setState({
@@ -109,7 +134,7 @@ class EditPost extends Component {
       });
       const postToSetOnDOM = {
         ...this.state.post,
-        media_url: this.state.imageUrl,
+        media_url: this.state.imageHasBeenUpdated ? this.state.imageUrl : this.state.post.media_url,
       }
       this.props.editPostOnDOM(postToSetOnDOM);
       this.props.dispatch({ 
@@ -117,7 +142,7 @@ class EditPost extends Component {
         payload: this.state.post, 
         image: this.state.imageHasBeenUpdated ? this.state.post.newImage: false,
       });
-      this.handleClose();
+      this.handleDialogAndSnack();
   }
 
   dateConvert = ( date ) => {
@@ -223,6 +248,16 @@ class EditPost extends Component {
                   </CardContent>
                 </Card>
             </Dialog>
+            <Snackbar
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              open={this.state.snackOpen}
+              onClose={this.handleCloseSnack}
+              autoHideDuration={2500}
+              ContentProps={{
+                'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Post Updated!</span>}
+            />
           </div>
           }
       </div>

@@ -14,6 +14,8 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import red from '@material-ui/core/colors/red';
 
+import Snackbar from '@material-ui/core/Snackbar';
+
 //UPLOAD STAGES
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
@@ -59,9 +61,24 @@ class UploadCard extends Component {
       currentUploadStage: 1,
       postTitle: '',
       postContent: '',
+      snackOpen: false,
     }, 
     {expanded: false};
   }
+
+  handleCloseSnack = () => {
+    this.setState({ 
+      ...this.state,
+      snackOpen: false,
+     });
+  };
+
+  handleSnackOpen = () => {
+    this.setState({ 
+      ...this.state,
+      snackOpen: true,
+     });
+  };
 
   handlePostCancel = () => {
     this.setState({ 
@@ -147,6 +164,7 @@ class UploadCard extends Component {
         if(window.location.hash.split('/')[1] === 'partner'){
           this.props.dispatch({type: 'GET_PARTNER', payload: window.location.hash.split('/')[2] });
         }
+        this.handleSnackOpen();
 
       })
       .catch(error => {
@@ -192,6 +210,16 @@ class UploadCard extends Component {
             />
         }
         </Dialog>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={this.state.snackOpen}
+          onClose={this.handleCloseSnack}
+          autoHideDuration={2500}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Post Created!</span>}
+        />
       </div>
     );
   }

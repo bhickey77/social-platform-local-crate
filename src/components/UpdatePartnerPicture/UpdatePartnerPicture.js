@@ -14,6 +14,9 @@ import UploadStage1 from './UploadStage1/UploadStage1';
 
 import { triggerProfileImageUpload } from '../../redux/actions/partnerActions';
 
+import Snackbar from '@material-ui/core/Snackbar';
+
+
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -27,8 +30,23 @@ class UpdatePartnerPicture extends Component {
       open: false,
       imageUrl: false,
       imageData: null, 
+      snackOpen: false,
     }
   }
+
+  handleCloseSnack = () => {
+    this.setState({ 
+      ...this.state,
+      snackOpen: false,
+     });
+  };
+
+  handleSnackOpen = () => {
+    this.setState({ 
+      ...this.state,
+      snackOpen: true,
+     });
+  };
 
   handleClickOpen = () => {
     this.setState({
@@ -71,6 +89,7 @@ class UpdatePartnerPicture extends Component {
   updateImage = () => {
     this.props.dispatch(triggerProfileImageUpload(this.state.imageData, this.props.user.userInfo.partner_id));
     this.props.updateProfilePictureOnDOM(this.state.imageUrl);
+    this.handleSnackOpen();
     this.setState({
       open: false,
       imageUrl: '',
@@ -105,6 +124,16 @@ class UpdatePartnerPicture extends Component {
           imageUrl = {imageUrl}
         />
         </Dialog>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={this.state.snackOpen}
+          onClose={this.handleCloseSnack}
+          autoHideDuration={2500}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Profile Photo Updated!</span>}
+        />
       </div>
     );
   }
