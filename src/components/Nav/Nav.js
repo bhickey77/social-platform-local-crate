@@ -90,12 +90,12 @@ class Nav extends Component {
             </Typography>
             {
               (user_type === 'admin') && 
-                [<Link style={{ textDecoration: 'none' }} to="/admin/accounts" key='accounts'>
-                  <Button className={classes.button}>
-                    Partner accounts
-                  </Button>
-                </Link>,
-                <Link style={{ textDecoration: 'none' }} to="/admin/posts" key='posts'>
+                // [<Link style={{ textDecoration: 'none' }} to="/admin/accounts" key='accounts'>
+                //   <Button className={classes.button}>
+                //     Partner accounts
+                //   </Button>
+                // </Link>,
+                [<Link style={{ textDecoration: 'none' }} to="/admin/posts" key='posts'>
                   <Button className={classes.button}>
                     Posts
                   </Button>

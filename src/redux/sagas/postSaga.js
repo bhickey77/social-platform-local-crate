@@ -71,6 +71,7 @@ function* editPost( action ) {
         console.log('edit payload', action.payload);
         yield sendEditPost(action.payload, action.image);
         yield put({ type: 'FETCH_POSTS' })
+        yield put({ type: 'FETCH_ALL_POSTS' });
     }
     catch ( error ) {
         console.log( 'Error in postList', error );
