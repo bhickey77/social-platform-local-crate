@@ -70,6 +70,7 @@ class UpdatePartnerPicture extends Component {
 
   updateImage = () => {
     this.props.dispatch(triggerProfileImageUpload(this.state.imageData, this.props.user.userInfo.partner_id));
+    this.props.updateProfilePictureOnDOM(this.state.imageUrl);
     this.setState({
       open: false,
       imageUrl: '',

@@ -58,6 +58,13 @@ class PartnerPage extends Component {
     let isAdmin = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo && (this.props.user.userInfo.user_type === 'admin');
   }
   
+  updateProfilePictureOnDOM = image_url => {
+    this.setState({
+      ...this.state,
+      image_url: image_url,
+    })
+  }
+
   render() {
     let isAdmin = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo && (this.props.user.userInfo.user_type === 'admin');
     const { classes } = this.props;
@@ -68,6 +75,10 @@ class PartnerPage extends Component {
     if(partnerUrl && partnerUrl.substring(0,3) !== 'http'){
       partnerUrl = 'https://' + partnerUrl;
     }
+    if(this.state.image_url){
+      partnerInfo.partner_media_url = this.state.image_url;
+    }
+
     return (
       <div>
         <Nav />
@@ -79,7 +90,7 @@ class PartnerPage extends Component {
                 alt="Profile-Photo" />
             {
               (partnerInfo.id === currentLoggedInPartnerId) &&
-                <UpdatePartnerPicture />
+                <UpdatePartnerPicture updateProfilePictureOnDOM={this.updateProfilePictureOnDOM}/>
             }
             </div>
             <div className="partner-page-header2">
