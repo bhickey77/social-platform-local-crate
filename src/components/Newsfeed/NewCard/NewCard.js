@@ -49,6 +49,12 @@ const styles = theme => ({
   });
 
 class NewCard extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            post: false,
+        }
+    }
 
     state = {
         expanded: false,
@@ -74,10 +80,17 @@ class NewCard extends Component {
         }
     }
 
+    editPostOnDOM = newPost => {
+        this.setState({
+            ...this.state,
+            post: newPost,
+        })
+    }
+
     render() {
         const { classes } = this.props;
-        const avatar_url = (this.props.post.is_default_image) ? "images/FreshnessAssuredBy.png" : this.props.post.partner_media_url;
-
+        const post = this.state.post || this.props.post; 
+        const avatar_url = (post.is_default_image) ? "images/FreshnessAssuredBy.png" : post.partner_media_url;
         return (
 
             <div className='upload-card'>
@@ -85,7 +98,7 @@ class NewCard extends Component {
                 <CardHeader
                     className={classes.header}
                     avatar={
-                    <Link to={`/partner/${this.props.post.partner_id}`}>
+                    <Link to={`/partner/${post.partner_id}`}>
                          <Avatar
                           aria-label="Recipe" 
                           src={avatar_url}
@@ -94,26 +107,28 @@ class NewCard extends Component {
                     }
                     action={
                         <div>
-                        <EditPost post={this.props.post}
-                        user={this.props.user}
-                        handleChange={this.handleChange}/>
-                        <HideIcon post={this.props.post}
-                        user={this.props.user}/>
+                        <EditPost post={post}
+                            user={this.props.user}
+                            handleChange={this.handleChange}
+                            editPostOnDOM={this.editPostOnDOM}
+                        />
+                        <HideIcon post={post}
+                            user={this.props.user}/>
                         </div>
                     }
-                    title={this.props.post.partner_name}
-                    subheader={String(this.dateConvert(this.props.post.date_created))}
+                    title={post.partner_name}
+                    subheader={String(this.dateConvert(post.date_created))}
                 />
-                <PostDialog post={this.props.post}
+                <PostDialog post={post}
                     user={this.props.user}
                     dateConvert={this.dateConvert}/>
                 <CardContent>
                 <Typography component="p">
-                    {this.props.post.title}
+                    {post.title}
                     </Typography>
                     <hr/>
                     <Typography component="p">
-                        {this.contentTrimmer(this.props.post.content)}
+                        {this.contentTrimmer(post.content)}
                     </Typography>
                 </CardContent>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

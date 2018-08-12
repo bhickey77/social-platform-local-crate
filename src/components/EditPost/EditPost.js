@@ -107,6 +107,11 @@ class EditPost extends Component {
           date_updated: this.dateConvert(this.date),
         } 
       });
+      const postToSetOnDOM = {
+        ...this.state.post,
+        media_url: this.state.imageUrl,
+      }
+      this.props.editPostOnDOM(postToSetOnDOM);
       this.props.dispatch({ 
         type: POST_ACTIONS.EDIT_POST,
         payload: this.state.post, 
