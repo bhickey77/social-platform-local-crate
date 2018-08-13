@@ -7,14 +7,6 @@ Bill has the AWS secrets when you need to add these to your file.
 
 We **STONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
-## Prerequisites
-
-Before you get started, make sure you have the following software installed on your computer:
-
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
-
 ## Create database and table
 
 Create a new database called `prime_app` and create a `person` table:
