@@ -7,14 +7,6 @@ Bill has the AWS secrets when you need to add these to your file.
 
 We **STONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
-## Prerequisites
-
-Before you get started, make sure you have the following software installed on your computer:
-
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
-
 ## Create database and table
 
 Create a new database called `prime_app` and create a `person` table:
@@ -57,12 +49,6 @@ To debug, you will need to run the client-side separately from the server. Start
 Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
 
 ![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Linting
-
-The Airbnb ESLint for react is a part of this project. If you would like to take advantage of this in VS Code, you can add the `ESLint` extension. Click the `Extensions` button (the button right below the `Debug`) and search for `ESLint`. Click `install` for the first result and then click `Reload`. Then it should be all set up!
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
 
 ## Production Build
 
