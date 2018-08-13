@@ -58,12 +58,6 @@ Then make sure `Launch Program` is selected from the dropdown, then click the gr
 
 ![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
 
-## Linting
-
-The Airbnb ESLint for react is a part of this project. If you would like to take advantage of this in VS Code, you can add the `ESLint` extension. Click the `Extensions` button (the button right below the `Debug`) and search for `ESLint`. Click `install` for the first result and then click `Reload`. Then it should be all set up!
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
 ## Production Build
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
