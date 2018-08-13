@@ -89,7 +89,8 @@ class PostDialog extends Component {
               }
               action={
                 <EditPost post={this.props.post}
-                user={this.props.user}/>
+                user={this.props.user}
+                editPostOnDOM={this.props.editPostOnDOM} />
               }
               title={this.props.post.title}
               subheader={String(this.props.dateConvert(this.props.post.date_created))}

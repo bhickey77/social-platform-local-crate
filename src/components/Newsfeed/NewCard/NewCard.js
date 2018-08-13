@@ -121,7 +121,9 @@ class NewCard extends Component {
                 />
                 <PostDialog post={post}
                     user={this.props.user}
-                    dateConvert={this.dateConvert}/>
+                    dateConvert={this.dateConvert}
+                    editPostOnDOM={this.editPostOnDOM}
+                />
                 <CardContent>
                 <Typography component="p">
                     {post.title}
