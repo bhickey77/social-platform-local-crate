@@ -6,7 +6,7 @@ const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploa
 
 
 const multer  = require('multer');
-const upload = multer({ dest: '../uploads/' });
+const upload = multer({ dest: '/app/tmp/uploads/' });
 
 const { updateProfilePicture, generateSignedUrlForCurrentUser } = require('../modules/uploadPost');
 
