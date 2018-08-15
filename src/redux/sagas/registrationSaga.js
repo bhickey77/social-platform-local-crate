@@ -6,7 +6,7 @@ function* registerUser( action ) {
       yield call(axios.post, '/api/user/register/', action.payload);
     }
     catch {
-        console.log( 'Error in registerUser', error );
+        // console.log( 'Error in registerUser', error );
     }
 }
 

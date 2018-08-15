@@ -20,15 +20,16 @@ router.put('/:id', upload.single('file'), (req, res) => {
 
 router.put('/hide/:id', (req, res) => {
     // PUT for editing whether a post is hidden
-    console.log('HIDING ID: ', req.user);
+    // console.log('HIDING ID: ', req.user);
     
     if(req.isAuthenticated() && isAdmin(req.user)){
-        console.log( req.body )
+        // console.log( req.body )
         queryText = `UPDATE post SET is_marked_as_hidden = $1 where id = $2;`;
         pool.query(queryText, [!req.body.post_is_hidden, req.params.id]).then(result => {
             res.sendStatus(200);
         }).catch(error => {
-            console.log('Error handling PUT for hide post:', error);});
+            // console.log('Error handling PUT for hide post:', error);
+        });
     } else {
         res.sendStatus(403);
     }
@@ -41,15 +42,16 @@ router.delete('/:id', (req, res) => {
         pool.query(queryText, [req.params.id]).then(result => {
             res.sendStatus(200);
         }).catch(error => {
-            console.log('Error handling DELETE for /deletePost:', error);});
+            // console.log('Error handling DELETE for /deletePost:', error);
+        });
     } else {
         res.sendStatus(403);
     }
 });
 
 router.post('/', upload.single('file'), (req, res) => {
-    console.log('hit the post post route: ');
-    console.log(req.user);
+    // console.log('hit the post post route: ');
+    // console.log(req.user);
     
     if (req.isAuthenticated()){
         uploadPost(req, res);
@@ -74,7 +76,7 @@ router.get('/', (req, res) => {
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
             res.sendStatus(500);
         })
 });
@@ -82,7 +84,7 @@ router.get('/', (req, res) => {
 router.get('/filter/:filter/:filteredBy', (req, res) => {
     // GET for FILTERED posts - admin view (shows posts based on filter)
         if(req.isAuthenticated() && isAdmin(req.user)){
-            console.log('filter test')
+            // console.log('filter test')
             let queryText = `SELECT post.title, post.content, post.media_key, post.date_created, post.is_marked_as_hidden, partner.name as partner_name,
                             partner.media_key as partner_media_key, partner.is_default_image
                             FROM post
@@ -96,7 +98,7 @@ router.get('/filter/:filter/:filteredBy', (req, res) => {
             pool.query(queryText,[req.params.filteredBy]).then((result) => {
                 generateSignedUrls(res, result.rows);
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
                 res.sendStatus(500);
             })
         
@@ -120,7 +122,7 @@ router.get('/all', (req, res) => {
         pool.query(queryText).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
             res.sendStatus(500);
         })
     } else {
@@ -136,7 +138,7 @@ router.get('/:id', (req, res) => {
         pool.query(queryText, [req.params.id]).then((result) => {
             generateSignedUrls(res, result.rows);
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
             res.sendStatus(500);
         })
 });

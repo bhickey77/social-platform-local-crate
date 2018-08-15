@@ -25,7 +25,7 @@ class CardsGrid extends Component {
 
   render() {
     const posts = this.props && this.props.post && this.props.post.unHiddenPosts || [];
-    console.log(`POSTSSSS: ` , posts);
+    // console.log(`POSTSSSS: ` , posts);
     const isSignedIn = this.props && this.props.user && this.props.user.userName || false;
     let userConditional = null;
 

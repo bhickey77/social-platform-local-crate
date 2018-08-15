@@ -6,11 +6,11 @@ import { PERSON_ACTIONS } from '../actions/personActions';
 function* getPersons( action ) {
     try {
         const personResponse = yield call( axios.get, `/api/person` );
-        console.log( 'personResponse', personResponse.data )
+        // console.log( 'personResponse', personResponse.data )
         yield put({ type: 'SET_PERSONS', payload: personResponse.data });
     }
     catch ( error ) {
-        console.log( 'Error in getPersons', error );
+        // console.log( 'Error in getPersons', error );
     }
 }
 
@@ -21,7 +21,7 @@ function* addPerson( action ) {
         yield put({ type: 'FETCH_PERSONS' })
     }
     catch ( error ) {
-        console.log( 'Error in addPerson', error );
+        // console.log( 'Error in addPerson', error );
     }
 }
 
@@ -31,7 +31,7 @@ function* hidePerson( action ) {
         yield put({ type: 'FETCH_PERSONS' })
     }
     catch ( error ) {
-        console.log( 'Error in editPerson', error );
+        // console.log( 'Error in editPerson', error );
     }
 }
 
@@ -42,7 +42,7 @@ function* deletePerson( action ) {
         yield put({ type: 'FETCH_PERSONS' })
     }
     catch ( error ) {
-        console.log( 'Error in deletePerson', error );
+        // console.log( 'Error in deletePerson', error );
     }
 }
 

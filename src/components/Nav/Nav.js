@@ -72,7 +72,7 @@ class Nav extends Component {
     this.props && this.props.user && this.props.user.userName && (isSignedIn = true);
     let user_type = this.props && this.props.user && this.props.user.userInfo && this.props.user.userInfo.user_type || false;
     const currentRoute = window.location.hash.split('/')[1];
-    console.log('user', this.props.user)
+    // console.log('user', this.props.user)
     return (
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>

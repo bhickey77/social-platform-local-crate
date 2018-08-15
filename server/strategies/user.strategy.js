@@ -11,7 +11,7 @@ passport.deserializeUser((id, done) => {
   pool.query('SELECT id, username, user_type FROM person WHERE id = $1', [id]).then((result) => {
     // Handle Errors
     const user = result && result.rows && result.rows[0];
-    console.log(result.rows);
+    // console.log(result.rows);
     
     if (!user) {
       // user not found
@@ -21,7 +21,7 @@ passport.deserializeUser((id, done) => {
       done(null, user);
     }
   }).catch((err) => {
-    console.log('query err ', err);
+    // console.log('query err ', err);
     done(err);
   });
 });
@@ -45,7 +45,7 @@ passport.use('local', new LocalStrategy({
           done(null, false);
         }
       }).catch((err) => {
-        console.log('error', err);
+        // console.log('error', err);
         done(null, {});
       });
   })));

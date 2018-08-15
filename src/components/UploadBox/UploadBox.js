@@ -13,7 +13,7 @@ class UploadBox extends Component {
     .on('upload', file => {
       let fileKey = Object.keys(this.uppy.state.files)[0];
       let imageData = this.uppy.state.files[fileKey].data;
-      console.log('UPPY STATE: ', imageData);
+      // console.log('UPPY STATE: ', imageData);
       this.props.setImage(imageData);
       this.uppy.state.files = [];
     })

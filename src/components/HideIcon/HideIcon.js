@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 // Material UI
 import Button from '@material-ui/core/Button';
 
+
 class HideIcon extends Component {
 
     hidePost = (post_is_hidden, post_id) => () => {
-        console.log( 'hidden state', this.state )
+        // console.log( 'hidden state', this.state )
         this.props.dispatch({ type: 'HIDE_POST', payload: {
             post_is_hidden,
             post_id,

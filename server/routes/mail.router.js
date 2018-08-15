@@ -18,9 +18,9 @@ let transporter = nodemailer.createTransport(transport)
   
   transporter.verify((error, success) => {
     if (error) {
-      console.log(error);
+      // console.log(error);
     } else {
-      console.log('Server is ready to take messages');
+      // console.log('Server is ready to take messages');
     }
   });
 
@@ -43,9 +43,9 @@ router.post('/send', (req, res, next) => {
 
     transporter.sendMail(mail, (err, data) => {
       if (err) {
-        console.log('error sending mail');
+        // console.log('error sending mail');
       } else {
-        console.log('successfully sent mail');
+        // console.log('successfully sent mail');
       }
     })
   } else {

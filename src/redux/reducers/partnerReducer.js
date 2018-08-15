@@ -4,7 +4,7 @@ import { PARTNER_ACTIONS } from '../actions/partnerActions';
 const partners = ( state = [], action ) => {
     switch ( action.type ) {
         case PARTNER_ACTIONS.SET_PARTNERS :
-        console.log( 'partners', action.payload)
+        // console.log( 'partners', action.payload)
         return action.payload;
         default:
             return state;
@@ -14,7 +14,7 @@ const partners = ( state = [], action ) => {
 const partner = ( state = [], action ) => {
     switch ( action.type ) {
         case PARTNER_ACTIONS.SET_PARTNER :
-            console.log( 'partner', action.payload)
+            // console.log( 'partner', action.payload)
             return action.payload;
         default:
             return state;
@@ -24,7 +24,7 @@ const partner = ( state = [], action ) => {
 const partnerPosts = ( state = [], action ) => {
     switch ( action.type ) {
         case PARTNER_ACTIONS.SET_PARTNER_POSTS:
-            console.log( 'partner', action.payload)
+            // console.log( 'partner', action.payload)
             return action.payload;
         default:
             return state;

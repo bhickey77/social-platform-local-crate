@@ -41,11 +41,10 @@ class Newsfeed extends Component {
   };
 
   componentDidMount() {
-    console.log(`PREVIOUS LOCATION: `, this.props.history);
-    
+    // console.log(`PREVIOUS LOCATION: `, this.props.history);
     this.props.dispatch(clearError());
     this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS });
-    console.log(this.props.justRegistered);
+    // console.log(this.props.justRegistered);
     
     if(this.props.justRegistered.justRegistered){
       this.handleSnackOpen();

@@ -13,6 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Slide from '@material-ui/core/Slide';
 
+
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -47,7 +48,7 @@ class Login extends Component {
 
   login = (event) => {
     event.preventDefault();
-    console.log('login');
+    // console.log('login');
 
     if (this.state.username === '' || this.state.password === '') {
       this.props.dispatch(formError());

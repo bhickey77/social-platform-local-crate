@@ -56,7 +56,7 @@ class DeletePost extends Component {
         open: true,
         post: this.props.post
     });
-    console.log(this.state.post);
+    // console.log(this.state.post);
   };
 
   handleClose = () => {

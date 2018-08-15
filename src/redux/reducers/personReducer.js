@@ -4,7 +4,7 @@ import { PERSON_ACTIONS } from '../actions/personActions';
 const persons = ( state = [], action ) => {
     switch ( action.type ) {
         case PERSON_ACTIONS.SET_PERSONS :
-        console.log( 'persons', action.payload)
+        // console.log( 'persons', action.payload)
             return action.payload;
         default:
             return state;

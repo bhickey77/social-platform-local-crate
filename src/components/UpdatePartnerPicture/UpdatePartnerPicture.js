@@ -60,10 +60,10 @@ class UpdatePartnerPicture extends Component {
   }
 
   setImage = (imageData) => {
-    console.log(`SETTING IMAGE: `, imageData);
+    // console.log(`SETTING IMAGE: `, imageData);
     const reader = new FileReader();
     reader.onloadend = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       this.setState({
         ...this.state,
         imageUrl: reader.result,

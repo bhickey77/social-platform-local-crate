@@ -41,7 +41,7 @@ function* registerUser(action) {
       type: LOGIN_ACTIONS.LOGIN_REQUEST_DONE,
     });
   } catch (error) {
-    console.log(`error with the register user saga: `, error);
+    // console.log(`error with the register user saga: `, error);
   }
 }
 
@@ -54,7 +54,7 @@ function* logoutUser(action) {
     });
     window.location.hash = '#/newsfeed';
   } catch (error) {
-    console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
+    // console.log('LOGOUT FAILED -- CHECK YOUR SERVER', error);
   }
 }
 

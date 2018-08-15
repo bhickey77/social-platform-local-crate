@@ -7,11 +7,11 @@ import { updateProfileImage } from '../requests/partnerRequests';
 function* getPartners( action ) {
     try {
         const partnerResponse = yield call( axios.get, `/api/partner` );
-        console.log( 'partnerResponse', partnerResponse.data )
+        // console.log( 'partnerResponse', partnerResponse.data )
         yield put({ type: 'SET_PARTNERS', payload: partnerResponse.data });
     }
     catch ( error ) {
-        console.log( 'Error in getPartners', error );
+        // console.log( 'Error in getPartners', error );
     }
 }
 
@@ -24,7 +24,7 @@ function* getPartner( action ) {
         yield put({ type: PARTNER_ACTIONS.SET_PARTNER_POSTS, payload: partnerPosts.data });
     }
     catch ( error ) {
-        console.log( 'Error in getPartner', error );
+        // console.log( 'Error in getPartner', error );
     }
 }
 
@@ -35,7 +35,7 @@ function* addPartner( action ) {
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {
-        console.log( 'Error in addPartner', error );
+        // console.log( 'Error in addPartner', error );
     }
 }
 
@@ -45,7 +45,7 @@ function* hidePartner( action ) {
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {
-        console.log( 'Error in editPartner', error );
+        // console.log( 'Error in editPartner', error );
     }
 }
 
@@ -56,7 +56,7 @@ function* deletePartner( action ) {
         yield put({ type: 'FETCH_PARTNERS' })
     }
     catch ( error ) {
-        console.log( 'Error in deletePartner', error );
+        // console.log( 'Error in deletePartner', error );
     }
 }
 
@@ -66,7 +66,7 @@ function* editProfileImage( action ) {
         yield put({type: PARTNER_ACTIONS.GET_PARTNER, payload: action.payload.partner_id })
     }
     catch ( error ) {
-        console.log( 'Error in deletePartner', error );
+        // console.log( 'Error in deletePartner', error );
     }
 }
 
