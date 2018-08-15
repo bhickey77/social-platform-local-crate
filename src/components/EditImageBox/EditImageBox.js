@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+// Uppy
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
 

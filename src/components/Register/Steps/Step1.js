@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import classNames from 'classnames';
+
+// Material UI
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 
 

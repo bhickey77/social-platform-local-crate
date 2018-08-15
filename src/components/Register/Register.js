@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { triggerRegistration } from '../../redux/actions/loginActions';
+
+// Components
 import Step1 from './Steps/Step1';
 import Step2 from './Steps/Step2';
 import Step3 from './Steps/Step3';
+import Nav from '../Nav/Nav';
+
+// Material UI
 import Dialog from '@material-ui/core/Dialog';
 
-import Nav from '../Nav/Nav';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -128,5 +132,4 @@ class Register extends Component {
   }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(Register);

@@ -2,18 +2,16 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { triggerProfileImageUpload } from '../../redux/actions/partnerActions';
 
-// MATERIAL UI - Upload
+// COMPONENTS
+import UploadStage1 from './UploadStage1/UploadStage1';
+
+// MATERIAL UI 
 import Dialog from '@material-ui/core/Dialog';
 import UploadBox from '../UploadBox/UploadBox';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-
-//UPLOAD STAGES
-import UploadStage1 from './UploadStage1/UploadStage1';
-
-import { triggerProfileImageUpload } from '../../redux/actions/partnerActions';
-
 import Snackbar from '@material-ui/core/Snackbar';
 
 
@@ -21,7 +19,6 @@ const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
 });
-
 
 class UpdatePartnerPicture extends Component {
   constructor(props){

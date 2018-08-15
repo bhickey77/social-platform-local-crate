@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+
+// Components 
+import Phone from './Phone';
+
+// Material UI
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Phone from './Phone';
+
+
 class RegisterStep2 extends Component {
     render() {
         return (

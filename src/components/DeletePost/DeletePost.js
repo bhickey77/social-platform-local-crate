@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { POST_ACTIONS } from '../../redux/actions/postActions';
+
+// Material UI
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -9,21 +12,14 @@ import red from '@material-ui/core/colors/red';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { POST_ACTIONS } from '../../redux/actions/postActions';
 
 const styles = theme => ({
-    card: {
-    //   maxWidth: 1000,
-    },
-    card1: {
-    //   maxwidth: 400,
-    },
     dialog: {
       width: 1000,
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%', 
     },
     actions: {
       display: 'flex',

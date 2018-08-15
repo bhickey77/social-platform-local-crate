@@ -1,5 +1,7 @@
 import React from 'react';
 import MaskedInput from 'react-text-mask';
+
+// Material UI
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
@@ -36,8 +38,6 @@ TextMaskCustom.propTypes = {
   onChange: PropTypes.func.isRequired,
 
 };
-
-
 
 
 class FormattedInputs extends React.Component {

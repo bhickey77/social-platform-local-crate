@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+
+// Components
+import Nav from '../../components/Nav/Nav';
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -41,5 +43,4 @@ class InfoPage extends Component {
   }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(InfoPage);

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+// Material UI
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -21,7 +23,6 @@ const styles = theme => ({
 });
 
 class PostFilterSelect extends Component {
-
 
     render() {
         const { classes } = this.props;

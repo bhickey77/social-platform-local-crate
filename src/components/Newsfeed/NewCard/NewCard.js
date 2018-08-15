@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+// Components
 import PostDialog from '../../PostDialog/PostDialog';
 import EditPost from '../../EditPost/EditPost';
 import HideIcon from '../../HideIcon/HideIcon';
-import PropTypes from 'prop-types';
+
+// Moment JS
 import moment from 'moment';
+
+// Material UI
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
@@ -16,9 +23,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-
 
 
 const styles = theme => ({
@@ -31,7 +35,7 @@ const styles = theme => ({
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%', 
     },
     actions: {
       display: 'flex',

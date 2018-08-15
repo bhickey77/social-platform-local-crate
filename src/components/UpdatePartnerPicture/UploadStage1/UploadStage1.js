@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+// Components
+import UploadBox from '../../UploadBox/UploadBox';
+
 // MATERIAL UI
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import UploadBox from '../../UploadBox/UploadBox';
 
 const imageStyle = {
   margin: '0 auto',
@@ -18,7 +20,6 @@ const testImage = {
   margin: '0 auto',
   width: '100%',
   height: 'auto',
-  /* height: 250px; */
 }
 
 const imageContainerStyle = {

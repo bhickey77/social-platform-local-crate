@@ -15,6 +15,5 @@ export default function* rootSaga() {
     personSaga(),
     postSaga(),
     mailerSaga(),
-    // watchIncrementAsync()
   ]);
 }

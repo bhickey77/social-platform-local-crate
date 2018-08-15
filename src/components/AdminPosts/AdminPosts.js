@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import PostFilterSelect from '../AdminPostFilter/PostFilterSelect';
-import PostFilterConditional from '../AdminPostFilter/PostFilterConditional';
-import HideIcon from '../HideIcon/HideIcon';
 import { PARTNER_ACTIONS } from '../../redux/actions/partnerActions';
 import { POST_ACTIONS } from '../../redux/actions/postActions'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
-import moment from 'moment';
+
+// Components
+import PostFilterSelect from '../AdminPostFilter/PostFilterSelect';
+import PostFilterConditional from '../AdminPostFilter/PostFilterConditional';
+import HideIcon from '../HideIcon/HideIcon';
 import PostDialog from '../PostDialog/PostDialog';
+import Nav from '../Nav/Nav';
+
+// Moment JS
+import moment from 'moment';
+
+// Material UI
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,8 +25,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-// Components
-import Nav from '../Nav/Nav';
 
 const mapStateToProps = state => ({
   user: state.user,

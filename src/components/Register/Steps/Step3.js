@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+
+// Material UI
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 
 class RegisterStep3 extends Component {
     render() {
