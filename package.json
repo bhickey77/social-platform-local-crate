@@ -1,7 +1,7 @@
 {
   "name": "prime-solo-project",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "proxy": "http://localhost:8000",
   "dependencies": {
     "@material-ui/core": "^1.4.1",
