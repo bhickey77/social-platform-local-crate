@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { POST_ACTIONS } from '../../../redux/actions/postActions';
+
+// Components
 import NewCard from '../NewCard/NewCard';
 import UploadCard from '../../UploadCard/UploadCard';
-import { POST_ACTIONS } from '../../../redux/actions/postActions';
+
+// Material UI
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
 
 const mapStateToProps = state => ({
   user: state.user,

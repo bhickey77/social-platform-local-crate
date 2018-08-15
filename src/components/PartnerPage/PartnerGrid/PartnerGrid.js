@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { PARTNER_ACTIONS } from '../../../redux/actions/partnerActions';
+
+// Components
 import NewCard from '../../Newsfeed/NewCard/NewCard';
 import UploadCard from '../../UploadCard/UploadCard';
-import { PARTNER_ACTIONS } from '../../../redux/actions/partnerActions';
+
+// Material UI
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -13,9 +18,6 @@ const mapStateToProps = state => ({
 });
 
 class PartnerGrid extends Component {
-  // componentDidMount() {
-  //   this.props.dispatch({type: PARTNER_ACTIONS.GET_PARTNER});
-  // }
 
   render() {
     const posts = this.props && this.props.partner && this.props.partner.partnerPosts || [];

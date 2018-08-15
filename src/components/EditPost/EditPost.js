@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { TextField } from '../../../node_modules/@material-ui/core';
+import { POST_ACTIONS } from '../../redux/actions/postActions';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+// Components
+import EditImageBox from '../EditImageBox/EditImageBox';
+import DeletePost from '../DeletePost/DeletePost';
+
+// Moment JS
 import moment from 'moment';
+
+// Material UI
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
@@ -14,28 +25,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import { TextField } from '../../../node_modules/@material-ui/core';
-import { POST_ACTIONS } from '../../redux/actions/postActions';
-import EditImageBox from '../EditImageBox/EditImageBox';
-import DeletePost from '../DeletePost/DeletePost';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 import Snackbar from '@material-ui/core/Snackbar';
 
 
 const styles = theme => ({
-    card: {
-    //   maxWidth: 1000,
-    },
-    card1: {
-    //   maxwidth: 400,
-    },
     dialog: {
       width: 1000,
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%', 
     },
     actions: {
       display: 'flex',

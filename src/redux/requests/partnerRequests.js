@@ -9,7 +9,7 @@ export const updateProfileImage = (imageData, partner_id) => {
       'Content-Type': imageData.type,
     }})
     .then(response => {
-      console.log('successfully uploaded to the S3: ', response); // do something with the response
+      console.log('successfully uploaded to the S3: ', response); 
     })
     .catch(error => {
       console.log('error uploading file: ', error);

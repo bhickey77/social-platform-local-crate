@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+// Components
+import Login from '../Login/Login';
+import Logout from '../Logout/Logout';
+import AddNewPartner from '../AddNewPartner/AddNewPartner';
+
+// Material UI
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,11 +18,6 @@ import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Login from '../Login/Login';
-import Logout from '../Logout/Logout';
-
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import AddNewPartner from '../AddNewPartner/AddNewPartner';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -53,9 +55,6 @@ const styles = {
 };
 
 class Nav extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -90,11 +89,6 @@ class Nav extends Component {
             </Typography>
             {
               (user_type === 'admin') && 
-                // [<Link style={{ textDecoration: 'none' }} to="/admin/accounts" key='accounts'>
-                //   <Button className={classes.button}>
-                //     Partner accounts
-                //   </Button>
-                // </Link>,
                 [<Link style={{ textDecoration: 'none' }} to="/admin/posts" key='posts'>
                   <Button className={classes.button}>
                     Posts
@@ -102,11 +96,6 @@ class Nav extends Component {
                 </Link>,
                 <AddNewPartner key='new'/>]
             }
-              {/* <Link to="/Register">
-                <Button color="primary">
-                  Register (new user)
-                </Button>
-              </Link> */}
             {(currentRoute !== 'newsfeed') &&
               <Link style={{ textDecoration: 'none' }} to="/newsfeed">
                 <Button className={classes.button}>
@@ -149,7 +138,4 @@ Nav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps)
-)(Nav);
+export default compose(withStyles(styles), connect(mapStateToProps))(Nav);

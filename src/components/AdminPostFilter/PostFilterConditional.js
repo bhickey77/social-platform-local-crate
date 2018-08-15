@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+// Material UI
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -27,7 +29,6 @@ class PostFilterConditional extends Component {
 
     render() {
         const { classes } = this.props;
-
         let postFilter = null;
         let clearButton = null;
 

@@ -20,6 +20,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import UploadStage1 from '../UploadStage1/UploadStage1';
 import UploadStage2 from '../UploadStage2/UploadStage2';
 
+
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
@@ -31,7 +32,7 @@ const styles = theme => ({
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%', 
   },
   actions: {
     display: 'flex',
@@ -157,7 +158,7 @@ class UploadCard extends Component {
         'Content-Type': this.state.imageData.type,
       }})
       .then(response => {
-        console.log('successfully uploaded to the S3: ', response); // do something with the response
+        console.log('successfully uploaded to the S3: ', response); 
         this.props.dispatch({type:'FETCH_POSTS'});
         console.log('BACK FROM SUBMIT: ', window.location.hash.split('/'));
         

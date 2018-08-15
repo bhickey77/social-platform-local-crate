@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { clearError } from '../../redux/actions/loginActions';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import { triggerLogout } from '../../redux/actions/loginActions';
+
+// Material UI
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 
 const mapStateToProps = state => ({
@@ -28,7 +30,6 @@ class Logout extends Component {
 
   logout = () => {
     this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
   }
   
   render() {

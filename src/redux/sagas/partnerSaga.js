@@ -75,7 +75,6 @@ function* partnerSaga() {
     yield takeLatest(PARTNER_ACTIONS.FETCH_PARTNERS, getPartners);
     yield takeLatest(PARTNER_ACTIONS.ADD_PARTNER, addPartner);
     yield takeLatest(PARTNER_ACTIONS.GET_PARTNER, getPartner);
-    // yield takeLatest(PARTNER_ACTIONS.EDIT_PARTNER, editPartner);
     yield takeLatest(PARTNER_ACTIONS.HIDE_PARTNER, hidePartner);
     yield takeLatest(PARTNER_ACTIONS.DELETE_PARTNER, deletePartner);
     yield takeLatest(PARTNER_ACTIONS.EDIT_PROFILE_IMAGE, editProfileImage);

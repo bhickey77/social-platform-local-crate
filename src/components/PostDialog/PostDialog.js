@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+// Components
 import EditPost from '../EditPost/EditPost';
+
+// Material UI
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
@@ -11,22 +16,15 @@ import red from '@material-ui/core/colors/red';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Image from 'material-ui-image';
 
 const styles = theme => ({
-    card: {
-    //   maxWidth: 1000,
-    },
-    card1: {
-    //   maxwidth: 400,
-    },
     dialog: {
       width: 1000,
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%',
     },
     actions: {
       display: 'flex',

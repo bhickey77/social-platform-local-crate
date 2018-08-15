@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearError } from '../../redux/actions/loginActions';
-import CardsGrid from './CardsGrid/CardsGrid';
 import { POST_ACTIONS } from '../../redux/actions/postActions';
 
+// Components
+import CardsGrid from './CardsGrid/CardsGrid';
 import Nav from '../Nav/Nav';
 import UpdatePartnerPicture from '../UpdatePartnerPicture/UpdatePartnerPicture';
 
+// Material UI
 import Snackbar from '@material-ui/core/Snackbar';
+
 
 const mapStateToProps = state => ({
   user: state.user,

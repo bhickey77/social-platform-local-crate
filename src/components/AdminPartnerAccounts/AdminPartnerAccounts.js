@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearError } from '../../redux/actions/loginActions';
+
+// Components
+import Nav from '../Nav/Nav';
+
+// Moment JS
 import moment from 'moment';
+
+// Material UI
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Nav from '../Nav/Nav';
+
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -80,5 +88,4 @@ class AdminPartnerAccounts extends Component {
   }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(AdminPartnerAccounts);

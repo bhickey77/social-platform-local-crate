@@ -116,6 +116,5 @@ PartnerPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// this allows us to use <App /> in index.js
 export default compose(withStyles(styles),connect(mapStateToProps))(PartnerPage);
 
