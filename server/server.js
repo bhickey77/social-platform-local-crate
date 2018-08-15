@@ -15,14 +15,8 @@ const postRouter = require('./routes/post.router');
 const mailRouter = require('./routes/mail.router');
 
 // Body parser middleware
-
-// const busboy = require('connect-busboy');
-// const busboyBodyParser = require('busboy-body-parser');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(busboy());
-// app.use(busboyBodyParser());
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -45,5 +39,5 @@ const PORT = process.env.PORT || 8000;
 
 /** Listen * */
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+  // console.log(`Listening on port: ${PORT}`);
 });

@@ -3,10 +3,10 @@ import axios from 'axios';
 
 function* sendEmail(action){
     try{
-        console.log('action.payload in sendEmail saga', action.payload);
+        // console.log('action.payload in sendEmail saga', action.payload);
         yield call(axios.post, '/api/mail/send', action.payload)
     } catch (error) {
-        console.log('Error in saga sendMail', error);
+        // console.log('Error in saga sendMail', error);
     }
 }
 

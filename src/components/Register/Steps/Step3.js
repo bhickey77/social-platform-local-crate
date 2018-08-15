@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 
 class RegisterStep3 extends Component {
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div>
             <div className="registration-container">

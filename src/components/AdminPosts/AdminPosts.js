@@ -56,7 +56,7 @@ class AdminPosts extends Component {
       this.props.dispatch({ type: 'FETCH_ALL_POSTS' });
       this.props.dispatch({ type: PARTNER_ACTIONS.FETCH_PARTNERS });
       this.setState({ filteredBy: 'none' });
-      console.log('filtered by', this.state.filteredBy);
+      // console.log('filtered by', this.state.filteredBy);
   }
 
   dateConvert = ( date ) => {
@@ -69,17 +69,17 @@ class AdminPosts extends Component {
 
   handleFilterChange = event => {
     this.setState({ filter: event.target.value });
-    console.log('filter', this.state.filter)
+    // console.log('filter', this.state.filter)
   }
 
   handleChange = event => {
     this.setState({ filteredBy: event.target.value });
-    console.log('filtered by', this.state.filteredBy);
+    // console.log('filtered by', this.state.filteredBy);
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('state', this.state.filter, this.state.filteredBy)
+    // console.log('state', this.state.filter, this.state.filteredBy)
       this.props.dispatch({ type: POST_ACTIONS.FETCH_POSTS_FILTERED,
         payload: {filter: this.state.filter, filteredBy: this.state.filteredBy }});
   }
@@ -106,8 +106,8 @@ class AdminPosts extends Component {
     const posts = this.props && this.props.post && this.props.post.allPosts || [];
     const partner = this.props && this.props.partner && this.props.partner.partners || [];
     // const { classes } = this.props;
-    console.log(posts);
-    console.log(partner);
+    // console.log(posts);
+    // console.log(partner);
     
     return (
       <div>

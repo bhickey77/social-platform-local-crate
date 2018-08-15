@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/info', rejectUnauthenticated, (req, res) => {
-  console.log('In the route api/user/info', req.user);
+  // console.log('In the route api/user/info', req.user);
   const queryText = `SELECT partner.name as "partner_name", 
                       username, first_name, partner_id, user_type, 
                       city, state, is_default_image, media_key  
@@ -23,7 +23,7 @@ router.get('/info', rejectUnauthenticated, (req, res) => {
                      WHERE person.id = $1;`
   pool.query(queryText, [req.user.id])
     .then(response => {
-      console.log('Back from the db in the get user info route: ', response.rows[0]);
+      // console.log('Back from the db in the get user info route: ', response.rows[0]);
       if(!response.rows[0].is_default_image){
         generateSignedUrlForCurrentUser(res, response.rows[0]);
       } else {
@@ -43,7 +43,7 @@ router.post('/register', (req, res, next) => {
   const password = encryptLib.encryptPassword(req.body.personData.password1);
   const partner = req.body.partnerData;
   const person = req.body.personData;
-  console.log(req.body);
+  // console.log(req.body);
   const currentDateTime = new Date().toJSON().toString();
 
   const partnerQuery = `INSERT INTO partner
@@ -54,7 +54,7 @@ router.post('/register', (req, res, next) => {
   const partnerValues = [partner.name, partner.city, partner.state, partner.website, currentDateTime, partner.type, null, true];
   pool.query(partnerQuery, partnerValues)
     .then(response => {
-      console.log(response.rows[0]);
+      // console.log(response.rows[0]);
       const personQuery = `INSERT INTO person
                            (username, first_name, last_name, email, phone, date_created, date_updated, partner_id, is_verified, user_type, password)
                            VALUES
@@ -62,16 +62,16 @@ router.post('/register', (req, res, next) => {
       const personValues = [person.username, person.first_name, person.last_name, person.email, person.phone, currentDateTime, currentDateTime, response.rows[0].id, true, 'user', password];
       pool.query(personQuery, personValues)
         .then(response => {
-          console.log(`successfully inserted into person: `, response);
+          // console.log(`successfully inserted into person: `, response);
           res.sendStatus(200);
         })
         .catch(error => {
-          console.log(`error inserting into person: `, error);
+          // console.log(`error inserting into person: `, error);
           res.sendStatus(500);
         })
     })
     .catch(error => {
-      console.log(`error with insert into partner: `, error);
+      // console.log(`error with insert into partner: `, error);
       res.sendStatus(500);
     })
 });

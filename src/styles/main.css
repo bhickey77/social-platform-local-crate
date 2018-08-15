@@ -27,19 +27,7 @@ body {
     grid-template-rows: auto;
     grid-template-areas: 
     "header"
-    "main"
-    "footer";
-}
-
-/* Footer */
-
-#footer {
-    grid-area: footer;
-    height: 150px;
-    background-color: black;
-    color: white;
-    background-image: url("/images/graywood.jpg");
-    width: 100%;
+    "main";
 }
 
 /* Header */
@@ -81,16 +69,6 @@ body {
     float: left;
 }
 
-/* Buttons */
-
-.redButton {
-
-}
-
-.whiteButton {
-
-}
-
 /* form */
 
 form {
@@ -117,8 +95,6 @@ input[type="submit"] {
     padding-top: 10%;
     
 }
-
-
 
 .message {
     padding: 10px 0;
@@ -185,13 +161,11 @@ li a:hover {
     width: 100%;
     height: auto;
     max-height: 500px;
-    /* height: 250px; */
 }
 
 .imageForDetails {
     margin: 0 auto;
     width: 25%;
-    /* height: 250px; */
 }
 
 .registration-container {

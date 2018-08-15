@@ -90,7 +90,7 @@ class EditPost extends Component {
         open: true,
         post: this.props.post
     });
-    console.log(this.state.post);
+    // console.log(this.state.post);
   };
 
   handleClose = () => {
@@ -151,7 +151,7 @@ class EditPost extends Component {
   setImage = imageData => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       this.setState({
         ...this.state,
         areChanges: true,

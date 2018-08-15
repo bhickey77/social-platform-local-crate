@@ -100,7 +100,7 @@ class UploadCard extends Component {
       ...this.state,
       [property]: event.target.value,
     })
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   handleSubmitPost = () => {
@@ -128,10 +128,10 @@ class UploadCard extends Component {
   }
 
   setImage = (imageData) => {
-    console.log(`SETTING IMAGE: `, imageData);
+    // console.log(`SETTING IMAGE: `, imageData);
     const reader = new FileReader();
     reader.onloadend = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       this.setState({
         ...this.state,
         imageUrl: reader.result,
@@ -158,9 +158,9 @@ class UploadCard extends Component {
         'Content-Type': this.state.imageData.type,
       }})
       .then(response => {
-        console.log('successfully uploaded to the S3: ', response); 
+        // console.log('successfully uploaded to the S3: ', response); 
         this.props.dispatch({type:'FETCH_POSTS'});
-        console.log('BACK FROM SUBMIT: ', window.location.hash.split('/'));
+        // console.log('BACK FROM SUBMIT: ', window.location.hash.split('/'));
         
         if(window.location.hash.split('/')[1] === 'partner'){
           this.props.dispatch({type: 'GET_PARTNER', payload: window.location.hash.split('/')[2] });
@@ -169,7 +169,7 @@ class UploadCard extends Component {
 
       })
       .catch(error => {
-        console.log('error uploading file: ', error);
+        // console.log('error uploading file: ', error);
       })
   }
 

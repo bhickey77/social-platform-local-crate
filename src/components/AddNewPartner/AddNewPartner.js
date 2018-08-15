@@ -92,7 +92,7 @@ class AddNewPartner extends Component {
         });
         break; 
       default:
-        console.log('Invalid field');
+        // console.log('Invalid field');
         break;      
     }
   }

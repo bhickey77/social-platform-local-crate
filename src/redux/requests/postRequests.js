@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export function sendEditPost(postData, image) {
-  console.log('IN POST REQUEST: ', postData);
-  console.log('IN POST REQUEST: ', image);
+  // console.log('IN POST REQUEST: ', postData);
+  // console.log('IN POST REQUEST: ', image);
   const data = new FormData();
   data.append('title', postData.title);
   data.append('content', postData.content);
@@ -23,9 +23,9 @@ export function sendEditPost(postData, image) {
 
   axios.put(`api/post/${postData.post_id}`, data, config)
     .then(response => {
-      console.log('successfully uploaded to the S3: ', response); 
+      // console.log('successfully uploaded to the S3: ', response); 
     })
     .catch(error => {
-      console.log('error uploading file: ', error);
+      // console.log('error uploading file: ', error);
     })
 }

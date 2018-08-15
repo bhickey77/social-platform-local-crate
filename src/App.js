@@ -6,16 +6,13 @@ import {
   Switch,
 } from 'react-router-dom';
 
-// import Footer from './components/Footer/Footer';
 import PartnerPage from './components/PartnerPage/PartnerPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import UploadCard from './components/UploadCard/UploadCard';
 import Newsfeed from './components/Newsfeed/Newsfeed';
-// import AddNewPartner from './components/AddNewPartner/AddNewPartner';
 import Register from './components/Register/Register';
 import AdminPartnerAccounts from './components/AdminPartnerAccounts/AdminPartnerAccounts';
 import AdminPosts from './components/AdminPosts/AdminPosts';
-// import Nav from './components/Nav/Nav';
 import './styles/main.css';
 
 const App = () => (
@@ -47,10 +44,6 @@ const App = () => (
           exact path="/admin/posts"
           component={AdminPosts}
         />
-         {/* <Route
-          exact path="/addNewPartner"
-          component={AddNewPartner}
-        /> */}
           <Route
           exact path="/Register"
           component={Register}
@@ -62,7 +55,6 @@ const App = () => (
         <Route render={() => <h1>404</h1>} />
       </Switch>
     </Router>
-    {/* <Footer className="item-c"/> */}
   </div>
 );
 

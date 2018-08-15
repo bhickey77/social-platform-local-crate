@@ -32,7 +32,7 @@ const imageContainerStyle = {
 
 class UploadStage1 extends Component {
   render() {
-    console.log(`PROPS IN UPLOAD STAGE 1: `, this.props);
+    // console.log(`PROPS IN UPLOAD STAGE 1: `, this.props);
     
     return (
       <div >
