@@ -1,7 +1,7 @@
 const pool = require('../modules/pool');
 
 const multer  = require('multer');
-const upload = multer({ dest: '../uploads/' });
+const upload = multer({ dest: '/app/tmp/uploads/' });
 const path = require('path');
 const fs = require('fs-extra');
 const tempfile = require('tempfile');
