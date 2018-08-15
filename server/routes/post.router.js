@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 const multer  = require('multer');
-const upload = multer({ dest: '../tmp/uploads/' });
+const upload = multer({ dest: '../uploads/' });
 
 const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploadPost');
 const { isAdmin } = require('../modules/authorization');
