@@ -3,7 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 const multer  = require('multer');
-const upload = multer({ dest: '/app/tmp/uploads/' });
+const multerDest = process.env.multer_dest || '../uploads/';
+const upload = multer({ dest: multerDest });
 
 const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploadPost');
 const { isAdmin } = require('../modules/authorization');

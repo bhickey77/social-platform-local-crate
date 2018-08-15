@@ -1,14 +1,15 @@
 const pool = require('../modules/pool');
 
 const multer  = require('multer');
-const upload = multer({ dest: '/app/tmp/uploads/' });
+const multerDest = process.env.multer_dest || '../uploads/';
+const upload = multer({ dest: multerDest });
 const path = require('path');
 const fs = require('fs-extra');
 const tempfile = require('tempfile');
 
 const AWS = require('aws-sdk');
 
-const BUCKET_NAME = 'social-platform-local-crate';
+const BUCKET_NAME = process.env.bucket_name;
 const IAM_USER_KEY = process.env.aws_access_key_id;
 const IAM_USER_SECRET = process.env.aws_secret_access_key;
  
