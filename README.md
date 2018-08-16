@@ -10,9 +10,12 @@ Social Crate is a social platform created to facilitate a community dialog betwe
 * Passport
 * AWS S3
 * Nodemailer
+* Uppy
+
 
 ## Documentation
 [Scope Document] - See 'Local Crate Scoping Document' in the root folder of this repo.
+
 
 ## Installing
 1. Download the GitHub repository down to your machine.
@@ -47,6 +50,7 @@ CREATE TABLE person (
 
 If you would like to name your database something else, you will need to change `local_crate` to the name of your new database name in `server/modules/pool.js`
 
+
 ## Admin Creation
 This is an important step!  The app does not have functionality to crate an admin from a live deployed app.
 1. To create an administrator, first make sure the server and app is running locally.
@@ -55,6 +59,7 @@ This is an important step!  The app does not have functionality to crate an admi
 4. In Postico, navigate to the `local_crate` database you created then to the `person` table.
 5. Change the `user_type` column from `user` to `admin`.
 6. This user is now an administrator.   When you push this database to Heroku, the user you created will permanently be an administrator and give access to administrator functionality.
+
 
 ## Create AWS Account to host photos
 1. Create AWS account.
@@ -87,11 +92,13 @@ This is an important step!  The app does not have functionality to crate an admi
 * add `EMAIL_PASSWORD` for email accountt that you want nodemailer to send from
 11. Run the command `heroku open` to open the project!
 
+
 ## Lay of the Land
 * `src/` contains the React application
 * `public/` contains static assets for the client-side
 * `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
 * `server/` contains the Express App
+
 
 ## Authors
 [Shannon Engstrom](https://github.com/Shannonengstrom) \
