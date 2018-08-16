@@ -48,12 +48,12 @@ If you would like to name your database something else, you will need to change 
 
 ## Create AWS Account to host photos
 1. Create AWS account.
-    a. Create S3 bucket.
-    b. Retrieve keys from AWS
-        * Click account username in navbar
-        * Select 'My Security Credentials'
-        * Select access keys
-        * Click 'Create new access key' - save this in the .env file
+2. Create S3 bucket.
+3. Retrieve keys from AWS
+4. Click account username in navbar
+5. Select 'My Security Credentials'
+6. Select access keys
+7. Click 'Create new access key' - save this in the .env file
 
 ### Admin Creation
 This is an important step!  The app does not have functionality to crate an admin from a live deployed app.
