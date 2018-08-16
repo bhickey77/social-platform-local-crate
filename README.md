@@ -1,6 +1,7 @@
 # Social Crate
 Social Crate is a social platform created to facilitate a community dialog between farmers, other food related suppliers, and customers for Local Crate -- a meal kit provider decentralizing the food industry.
 
+
 ## Built With
 * React
 * Express
@@ -26,6 +27,9 @@ multer_dest = /app/tmp/uploads/
 ```
 5. Run the command `npm install` to install the dependencies.
 
+## Documentation
+[Scope Document] - See 'Local Crate Scoping Document' in the root folder of this repo.
+
 ## Create database and table
 Postico is the recommended application for creation of your database as the formatting in the database.sql file is built from postico code.
 
@@ -50,6 +54,15 @@ If you would like to name your database something else, you will need to change 
         * Select 'My Security Credentials'
         * Select access keys
         * Click 'Create new access key' - save this in the .env file
+
+### Admin Creation
+This is an important step!  The app does not have functionality to crate an admin from a live deployed app.
+1. To create an administrator, first make sure the server and app is running locally.
+2. Navigate to [the Register page](http://localhost:3000/#/register) in your browser.
+3. Register the a user by following the steps.
+4. In Postico, navigate to the `local_crate` database you created then to the `person` table.
+5. Change the `user_type` column from `user` to `admin`.
+6. This user is now an administrator.   When you push this database to Heroku, the user you created will permanently be an administrator and give access to administrator functionality.
 
 ## Deployment on Heroku
 1. Register an account on Heroku (http://signup.heroku.com/login).
@@ -77,4 +90,10 @@ If you would like to name your database something else, you will need to change 
 * `public/` contains static assets for the client-side
 * `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
 * `server/` contains the Express App
+
+## Authors
+[Shannon Engstrom](https://github.com/Shannonengstrom) \
+[Ben Hacker](https://github.com/BenHacker1995) \
+[Bill Hickey](https://github.com/bhickey77) \
+[Jake Tovsen](https://github.com/JacobTovsen)
 
