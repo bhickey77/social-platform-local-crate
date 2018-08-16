@@ -46,6 +46,15 @@ CREATE TABLE person (
 
 If you would like to name your database something else, you will need to change `local_crate` to the name of your new database name in `server/modules/pool.js`
 
+## Admin Creation
+This is an important step!  The app does not have functionality to crate an admin from a live deployed app.
+1. To create an administrator, first make sure the server and app is running locally.
+2. Navigate to [the Register page](http://localhost:3000/#/register) in your browser.
+3. Register the a user by following the steps.
+4. In Postico, navigate to the `local_crate` database you created then to the `person` table.
+5. Change the `user_type` column from `user` to `admin`.
+6. This user is now an administrator.   When you push this database to Heroku, the user you created will permanently be an administrator and give access to administrator functionality.
+
 ## Create AWS Account to host photos
 1. Create AWS account.
 2. Create S3 bucket.
@@ -55,14 +64,6 @@ If you would like to name your database something else, you will need to change 
 6. Select access keys
 7. Click 'Create new access key' - save this in the .env file
 
-### Admin Creation
-This is an important step!  The app does not have functionality to crate an admin from a live deployed app.
-1. To create an administrator, first make sure the server and app is running locally.
-2. Navigate to [the Register page](http://localhost:3000/#/register) in your browser.
-3. Register the a user by following the steps.
-4. In Postico, navigate to the `local_crate` database you created then to the `person` table.
-5. Change the `user_type` column from `user` to `admin`.
-6. This user is now an administrator.   When you push this database to Heroku, the user you created will permanently be an administrator and give access to administrator functionality.
 
 ## Deployment on Heroku
 1. Register an account on Heroku (http://signup.heroku.com/login).
