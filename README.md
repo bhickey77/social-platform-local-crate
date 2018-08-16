@@ -1,12 +1,40 @@
-## Deployment
+# Social Crate
+Social Crate is a social platform created to facilitate a community dialog between farmers, other food related suppliers, and customers for Local Crate -- a meal kit provider decentralizing the food industry.
 
+## Built With
+* React
+* Express
+* PostgreSQL
+* Material UI
+* Passport
+* AWS S3
+* Nodemailer
+
+## Installing
+1. Clone the GitHub repository down to your machine.
+2. Navigate to the folder in your Terminal.
+3. Create a `.env` file at the root of the repository.
+4. Inside the `.env` file, add following lines of code:
+```
+SERVER_SESSION_SECRET = sadfjlkj34tr#$5654ssgdfssdfg%^2312
+aws_access_key_id = ///POPULATE WITH YOUR KEY ID see Deployment
+aws_secret_access_key = ///POPULATE WITH YOUR KEY see Deployment
+bucket_name = ///POPULATE WITH YOUR BUCKET NAME see Deployment
+EMAIL_PASSWORD = ///Setup Gmail account
+EMAIL_USERNAME = ///Setup Gmail account
+multer_dest = /app/tmp/uploads/
+```
+5. Run the command `npm install` to install the dependencies.
+
+
+## Deployment
 1. Create AWS account.
-1. Create S3 bucket.
-1. Retrieve keys from AWS
-* Click account username in navbar
-* Select 'My Security Credentials'
-* Select access keys
-* Click 'Create new access key'
+    a. Create S3 bucket.
+    b. Retrieve keys from AWS
+        * Click account username in navbar
+        * Select 'My Security Credentials'
+        * Select access keys
+        * Click 'Create new access key' - save this in the .env file
 4. Create a new Heroku project
 1. Link the Heroku project to the project GitHub Repo
 1. Create an Herkoku Postgres database
@@ -25,8 +53,9 @@
 
 ## Create database and table
 
-Create a new database called `local_crate` and create a `person` table:
+Create a new database called `local_crate` and create the 5 tables listed in the database.sql file of this repo.
 
+Example:
 ```SQL
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
@@ -35,26 +64,7 @@ CREATE TABLE person (
 );
 ```
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Download (Don't Clone) This Repository
-
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
-
-## Development Setup Instructions
-
-* Run `npm install`
-* Create a `.env` file at the root of the project and paste this line into the file:
-    ```
-    SERVER_SESSION_SECRET=superDuperSecret
-    ```
-    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm run server`
-* Run `npm run client`
-* Navigate to `localhost:3000`
+If you would like to name your database something else, you will need to change `local_crate` to the name of your new database name in `server/modules/pool.js`
 
 ## Production Build
 
