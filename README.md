@@ -11,6 +11,9 @@ Social Crate is a social platform created to facilitate a community dialog betwe
 * AWS S3
 * Nodemailer
 
+## Documentation
+[Scope Document] - See 'Local Crate Scoping Document' in the root folder of this repo.
+
 ## Installing
 1. Download the GitHub repository down to your machine.
 2. Navigate to the folder in your Terminal.
@@ -27,8 +30,6 @@ multer_dest = /app/tmp/uploads/
 ```
 5. Run the command `npm install` to install the dependencies.
 
-## Documentation
-[Scope Document] - See 'Local Crate Scoping Document' in the root folder of this repo.
 
 ## Create database and table
 Postico is the recommended application for creation of your database as the formatting in the database.sql file is built from postico code.
