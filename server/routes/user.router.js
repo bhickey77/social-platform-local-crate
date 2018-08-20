@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
-const { generateSignedUrlForCurrentUser } = require('../modules/uploadPost');
+const { generateSignedUrlForCurrentUser } = require('../modules/imageHandler');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {

@@ -2,14 +2,14 @@ const express = require('express');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
-const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploadPost');
+const { uploadPost, generateSignedUrls, updatePost } = require('../modules/imageHandler');
 
 
 const multer  = require('multer');
 const multerDest = process.env.multer_dest || '../uploads/';
 const upload = multer({ dest: multerDest });
 
-const { updateProfilePicture, generateSignedUrlForCurrentUser } = require('../modules/uploadPost');
+const { updateProfilePicture, generateSignedUrlForCurrentUser } = require('../modules/imageHandler');
 
 router.get('/', (req, res) => {
     // GET for ALL partners - admin view (can limit volume in query)

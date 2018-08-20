@@ -13,6 +13,8 @@ const BUCKET_NAME = process.env.bucket_name;
 const IAM_USER_KEY = process.env.aws_access_key_id;
 const IAM_USER_SECRET = process.env.aws_secret_access_key;
  
+const verbose = false;
+
 const uploadPost = async(req, res) => {
   let media_key = await uploadToS3(req.file);
   await uploadToSQL(req, media_key);
@@ -21,8 +23,8 @@ const uploadPost = async(req, res) => {
 
 const updatePost = async(req, res) => {
   let media_key = false;
-  // console.log('IN UPDATEPOST: ', req.body.isNewImage);
-  // console.log(req.body.isNewImage);
+  verbose && console.log('IN UPDATEPOST: ', req.body.isNewImage);
+  verbose && console.log(req.body.isNewImage);
   if(req.body.isNewImage !== 'false'){
     media_key = await uploadToS3(req.file);
   } 
@@ -37,13 +39,13 @@ const updateProfilePicture = async(req, res) => {
 }
 
 const generateSignedUrlForCurrentUser = async(res, userInfo) => {
-  // console.log('NEW INFO: ', userInfo);
+  verbose && console.log('NEW INFO: ', userInfo);
   const newInfo = await addSignedUrlForCurrentUser(userInfo);
   res.send([newInfo]);
 }
 
 const generateSignedUrls = async (res, rows) => {
-  // console.log(rows);
+  verbose && console.log(rows);
   const newRows = await addSignedUrls(rows);
   res.send(newRows);
 }
@@ -60,7 +62,7 @@ const addSignedUrlForCurrentUser = async userInfo => {
 const addSignedUrls = async rows => {
   const newRows = [];
   for(const row of rows){
-    // console.log(row);
+    verbose && console.log(row);
     const media_url = await generateSignedUrl(row.media_key);
     row.media_url = media_url;
     if(!row.is_default_image){
@@ -86,9 +88,9 @@ const generateSignedUrl = (media_key) => {
     let urlParams = {Bucket: BUCKET_NAME, Key: media_key};
     s3bucket.getSignedUrl('getObject', urlParams, function(err, url) {
       if(err){
-        // console.log(`error with getsignedurl: `, err);
+        verbose && console.log(`error with getsignedurl: `, err);
       } else {
-        // console.log(`url from getsignedurl: `, url);
+        verbose && console.log(`url from getsignedurl: `, url);
         resolve(url);
       }       
     })
@@ -128,10 +130,10 @@ function updateSQL(req, media_key) {
     
     pool.query(queryText, values)
     .then((result) => {
-      // console.log('back from db with:', result);
+      verbose && console.log('back from db with:', result);
       resolve(200);
     }).catch((error) => {
-        // console.log('error in POST', error);
+        verbose && console.log('error in POST', error);
         resolve(500);
     })
   })
@@ -153,10 +155,10 @@ function uploadToSQL(req, media_key) {
         date_updated,
         is_marked_as_hidden,
     ]).then((result) => {
-        // console.log('back from db with:', result);
+        verbose && console.log('back from db with:', result);
         resolve(200);
     }).catch((error) => {
-        // console.log('error in POST', error);
+        verbose && console.log('error in POST', error);
         resolve(500);
     })
   })
@@ -166,7 +168,7 @@ function uploadToS3(file) {
   return new Promise(resolve => {
     fs.readFile(file.path)
     .then(data => {
-      // console.log(`file read: `, data);
+      verbose && console.log(`file read: `, data);
       let s3bucket = new AWS.S3({
         accessKeyId: IAM_USER_KEY,
         secretAccessKey: IAM_USER_SECRET,
@@ -181,17 +183,17 @@ function uploadToS3(file) {
         };
         s3bucket.upload(params, function (err, data) {
           if (err) {
-            // console.log('error in callback');
-            // console.log(err);
+            verbose && console.log('error in callback');
+            verbose && console.log(err);
           }
-            // console.log('success');
-            // console.log(data.Key);
+            verbose && console.log('success');
+            verbose && console.log(data.Key);
             resolve(data.Key);
         })
       })
     })
     .catch(error => {
-      // console.log(`error reading file: `, error);
+      verbose && console.log(`error reading file: `, error);
     })
   })
 }

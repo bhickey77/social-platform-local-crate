@@ -6,7 +6,7 @@ const multer  = require('multer');
 const multerDest = process.env.multer_dest || '../uploads/';
 const upload = multer({ dest: multerDest });
 
-const { uploadPost, generateSignedUrls, updatePost } = require('../modules/uploadPost');
+const { uploadPost, generateSignedUrls, updatePost } = require('../modules/imageHandler');
 const { isAdmin } = require('../modules/authorization');
 
 router.put('/:id', upload.single('file'), (req, res) => {
